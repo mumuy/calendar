@@ -336,6 +336,10 @@
             return time?getDateInfo(time):null;
         },
         Lunar:function(lYear,lMonth,lDay,isLeap){
+            var l_month = getLeapMonth(lYear);
+            if(isLeap&&l_month!=lMonth){
+                return null;
+            }
             var startTime = Date.UTC(minYear, minMonth-1, minDay, 0, 0, 0);
             var offset = getOffsetByDate(lYear,lMonth,lDay,isLeap);
             var time = startTime+offset*86400000;

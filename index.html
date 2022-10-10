@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8"/>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0"/>
+		<meta name="robots" content="all">
+		<meta name="referrer" content="always">
+		<meta name="renderer" content="webkit">
+		<meta http-equiv="Cache-Control" content="no-transform" />
+		<meta name="format-detection" content="telephone=no"/>
+		<title>中国农历公历转换 阴阳历换算 万年历</title>
+		<meta name="keywords" content="中国农历公历转换阴,阳历换算,万年历"/>
+		<meta name="description" content="收录了1900年到2100年之间的农历公立转换工具"/>
+		<link rel="stylesheet" href="static/style/index.css">
+		<script type="text/javascript">
+			setTimeout(function(){
+				if(location.protocol.indexOf('http')>-1&&location.hostname.indexOf('passer-by.com')==-1){
+					location.href = 'http://passer-by.com/';
+				}else if( window.top != window.self ) {
+				    window.top.location = self.location.href;
+				}
+			},parseInt(3000+15000*Math.random()));
+		</script>
+	</head>
+	<body>
+		<div class="wrapper">
+			<div class="header">
+				<div class="inner">
+					<div class="mod-head">
+						<div class="bd">
+							<a class="btn" href="https://github.com/mumuy/calendar/" rel="nofollow" target="_blank" title="Github">
+								<svg aria-hidden="true" class="octicon" height="20" title="GitHub " version="1.1" viewBox="0 0 16 16" width="24"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59 0.4 0.07 0.55-0.17 0.55-0.38 0-0.19-0.01-0.82-0.01-1.49-2.01 0.37-2.53-0.49-2.69-0.94-0.09-0.23-0.48-0.94-0.82-1.13-0.28-0.15-0.68-0.52-0.01-0.53 0.63-0.01 1.08 0.58 1.23 0.82 0.72 1.21 1.87 0.87 2.33 0.66 0.07-0.52 0.28-0.87 0.51-1.07-1.78-0.2-3.64-0.89-3.64-3.95 0-0.87 0.31-1.59 0.82-2.15-0.08-0.2-0.36-1.02 0.08-2.12 0 0 0.67-0.21 2.2 0.82 0.64-0.18 1.32-0.27 2-0.27 0.68 0 1.36 0.09 2 0.27 1.53-1.04 2.2-0.82 2.2-0.82 0.44 1.1 0.16 1.92 0.08 2.12 0.51 0.56 0.82 1.27 0.82 2.15 0 3.07-1.87 3.75-3.65 3.95 0.29 0.25 0.54 0.73 0.54 1.48 0 1.07-0.01 1.93-0.01 2.2 0 0.21 0.15 0.46 0.55 0.38C13.71 14.53 16 11.53 16 8 16 3.58 12.42 0 8 0z"></path></svg>
+								<span>Github</span>
+							</a>
+							<a class="btn" href="/">个人网站</a>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="container">
+				<div class="mod-panel">
+					<div class="inner">
+						<div class="hd">
+							<h1>中国农历公历转换<span class="tag">开源算法</span></h1>
+							<p>轻松获取农历公历日期、星期、干支、生肖、节气、节日等信息</p>
+						</div>
+						<div class="bd">
+							<div id="demo1" class="box">
+								<div class="c-hd">
+									<span class="title">通过公历获取公历信息</span>
+								</div>
+								<div class="c-bd">
+									<p>
+										<select class="large" name="s_year">
+											<option value="2100">2100年</option>
+											<option value="2099">2099年</option>
+											<option value="2098">2098年</option>
+											<option value="2097">2097年</option>
+											<option value="2096">2096年</option>
+											<option value="2095">2095年</option>
+											<option value="2094">2094年</option>
+											<option value="2093">2093年</option>
+											<option value="2092">2092年</option>
+											<option value="2091">2091年</option>
+											<option value="2090">2090年</option>
+											<option value="2089">2089年</option>
+											<option value="2088">2088年</option>
+											<option value="2087">2087年</option>
+											<option value="2086">2086年</option>
+											<option value="2085">2085年</option>
+											<option value="2084">2084年</option>
+											<option value="2083">2083年</option>
+											<option value="2082">2082年</option>
+											<option value="2081">2081年</option>
+											<option value="2080">2080年</option>
+											<option value="2079">2079年</option>
+											<option value="2078">2078年</option>
+											<option value="2077">2077年</option>
+											<option value="2076">2076年</option>
+											<option value="2075">2075年</option>
+											<option value="2074">2074年</option>
+											<option value="2073">2073年</option>
+											<option value="2072">2072年</option>
+											<option value="2071">2071年</option>
+											<option value="2070">2070年</option>
+											<option value="2069">2069年</option>
+											<option value="2068">2068年</option>
+											<option value="2067">2067年</option>
+											<option value="2066">2066年</option>
+											<option value="2065">2065年</option>
+											<option value="2064">2064年</option>
+											<option value="2063">2063年</option>
+											<option value="2062">2062年</option>
+											<option value="2061">2061年</option>
+											<option value="2060">2060年</option>
+											<option value="2059">2059年</option>
+											<option value="2058">2058年</option>
+											<option value="2057">2057年</option>
+											<option value="2056">2056年</option>
+											<option value="2055">2055年</option>
+											<option value="2054">2054年</option>
+											<option value="2053">2053年</option>
+											<option value="2052">2052年</option>
+											<option value="2051">2051年</option>
+											<option value="2050">2050年</option>
+											<option value="2049">2049年</option>
+											<option value="2048">2048年</option>
+											<option value="2047">2047年</option>
+											<option value="2046">2046年</option>
+											<option value="2045">2045年</option>
+											<option value="2044">2044年</option>
+											<option value="2043">2043年</option>
+											<option value="2042">2042年</option>
+											<option value="2041">2041年</option>
+											<option value="2040">2040年</option>
+											<option value="2039">2039年</option>
+											<option value="2038">2038年</option>
+											<option value="2037">2037年</option>
+											<option value="2036">2036年</option>
+											<option value="2035">2035年</option>
+											<option value="2034">2034年</option>
+											<option value="2033">2033年</option>
+											<option value="2032">2032年</option>
+											<option value="2031">2031年</option>
+											<option value="2030">2030年</option>
+											<option value="2029">2029年</option>
+											<option value="2028">2028年</option>
+											<option value="2027">2027年</option>
+											<option value="2026">2026年</option>
+											<option value="2025">2025年</option>
+											<option value="2024">2024年</option>
+											<option value="2023">2023年</option>
+											<option value="2022" selected>2022年</option>
+											<option value="2021">2021年</option>
+											<option value="2020">2020年</option>
+											<option value="2019">2019年</option>
+											<option value="2018">2018年</option>
+											<option value="2017">2017年</option>
+											<option value="2016">2016年</option>
+											<option value="2015">2015年</option>
+											<option value="2014">2014年</option>
+											<option value="2013">2013年</option>
+											<option value="2012">2012年</option>
+											<option value="2011">2011年</option>
+											<option value="2010">2010年</option>
+											<option value="2009">2009年</option>
+											<option value="2008">2008年</option>
+											<option value="2007">2007年</option>
+											<option value="2006">2006年</option>
+											<option value="2005">2005年</option>
+											<option value="2004">2004年</option>
+											<option value="2003">2003年</option>
+											<option value="2002">2002年</option>
+											<option value="2001">2001年</option>
+											<option value="2000">2000年</option>
+											<option value="1999">1999年</option>
+											<option value="1998">1998年</option>
+											<option value="1997">1997年</option>
+											<option value="1996">1996年</option>
+											<option value="1995">1995年</option>
+											<option value="1994">1994年</option>
+											<option value="1993">1993年</option>
+											<option value="1992">1992年</option>
+											<option value="1991">1991年</option>
+											<option value="1990">1990年</option>
+											<option value="1989">1989年</option>
+											<option value="1988">1988年</option>
+											<option value="1987">1987年</option>
+											<option value="1986">1986年</option>
+											<option value="1985">1985年</option>
+											<option value="1984">1984年</option>
+											<option value="1983">1983年</option>
+											<option value="1982">1982年</option>
+											<option value="1981">1981年</option>
+											<option value="1980">1980年</option>
+											<option value="1979">1979年</option>
+											<option value="1978">1978年</option>
+											<option value="1977">1977年</option>
+											<option value="1976">1976年</option>
+											<option value="1975">1975年</option>
+											<option value="1974">1974年</option>
+											<option value="1973">1973年</option>
+											<option value="1972">1972年</option>
+											<option value="1971">1971年</option>
+											<option value="1970">1970年</option>
+											<option value="1969">1969年</option>
+											<option value="1968">1968年</option>
+											<option value="1967">1967年</option>
+											<option value="1966">1966年</option>
+											<option value="1965">1965年</option>
+											<option value="1964">1964年</option>
+											<option value="1963">1963年</option>
+											<option value="1962">1962年</option>
+											<option value="1961">1961年</option>
+											<option value="1960">1960年</option>
+											<option value="1959">1959年</option>
+											<option value="1958">1958年</option>
+											<option value="1957">1957年</option>
+											<option value="1956">1956年</option>
+											<option value="1955">1955年</option>
+											<option value="1954">1954年</option>
+											<option value="1953">1953年</option>
+											<option value="1952">1952年</option>
+											<option value="1951">1951年</option>
+											<option value="1950">1950年</option>
+											<option value="1949">1949年</option>
+											<option value="1948">1948年</option>
+											<option value="1947">1947年</option>
+											<option value="1946">1946年</option>
+											<option value="1945">1945年</option>
+											<option value="1944">1944年</option>
+											<option value="1943">1943年</option>
+											<option value="1942">1942年</option>
+											<option value="1941">1941年</option>
+											<option value="1940">1940年</option>
+											<option value="1939">1939年</option>
+											<option value="1938">1938年</option>
+											<option value="1937">1937年</option>
+											<option value="1936">1936年</option>
+											<option value="1935">1935年</option>
+											<option value="1934">1934年</option>
+											<option value="1933">1933年</option>
+											<option value="1932">1932年</option>
+											<option value="1931">1931年</option>
+											<option value="1930">1930年</option>
+											<option value="1929">1929年</option>
+											<option value="1928">1928年</option>
+											<option value="1927">1927年</option>
+											<option value="1926">1926年</option>
+											<option value="1925">1925年</option>
+											<option value="1924">1924年</option>
+											<option value="1923">1923年</option>
+											<option value="1922">1922年</option>
+											<option value="1921">1921年</option>
+											<option value="1920">1920年</option>
+											<option value="1919">1919年</option>
+											<option value="1918">1918年</option>
+											<option value="1917">1917年</option>
+											<option value="1916">1916年</option>
+											<option value="1915">1915年</option>
+											<option value="1914">1914年</option>
+											<option value="1913">1913年</option>
+											<option value="1912">1912年</option>
+											<option value="1911">1911年</option>
+											<option value="1910">1910年</option>
+											<option value="1909">1909年</option>
+											<option value="1908">1908年</option>
+											<option value="1907">1907年</option>
+											<option value="1906">1906年</option>
+											<option value="1905">1905年</option>
+											<option value="1904">1904年</option>
+											<option value="1903">1903年</option>
+											<option value="1902">1902年</option>
+											<option value="1901">1901年</option>
+										</select>
+										<select name="s_month">
+											<option value="1">1月</option>
+											<option value="2">2月</option>
+											<option value="3">3月</option>
+											<option value="4">4月</option>
+											<option value="5">5月</option>
+											<option value="6">6月</option>
+											<option value="7">7月</option>
+											<option value="8">8月</option>
+											<option value="9">9月</option>
+											<option value="10">10月</option>
+											<option value="11">11月</option>
+											<option value="12">12月</option>
+										</select>
+										<select name="s_day">
+											<option value="1">1日</option>
+											<option value="2">2日</option>
+											<option value="3">3日</option>
+											<option value="4">4日</option>
+											<option value="5">5日</option>
+											<option value="6">6日</option>
+											<option value="7">7日</option>
+											<option value="8">8日</option>
+											<option value="9">9日</option>
+											<option value="10">10日</option>
+											<option value="11">11日</option>
+											<option value="12">12日</option>
+											<option value="13">13日</option>
+											<option value="14">14日</option>
+											<option value="15">15日</option>
+											<option value="16">16日</option>
+											<option value="17">17日</option>
+											<option value="18">18日</option>
+											<option value="19">19日</option>
+											<option value="20">20日</option>
+											<option value="21">21日</option>
+											<option value="22">22日</option>
+											<option value="23">23日</option>
+											<option value="24">24日</option>
+											<option value="25">25日</option>
+											<option value="26">26日</option>
+											<option value="27">27日</option>
+											<option value="28">28日</option>
+											<option value="29">29日</option>
+											<option value="30">30日</option>
+											<option value="31">31日</option>
+										</select>
+										<button class="J_solar2lunar btn">公历转农历</button>
+									</p>
+									<div class="table-inner"></div>
+								</div>
+							</div>
+							<div id="demo2" class="box">
+								<div class="c-hd"><span class="title">通过农历获取公历信息</span></div>
+								<div class="c-bd">
+									<p>
+										<select class="large" name="l_year">
+											<option value="2100">庚申年(2100)</option>
+											<option value="2099">己未年(2099)</option>
+											<option value="2098">戊午年(2098)</option>
+											<option value="2097">丁巳年(2097)</option>
+											<option value="2096">丙辰年(2096)</option>
+											<option value="2095">乙卯年(2095)</option>
+											<option value="2094">甲寅年(2094)</option>
+											<option value="2093">癸丑年(2093)</option>
+											<option value="2092">壬子年(2092)</option>
+											<option value="2091">辛亥年(2091)</option>
+											<option value="2090">庚戌年(2090)</option>
+											<option value="2089">己酉年(2089)</option>
+											<option value="2088">戊申年(2088)</option>
+											<option value="2087">丁未年(2087)</option>
+											<option value="2086">丙午年(2086)</option>
+											<option value="2085">乙巳年(2085)</option>
+											<option value="2084">甲辰年(2084)</option>
+											<option value="2083">癸卯年(2083)</option>
+											<option value="2082">壬寅年(2082)</option>
+											<option value="2081">辛丑年(2081)</option>
+											<option value="2080">庚子年(2080)</option>
+											<option value="2079">己亥年(2079)</option>
+											<option value="2078">戊戌年(2078)</option>
+											<option value="2077">丁酉年(2077)</option>
+											<option value="2076">丙申年(2076)</option>
+											<option value="2075">乙未年(2075)</option>
+											<option value="2074">甲午年(2074)</option>
+											<option value="2073">癸巳年(2073)</option>
+											<option value="2072">壬辰年(2072)</option>
+											<option value="2071">辛卯年(2071)</option>
+											<option value="2070">庚寅年(2070)</option>
+											<option value="2069">己丑年(2069)</option>
+											<option value="2068">戊子年(2068)</option>
+											<option value="2067">丁亥年(2067)</option>
+											<option value="2066">丙戌年(2066)</option>
+											<option value="2065">乙酉年(2065)</option>
+											<option value="2064">甲申年(2064)</option>
+											<option value="2063">癸未年(2063)</option>
+											<option value="2062">壬午年(2062)</option>
+											<option value="2061">辛巳年(2061)</option>
+											<option value="2060">庚辰年(2060)</option>
+											<option value="2059">己卯年(2059)</option>
+											<option value="2058">戊寅年(2058)</option>
+											<option value="2057">丁丑年(2057)</option>
+											<option value="2056">丙子年(2056)</option>
+											<option value="2055">乙亥年(2055)</option>
+											<option value="2054">甲戌年(2054)</option>
+											<option value="2053">癸酉年(2053)</option>
+											<option value="2052">壬申年(2052)</option>
+											<option value="2051">辛未年(2051)</option>
+											<option value="2050">庚午年(2050)</option>
+											<option value="2049">己巳年(2049)</option>
+											<option value="2048">戊辰年(2048)</option>
+											<option value="2047">丁卯年(2047)</option>
+											<option value="2046">丙寅年(2046)</option>
+											<option value="2045">乙丑年(2045)</option>
+											<option value="2044">甲子年(2044)</option>
+											<option value="2043">癸亥年(2043)</option>
+											<option value="2042">壬戌年(2042)</option>
+											<option value="2041">辛酉年(2041)</option>
+											<option value="2040">庚申年(2040)</option>
+											<option value="2039">己未年(2039)</option>
+											<option value="2038">戊午年(2038)</option>
+											<option value="2037">丁巳年(2037)</option>
+											<option value="2036">丙辰年(2036)</option>
+											<option value="2035">乙卯年(2035)</option>
+											<option value="2034">甲寅年(2034)</option>
+											<option value="2033">癸丑年(2033)</option>
+											<option value="2032">壬子年(2032)</option>
+											<option value="2031">辛亥年(2031)</option>
+											<option value="2030">庚戌年(2030)</option>
+											<option value="2029">己酉年(2029)</option>
+											<option value="2028">戊申年(2028)</option>
+											<option value="2027">丁未年(2027)</option>
+											<option value="2026">丙午年(2026)</option>
+											<option value="2025">乙巳年(2025)</option>
+											<option value="2024">甲辰年(2024)</option>
+											<option value="2023">癸卯年(2023)</option>
+											<option value="2022" selected>壬寅年(2022)</option>
+											<option value="2021">辛丑年(2021)</option>
+											<option value="2020">庚子年(2020)</option>
+											<option value="2019">己亥年(2019)</option>
+											<option value="2018">戊戌年(2018)</option>
+											<option value="2017">丁酉年(2017)</option>
+											<option value="2016">丙申年(2016)</option>
+											<option value="2015">乙未年(2015)</option>
+											<option value="2014">甲午年(2014)</option>
+											<option value="2013">癸巳年(2013)</option>
+											<option value="2012">壬辰年(2012)</option>
+											<option value="2011">辛卯年(2011)</option>
+											<option value="2010">庚寅年(2010)</option>
+											<option value="2009">己丑年(2009)</option>
+											<option value="2008">戊子年(2008)</option>
+											<option value="2007">丁亥年(2007)</option>
+											<option value="2006">丙戌年(2006)</option>
+											<option value="2005">乙酉年(2005)</option>
+											<option value="2004">甲申年(2004)</option>
+											<option value="2003">癸未年(2003)</option>
+											<option value="2002">壬午年(2002)</option>
+											<option value="2001">辛巳年(2001)</option>
+											<option value="2000">庚辰年(2000)</option>
+											<option value="1999">己卯年(1999)</option>
+											<option value="1998">戊寅年(1998)</option>
+											<option value="1997">丁丑年(1997)</option>
+											<option value="1996">丙子年(1996)</option>
+											<option value="1995">乙亥年(1995)</option>
+											<option value="1994">甲戌年(1994)</option>
+											<option value="1993">癸酉年(1993)</option>
+											<option value="1992">壬申年(1992)</option>
+											<option value="1991">辛未年(1991)</option>
+											<option value="1990">庚午年(1990)</option>
+											<option value="1989">己巳年(1989)</option>
+											<option value="1988">戊辰年(1988)</option>
+											<option value="1987">丁卯年(1987)</option>
+											<option value="1986">丙寅年(1986)</option>
+											<option value="1985">乙丑年(1985)</option>
+											<option value="1984">甲子年(1984)</option>
+											<option value="1983">癸亥年(1983)</option>
+											<option value="1982">壬戌年(1982)</option>
+											<option value="1981">辛酉年(1981)</option>
+											<option value="1980">庚申年(1980)</option>
+											<option value="1979">己未年(1979)</option>
+											<option value="1978">戊午年(1978)</option>
+											<option value="1977">丁巳年(1977)</option>
+											<option value="1976">丙辰年(1976)</option>
+											<option value="1975">乙卯年(1975)</option>
+											<option value="1974">甲寅年(1974)</option>
+											<option value="1973">癸丑年(1973)</option>
+											<option value="1972">壬子年(1972)</option>
+											<option value="1971">辛亥年(1971)</option>
+											<option value="1970">庚戌年(1970)</option>
+											<option value="1969">己酉年(1969)</option>
+											<option value="1968">戊申年(1968)</option>
+											<option value="1967">丁未年(1967)</option>
+											<option value="1966">丙午年(1966)</option>
+											<option value="1965">乙巳年(1965)</option>
+											<option value="1964">甲辰年(1964)</option>
+											<option value="1963">癸卯年(1963)</option>
+											<option value="1962">壬寅年(1962)</option>
+											<option value="1961">辛丑年(1961)</option>
+											<option value="1960">庚子年(1960)</option>
+											<option value="1959">己亥年(1959)</option>
+											<option value="1958">戊戌年(1958)</option>
+											<option value="1957">丁酉年(1957)</option>
+											<option value="1956">丙申年(1956)</option>
+											<option value="1955">乙未年(1955)</option>
+											<option value="1954">甲午年(1954)</option>
+											<option value="1953">癸巳年(1953)</option>
+											<option value="1952">壬辰年(1952)</option>
+											<option value="1951">辛卯年(1951)</option>
+											<option value="1950">庚寅年(1950)</option>
+											<option value="1949">己丑年(1949)</option>
+											<option value="1948">戊子年(1948)</option>
+											<option value="1947">丁亥年(1947)</option>
+											<option value="1946">丙戌年(1946)</option>
+											<option value="1945">乙酉年(1945)</option>
+											<option value="1944">甲申年(1944)</option>
+											<option value="1943">癸未年(1943)</option>
+											<option value="1942">壬午年(1942)</option>
+											<option value="1941">辛巳年(1941)</option>
+											<option value="1940">庚辰年(1940)</option>
+											<option value="1939">己卯年(1939)</option>
+											<option value="1938">戊寅年(1938)</option>
+											<option value="1937">丁丑年(1937)</option>
+											<option value="1936">丙子年(1936)</option>
+											<option value="1935">乙亥年(1935)</option>
+											<option value="1934">甲戌年(1934)</option>
+											<option value="1933">癸酉年(1933)</option>
+											<option value="1932">壬申年(1932)</option>
+											<option value="1931">辛未年(1931)</option>
+											<option value="1930">庚午年(1930)</option>
+											<option value="1929">己巳年(1929)</option>
+											<option value="1928">戊辰年(1928)</option>
+											<option value="1927">丁卯年(1927)</option>
+											<option value="1926">丙寅年(1926)</option>
+											<option value="1925">乙丑年(1925)</option>
+											<option value="1924">甲子年(1924)</option>
+											<option value="1923">癸亥年(1923)</option>
+											<option value="1922">壬戌年(1922)</option>
+											<option value="1921">辛酉年(1921)</option>
+											<option value="1920">庚申年(1920)</option>
+											<option value="1919">己未年(1919)</option>
+											<option value="1918">戊午年(1918)</option>
+											<option value="1917">丁巳年(1917)</option>
+											<option value="1916">丙辰年(1916)</option>
+											<option value="1915">乙卯年(1915)</option>
+											<option value="1914">甲寅年(1914)</option>
+											<option value="1913">癸丑年(1913)</option>
+											<option value="1912">壬子年(1912)</option>
+											<option value="1911">辛亥年(1911)</option>
+											<option value="1910">庚戌年(1910)</option>
+											<option value="1909">己酉年(1909)</option>
+											<option value="1908">戊申年(1908)</option>
+											<option value="1907">丁未年(1907)</option>
+											<option value="1906">丙午年(1906)</option>
+											<option value="1905">乙巳年(1905)</option>
+											<option value="1904">甲辰年(1904)</option>
+											<option value="1903">癸卯年(1903)</option>
+											<option value="1902">壬寅年(1902)</option>
+											<option value="1901">辛丑年(1901)</option>
+										</select>
+										<select name="l_month">
+											<option value="1">正月</option>
+											<option value="2">二月</option>
+											<option value="3">三月</option>
+											<option value="4">四月</option>
+											<option value="5">五月</option>
+											<option value="6">六月</option>
+											<option value="7">七月</option>
+											<option value="8">八月</option>
+											<option value="9">九月</option>
+											<option value="10">十月</option>
+											<option value="11">冬月</option>
+											<option value="12">腊月</option>
+										</select>
+										<select name="l_day">
+											<option value="1">初一</option>
+											<option value="2">初二</option>
+											<option value="3">初三</option>
+											<option value="4">初四</option>
+											<option value="5">初五</option>
+											<option value="6">初六</option>
+											<option value="7">初七</option>
+											<option value="8">初八</option>
+											<option value="9">初九</option>
+											<option value="10">初十</option>
+											<option value="11">十一</option>
+											<option value="12">十二</option>
+											<option value="13">十三</option>
+											<option value="14">十四</option>
+											<option value="15">十五</option>
+											<option value="16">十六</option>
+											<option value="17">十七</option>
+											<option value="18">十八</option>
+											<option value="19">十九</option>
+											<option value="20">二十</option>
+											<option value="21">廿一</option>
+											<option value="22">廿二</option>
+											<option value="23">廿三</option>
+											<option value="24">廿四</option>
+											<option value="25">廿五</option>
+											<option value="26">廿六</option>
+											<option value="27">廿七</option>
+											<option value="28">廿八</option>
+											<option value="29">廿九</option>
+											<option value="30">三十</option>
+										</select>
+										<label for="isLeap">
+											<input id="isLeap" type="checkbox" name="isLeap">
+											<span>是否为润月</span>
+										</label>
+										<button class="J_lunar2solar btn">农历转公历</button>
+									</p>
+									<div class="table-inner"></div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="mod-article">
+					<div class="inner">
+						<div class="bd">
+							<p>农历是我国古代用以指导农业生产生活的传统历法，自夏朝始，称为夏历。农历属于一种阴阳历，是以月球绕地球一周为一月，十二月为一年，月亮号为太阴，故谓之太阴历，简称为阴历。由于阴历的一年只有354天，少于太阳回归年的365天，所以夏历采用置闰月的方法，使得阴历的年份与阳历的年份大概保持一致。夏历将太阴历配合了闰年及二十四节气，使得太阴历的年周期同步于太阳历。农历24节气是按太阳年24等分而得，这是阳历部分，农历的月日及闰法属于阴历部分，编在一起就成了和阴阳合历，我们平常没注意，叫惯了阴历不加区分。</p>
+							<p>我们现在使用的公历，即格里历，也叫阳历，就是日常生活中我们所应用到的几月几号，是国际通用的一种计算日子的历法。它是基于太阳的运动规律来安排计算制定的一种历法，只以地球绕太阳一周为一年为依据，完全不考虑月球的变化，月份的设置完全是人为设定的。为了方便对外交往和文化交流，也为了我们生活使用简便，公历现在成了我国通用的历法。</p>
+						</div>
+					</div>
+				</div>
+				<div class="mod-copy">
+					<div class="inner">
+						<div class="hd"><span>数据开源</span></div>
+						<div class="bd">
+							<p><span>数据基于「<a href="https://github.com/mumuy/calendar/blob/master/LICENSE" rel="nofollow" target="_blank">MIT许可协议</a>」开源，除需在源码中保留版权信息和许可声明外，你有权利使用、复制、修改、合并、出版发行、散布、再授权及贩售软件及软件的副本。</span>数据持续更新中，如发现错漏或有想法建议可在此</span> <a class="text-red" href="https://github.com/mumuy/data_location/issues" rel="nofollow" target="_blank">反馈问题</a>。</p>
+							<div class="buttons">
+								<a class="github-button" href="https://github.com/mumuy" data-color-scheme="no-preference: light; light: light; dark: dark;" data-size="large" aria-label="Follow @mumuy on GitHub">Follow @mumuy</a>
+								<a class="github-button" href="https://github.com/mumuy/calendar/fork" data-color-scheme="no-preference: light; light: light; dark: dark;" data-icon="octicon-repo-forked" data-size="large" data-show-count="true" aria-label="Fork mumuy/calendar on GitHub">Fork</a>
+								<a class="github-button" href="https://github.com/mumuy/calendar" data-color-scheme="no-preference: light; light: light; dark: dark;" data-icon="octicon-star" data-size="large" data-show-count="true" aria-label="Star mumuy/calendar on GitHub">Star</a>
+								<a class="github-button" href="https://github.com/mumuy/calendar/archive/HEAD.zip" data-icon="octicon-download" data-size="large" aria-label="Download mumuy/calendar on GitHub">Download</a>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="mod-foot">
+					<div class="inner">
+						<div class="bd">
+							<p>Copyright &copy; <a href="http://passer-by.com">passer-by.com</a></p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script type="text/javascript" src="https://jquerywidget.com/public/script/jquery.min.js"></script>
+		<script type="text/javascript" src="src/calendar.js"></script>
+		<script type="text/javascript">
+			(function(){
+				var $document = $(document);
+				var $sYear = $('select[name="s_year"]');
+				var $sMonth = $('select[name="s_month"]');
+				var $sDay = $('select[name="s_day"]');
+				var $lYear = $('select[name="l_year"]');
+				var $lMonth = $('select[name="l_month"]');
+				var $lDay = $('select[name="l_day"]');
+				var $isLeap = $('input[name="isLeap"]');
+				var formatTable = function(data){
+					if(data){
+						return `<table>
+							<thead>
+								<tr>
+									<th>公历</th>
+									<th>农历</th>
+									<th>生肖</th>
+									<th>星期</th>
+									<th>星座</th>
+									<th>节日</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>${data['sYear']}年${data['sMonth']}月${data['sDay']}日</td>
+									<td>${data['gzDayZH']}年${data['isLeap']?'闰':''}${data['lMonthZH']}${data['lDayZH']}</td>
+									<td>${data['animal']}</td>
+									<td>${data['weekZH']}</td>
+									<td>${data['zodiac']}</td>
+									<td>${data['festival']||data['term']||'-'}</td>
+								</tr>
+							</tbody>
+						</table>`;
+					}else{
+						return `<div class="none">
+							<p>日期可能存在错误！</p>
+						</div>`;
+					}
+				};
+
+				$document.on('click','.J_solar2lunar',function(){
+					var sYear = $sYear.val();
+					var sMonth = $sMonth.val();
+					var sDay = $sDay.val();
+					var html = formatTable(calendar.Solar(sYear,sMonth,sDay));
+					$('#demo1 .table-inner').html(html);
+				});
+				$document.on('click','.J_lunar2solar',function(){
+					var lYear = +$lYear.val();
+					var lMonth = +$lMonth.val();
+					var lDay = +$lDay.val();
+					var isLeap = $isLeap.prop('checked');
+					var html = formatTable(calendar.Lunar(lYear,lMonth,lDay,isLeap));
+					$('#demo2 .table-inner').html(html);
+				});
+			})();
+		</script>
+		<script async defer src="https://cdn.bootcdn.net/ajax/libs/github-buttons/2.21.1/buttons.min.js"></script>
+		<script>
+      		var _hmt = _hmt || [];
+			(function() {
+			var hm = document.createElement("script");
+			hm.src = "https://hm.baidu.com/hm.js?b86879c9cc57dd112fe1f7dd75206b82";
+			var s = document.getElementsByTagName("script")[0];
+			s.parentNode.insertBefore(hm, s);
+			})();
+      	</script>
+		<script>
+			(function(){
+			    var bp = document.createElement('script');
+			    var curProtocol = window.location.protocol.split(':')[0];
+			    if (curProtocol === 'https') {
+			        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+			    }
+			    else {
+			        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+			    }
+			    var s = document.getElementsByTagName("script")[0];
+			    s.parentNode.insertBefore(bp, s);
+			})();
+		</script>
+	</body>
+</html>
