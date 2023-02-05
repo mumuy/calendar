@@ -433,7 +433,7 @@ class WidgetCalendar extends HTMLElement {
                     // 是否增加一行
                     if(result.length<=35){
                         let lastDay = result.at(-1);
-                        for(let i=1;i<=7;i++){
+                        for(let i=1;result.length<42;i++){
                             let obj = calendar.Solar(lastDay['sYear'],lastDay['sMonth'],lastDay['sDay']+i);
                             result.push(obj);
                         }
