@@ -22,6 +22,7 @@
 				}
 			},parseInt(3000+15000*Math.random()));
 		</script>
+		<script type="text/javascript" src="dist/widget-calendar.min.js"></script>
 	</head>
 	<body>
 		<div class="wrapper">
@@ -567,6 +568,31 @@
 									<div class="table-inner"></div>
 								</div>
 							</div>
+							<div class="box">
+								<div class="c-hd">
+									<span class="title">万年历Web组件</span>
+								</div>
+								<div class="c-bd">
+									<widget-calendar></widget-calendar>
+								</div>
+								<div class="c-ft">
+									<h4>自定义事件</h4>
+<code>
+<pre>
+document.querySelector('widget-calendar').addEventListener('onSelected',function(event){
+	let data = event.detail;
+	alert('你选择了：'+data['sYear']+'-'+data['sMonth']+'-'+data['sDay']);
+});
+</pre>
+</code>
+								</div>
+								<script type="text/javascript">
+									document.querySelector('widget-calendar').addEventListener('onSelected',function(event){
+										let data = event.detail;
+										alert('你选择了：'+data['sYear']+'-'+data['sMonth']+'-'+data['sDay']);
+									});
+								</script>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -580,9 +606,9 @@
 				</div>
 				<div class="mod-copy">
 					<div class="inner">
-						<div class="hd"><span>数据开源</span></div>
+						<div class="hd"><span>算法开源</span></div>
 						<div class="bd">
-							<p><span>数据基于「<a href="https://github.com/mumuy/calendar/blob/master/LICENSE" rel="nofollow" target="_blank">MIT许可协议</a>」开源，除需在源码中保留版权信息和许可声明外，你有权利使用、复制、修改、合并、出版发行、散布、再授权及贩售软件及软件的副本。</span>数据持续更新中，如发现错漏或有想法建议可在此</span> <a class="text-red" href="https://github.com/mumuy/data_location/issues" rel="nofollow" target="_blank">反馈问题</a>。</p>
+							<p><span>算法基于「<a href="https://github.com/mumuy/calendar/blob/master/LICENSE" rel="nofollow" target="_blank">MIT许可协议</a>」开源，除需在源码中保留版权信息和许可声明外，你有权利使用、复制、修改、合并、出版发行、散布、再授权及贩售软件及软件的副本。</span>数据持续更新中，如发现错漏或有想法建议可在此</span> <a class="text-red" href="https://github.com/mumuy/data_location/issues" rel="nofollow" target="_blank">反馈问题</a>。</p>
 							<div class="buttons">
 								<a class="github-button" href="https://github.com/mumuy" data-color-scheme="no-preference: light; light: light; dark: dark;" data-size="large" aria-label="Follow @mumuy on GitHub">Follow @mumuy</a>
 								<a class="github-button" href="https://github.com/mumuy/calendar/fork" data-color-scheme="no-preference: light; light: light; dark: dark;" data-icon="octicon-repo-forked" data-size="large" data-show-count="true" aria-label="Fork mumuy/calendar on GitHub">Fork</a>
@@ -602,7 +628,7 @@
 			</div>
 		</div>
 		<script type="text/javascript" src="https://jquerywidget.com/public/script/jquery.min.js"></script>
-		<script type="text/javascript" src="src/calendar.js"></script>
+		<script type="text/javascript" src="dist/calendar.min.js"></script>
 		<script type="text/javascript">
 			(function(){
 				var $document = $(document);

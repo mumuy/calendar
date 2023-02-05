@@ -151,6 +151,20 @@ a:hover{
 .mod-panel .bd .c-bd{
     padding:20px;
 }
+.mod-panel .bd .c-ft{
+    padding:20px;
+}
+.mod-panel .bd h4{
+    line-height: 30px;
+    font-size: 16px;
+    font-weight: bold;
+}
+.mod-panel .bd code{
+    display: block;
+    padding: 15px;
+    background: #f8f8f8;
+    border-radius: 6px;
+}
 .mod-panel .bd .table-inner{
     padding-top:20px;
 }
@@ -193,6 +207,7 @@ a:hover{
 .mod-panel .bd .btn {
     height: 34px;
     min-width: 80px;
+    padding:0 15px;
     background: #2095f2;
     border: medium none;
     line-height: 34px;
