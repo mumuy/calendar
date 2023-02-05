@@ -1,5 +1,10 @@
 # 中国农历公历换算算法
 
+## 网页组件
+```html
+<widget-calendar></widget-calendar>
+```
+
 ## 方法调用
 
 ```js
