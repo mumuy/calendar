@@ -2,7 +2,7 @@
 
 ## 网页组件
 ```html
-<widget-calendar></widget-calendar>
+<widget-calendar date="2023-01-01"></widget-calendar>
 ```
 
 ## 方法调用

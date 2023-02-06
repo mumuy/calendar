@@ -12,7 +12,9 @@ import {
     weekMap,
     dayMap,
     sFestival,
+    sFestival2,
     lFestival,
+    lFestival2,
     oFestival
 } from './data';
 
@@ -116,7 +118,7 @@ export function getDateByOffset(offset){
         return null;
     }
     let count = 0;
-    for(let lYear = minYear; lYear<=maxYear; lYear++){
+    for(lYear = minYear; lYear<=maxYear; lYear++){
         days = getLunarYearDays(lYear);
         if(count + days>=offset){
             break;
@@ -191,6 +193,9 @@ export function getDateInfo(timestamp){
     if(sFestival[dateStr]){
         festivals.push(sFestival[dateStr]);
     }
+    if(sFestival2[dateStr]){
+        festivals.push(sFestival2[dateStr]);
+    }
     dateStr = getDateString(result['sMonth'],index,week);
     if(oFestival[dateStr]){
         festivals.push(oFestival[dateStr]);
@@ -233,8 +238,13 @@ export function getDateInfo(timestamp){
         dateStr = getDateString(result['lMonth'],result['lDay']);
         if(result['lMonth']==12&&result['lDay']==getLunarMonthDays(result['lYear'],12)){
             festivals.push(lFestival['12-30']);
-        }else if(lFestival[dateStr]){
-            festivals.push(lFestival[dateStr]);
+        }else{
+            if(lFestival[dateStr]){
+                festivals.push(lFestival[dateStr]);
+            }
+            if(lFestival2[dateStr]){
+                festivals.push(lFestival2[dateStr]);
+            }
         }
     }
     result['festival'] = festivals.join(' ');
