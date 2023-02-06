@@ -412,7 +412,6 @@ class WidgetCalendar extends HTMLElement {
             }
             let that_date = getDateString(thatDay['sYear'],thatDay['sMonth'],thatDay['sDay']);
             _.setAttribute('date',that_date);
-            formatSetting(param['year']);
             //获取日历信息
             _data = (function(){
                 let firstDay = calendar.Solar(thatDay['sYear'],thatDay['sMonth'],1);
@@ -496,6 +495,8 @@ class WidgetCalendar extends HTMLElement {
             <p>'+thatDay['gzMonthZH']+'月 '+thatDay['gzDayZH']+'日</p></div>\
             <div class="festival"><p>'+thatDay['festival'].replace(/\s/g,'</p><p>')+'</p></div>';
             $tbody.innerHTML = html;
+
+            _.dispatchEvent(new CustomEvent('onChange',{'detail':thatDay}));
         };
         let formatSetting = function(year){
             year = year||(new Date()).getFullYear();
@@ -573,14 +574,18 @@ class WidgetCalendar extends HTMLElement {
             let month = $month.value;
             month--;
             formatTable({'year':year,'month':month,'day':_day});
-            if(month==0)formatSetting(--year);
+            if(month==0){
+                formatSetting(--year);
+            }
         };
         $next_month.onclick = function(){
             let year = $year.value;
             let month = $month.value;
             month++;
             formatTable({'year':year,'month':month,'day':_day});
-            if(month==13)formatSetting(++year);
+            if(month==13){
+                formatSetting(++year);
+            }
         };
         $tbody.onclick = function(e){
             e = e || window.event;
@@ -599,8 +604,10 @@ class WidgetCalendar extends HTMLElement {
         if(_date){
             let [year,month,day] = _date.split('-');
             formatTable({'year':year,'month':month,'day':day});
+            formatSetting(year);
         }else{
             formatTable();
+            formatSetting();
         }
     }
 }
