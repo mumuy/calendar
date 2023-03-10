@@ -15,12 +15,12 @@ import {
     sFestival2,
     lFestival,
     lFestival2,
-    oFestival
+    oFestival,
+    minYear,
+    minMonth,
+    minDay,
+    maxYear
 } from './data';
-
-// 农历有效期范围
-const minYear = 1900, minMonth=1, minDay = 30;
-const maxYear = 2100;
 
 // 获取指定年份的24节气日期数据
 export function getTermDate(sYear){

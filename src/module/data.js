@@ -187,6 +187,15 @@ const oFestival = {
     '11-04-04':'感恩节',
 };
 
+
+// 农历有效期范围
+const minYear = 1900;
+const minMonth = 1;
+const minDay = 30;
+const maxYear = 2100;
+const maxMonth = 12;
+const maxDay = 31;
+
 export {
     termMinDate,
     termData,
@@ -204,5 +213,11 @@ export {
     sFestival2,
     lFestival,
     lFestival2,
-    oFestival
+    oFestival,
+    minYear,
+    minMonth,
+    minDay,
+    maxYear,
+    maxMonth,
+    maxDay
 }

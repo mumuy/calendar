@@ -1,4 +1,5 @@
 import {getDateInfo,getLeapMonth,getOffsetByDate} from './module/method';
+import {minYear, minMonth, minDay} from './module/data';
 
 export default {
     Solar:function(sYear,sMonth,sDay){
