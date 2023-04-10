@@ -32,7 +32,7 @@ gulp.task('main', () => {
         return bundle.write({
             file: './dist/calendar.min.js',
             format: 'umd',
-            name: 'relationship',
+            name: 'calendar',
             banner
         });
     });
@@ -46,7 +46,10 @@ gulp.task('widget', () => {
         ]
     }).then(bundle => {
         return bundle.write({
-            file: './dist/widget-calendar.min.js'
+            file: './dist/widget-calendar.min.js',
+            format: 'umd',
+            name: 'widget-calendar',
+            banner
         });
     });
 });
