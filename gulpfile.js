@@ -47,8 +47,7 @@ gulp.task('widget', () => {
     }).then(bundle => {
         return bundle.write({
             file: './dist/widget-calendar.min.js',
-            format: 'umd',
-            name: 'widget-calendar',
+            format: 'iife',
             banner
         });
     });
