@@ -20,7 +20,7 @@ function getDateInfo(timestamp){
     let festivals = [];
     festivals = festivals.concat(getFestivalsBySolar(result['sYear'],result['sMonth'],result['sDay']));
     if(offset>-1){
-        result['gzYearZH'] = getGanZhiYear(result['sYear']);
+        result['gzYearZH'] = getGanZhiYear(result['lYear']);
         result['gzMonthZH'] = getGanZhiMonth(result['sYear'],result['sMonth'],result['sDay']);
         result['gzDayZH'] = getGanZhiDay(result['sYear'],result['sMonth'],result['sDay']);
         result['animal'] = getAnimalYear(result['lYear']);

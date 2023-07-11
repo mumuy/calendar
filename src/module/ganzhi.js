@@ -8,8 +8,8 @@ const ganMap = ['甲','乙','丙','丁','戊','己','庚','辛','壬','癸'];
 const zhiMap = ['子','丑','寅','卯','辰','巳','午','未','申','酉','戌','亥'];
 
 // 获取干支年: 1984年为甲子年
-export function getGanZhiYear(sYear){
-    let gzIndex = sYear - 1984;
+export function getGanZhiYear(lYear){
+    let gzIndex = lYear - 1984;
     gzIndex = gzIndex%60>0?gzIndex%60:gzIndex%60+60;
     let gan = gzIndex%10;
     let zhi = gzIndex%12;
