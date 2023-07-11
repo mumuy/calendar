@@ -1,9 +1,10 @@
 /*
 *   万年历组件
 */
-import {holidayMap,scheduleMap} from './module/holiday';
-import {sFestival,lFestival} from './module/data';
-import {getSolarMonthDays,getDateString} from './module/method';
+import {holidayMap,scheduleMap} from './module/data/holiday';
+import {sFestival,lFestival} from './module/festival';
+import {getDateString} from './module/method';
+import {getSolarMonthDays} from './module/solar';
 import calendar from './calendar';
 
 class WidgetCalendar extends HTMLElement {
