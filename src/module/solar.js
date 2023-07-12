@@ -11,11 +11,11 @@ export function getSolarByTimestamp(timestamp){
     let now = new Date(timestamp);
     let week = now.getDay();
     return {
-        'sYear':now.getFullYear(),
-        'sMonth':now.getMonth()+1,
-        'sDay':now.getDate(),
-        'week':week,
-        'weekZH':'星期'+weekMap[week],
+        sYear:now.getFullYear(),
+        sMonth:now.getMonth()+1,
+        sDay:now.getDate(),
+        week:week,
+        weekZH:'星期'+weekMap[week],
     };
 }
 
