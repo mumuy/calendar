@@ -1,4 +1,4 @@
-import {minYear,maxYear} from './data/map';
+import {minYear,maxYear} from './data/config';
 import {getSolarByTimestamp} from './solar';
 import {getGanZhiDay} from './ganzhi';
 
