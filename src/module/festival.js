@@ -1,7 +1,10 @@
-import {getDateString} from './method';
-import {getLunarMonthDays} from './lunar';
+import {getDateString} from './tool';
+import {getSolarByTimestamp} from './solar';
+import {getLunarByTimestamp,getLunarMonthDays} from './lunar';
+import {getTermDate} from './term';
+import {getGanZhiDay} from './ganzhi';
 
-// 公历节日
+// 公历主要节日
 export const sFestival = {
     '01-01':'元旦',
     '02-14':'情人节',
@@ -20,6 +23,7 @@ export const sFestival = {
     '12-24':'平安夜',
     '12-25':'圣诞节',
 };
+// 公历非主要节日
 export const sFestival2 = {
     '01-10':'中国人民警察节',
     '01-26':'国际海关日',
@@ -95,7 +99,7 @@ export const sFestival2 = {
     '12-11':'国际山岳日',
     '12-15':'强化免疫日',
 };
-// 农历节日
+// 农历主要节日
 export const lFestival = {
     '01-01':'春节',
     '01-15':'元宵节',
@@ -112,17 +116,19 @@ export const lFestival = {
     '12-24':'南小年',
     '12-30':'除夕'
 };
+// 农历非主要节日
 export const lFestival2 = {
     '06-24':'火把节',
     '10-01':'寒衣节',
 };
-// 其他节日
+// 公历星期推算节日
 export const oFestival = {
     '05-02-00':'母亲节',
     '06-03-00':'父亲节',
     '11-04-04':'感恩节',
 };
-
+// 节气推算节日
+export const tFestival = ['初伏','中伏','末伏','出伏','复活节'];
 
 // 通过公历获取节日
 export function getFestivalsBySolar(sYear,sMonth,sDay){
@@ -141,6 +147,67 @@ export function getFestivalsBySolar(sYear,sMonth,sDay){
     dateStr = getDateString(sMonth,index,week);
     if(oFestival[dateStr]){
         festivals.push(oFestival[dateStr]);
+    }
+    return festivals;
+}
+
+// 获取节气作用节日
+export function getTermFestivalsBySolar(sYear,sMonth,sDay){
+    let festivals = [];
+    let termDate = getTermDate(sYear);
+    let dayTime = 86400000;
+    // 三伏天
+    let xiazhi = new Date(sYear,5,termDate[11]);
+    let qiufen = new Date(sYear,7,termDate[14]);
+    let count = 0;
+    for(let time = xiazhi.getTime();time<=qiufen.getTime();time+=dayTime){
+        let solar = getSolarByTimestamp(time);
+        let ganzhi = getGanZhiDay(solar['sYear'],solar['sMonth'],solar['sDay']);
+        if(ganzhi.indexOf('庚')>-1){
+            count++;
+            if(solar['sYear']==sYear&&solar['sMonth']==sMonth&&solar['sDay']==sDay){
+                if(count==3){
+                    festivals.push('初伏');
+                }else if(count==4){
+                    festivals.push('中伏');
+                }
+            }
+        }
+    }
+    count = 0;
+    for(let time = qiufen.getTime();time<=qiufen.getTime()+dayTime*20;time+=dayTime){
+        let solar = getSolarByTimestamp(time);
+        let ganzhi = getGanZhiDay(solar['sYear'],solar['sMonth'],solar['sDay']);
+        if(ganzhi.indexOf('庚')>-1){
+            count++;
+            if(solar['sYear']==sYear&&solar['sMonth']==sMonth&&solar['sDay']==sDay){
+                if(count==1){
+                    festivals.push('末伏');
+                }else if(count==2){
+                    festivals.push('出伏');
+                }
+            }
+        }
+    }
+    // 复活节
+    let chunfen = new Date(sYear,2,termDate[5]);
+    let hasFullMoon = false;
+    let hasSunDay = false;
+    for(let time = chunfen.getTime();time<=chunfen.getTime()+30*dayTime;time+=dayTime){
+        if(!hasFullMoon){
+            let lunar = getLunarByTimestamp(time);
+            if(lunar['lDay']==15){
+                hasFullMoon = true;
+            }
+        }else if(!hasSunDay){
+            let solar = getSolarByTimestamp(time);
+            if(solar['week']==0){
+                hasSunDay = true;
+                if(solar['sYear']==sYear&&solar['sMonth']==sMonth&&solar['sDay']==sDay){
+                    festivals.push('复活节');
+                }
+            }
+        }
     }
     return festivals;
 }

@@ -1,6 +1,6 @@
 
 // 闰月数据压缩：1位闰月大小+12位平月大小及4位长度闰月月份转2进制，再转32进制
-var monthData = [
+export const monthData = [
     'iuo','in0','19bg','l6l','1kj0','1mag','2pak','ll0','16mg','lei',
     'in0','19dm','196g','1kig','3kil','1da0','1ll0','1bd2','15dg','2ibn',
     'ibg','195g','1d5l','qig','ra0','3aqk','ar0','15bg','kni','ibg',
@@ -23,31 +23,11 @@ var monthData = [
     '1qb8','1l90','1ml0','2ql6','lmg','in0','1aek','18mg','1kag','1sii',
     '1l90'
 ];
-// 月份
-const monthMap = ['正','二','三','四','五','六','七','八','九','十','冬','腊'];
-// 星期
-const weekMap = ['日','一','二','三','四','五','六'];
-// 十位
-const dayMap = ['初一','初二','初三','初四','初五','初六','初七','初八','初九','初十','十一','十二','十三','十四','十五','十六','十七','十八','十九','二十','廿一','廿二','廿三','廿四','廿五','廿六','廿七','廿八','廿九','三十'];
-
 
 // 农历有效期范围
-const minYear = 1900;
-const minMonth = 1;
-const minDay = 30;
-const maxYear = 2100;
-const maxMonth = 12;
-const maxDay = 31;
-
-export {
-    monthData,
-    monthMap,
-    weekMap,
-    dayMap,
-    minYear,
-    minMonth,
-    minDay,
-    maxYear,
-    maxMonth,
-    maxDay
-}
+export const minYear = 1900;
+export const minMonth = 1;
+export const minDay = 30;
+export const maxYear = 2100;
+export const maxMonth = 12;
+export const maxDay = 31;

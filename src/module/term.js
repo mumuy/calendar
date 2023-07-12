@@ -1,7 +1,4 @@
-import {
-    minYear,
-    maxYear
-} from './data/map';
+import {minYear,maxYear} from './data/map';
 import {getSolarByTimestamp} from './solar';
 import {getGanZhiDay} from './ganzhi';
 
@@ -60,37 +57,5 @@ export function getTerm(sYear,sMonth,sDay){
             term = termMap[index];
         }
     });
-    let xiazhi = new Date(sYear,5,termDate[11]);
-    let qiufen = new Date(sYear,7,termDate[14]);
-    let count = 0;
-    for(let time = xiazhi.getTime();time<=qiufen.getTime();time+=86400000){
-        let date = getSolarByTimestamp(time);
-        let ganzhi = getGanZhiDay(date['sYear'],date['sMonth'],date['sDay']);
-        if(ganzhi.indexOf('庚')>-1){
-            count++;
-            if(date['sYear']==sYear&&date['sMonth']==sMonth&&date['sDay']==sDay){
-                if(count==3){
-                    term = '初伏';
-                }else if(count==4){
-                    term = '中伏';
-                }
-            }
-        }
-    }
-    count = 0;
-    for(let time = qiufen.getTime();time<=qiufen.getTime()+86400000*20;time+=86400000){
-        let date = getSolarByTimestamp(time);
-        let ganzhi = getGanZhiDay(date['sYear'],date['sMonth'],date['sDay']);
-        if(ganzhi.indexOf('庚')>-1){
-            count++;
-            if(date['sYear']==sYear&&date['sMonth']==sMonth&&date['sDay']==sDay){
-                if(count==1){
-                    term = '末伏';
-                }else if(count==2){
-                    term = '出伏';
-                }
-            }
-        }
-    }
     return term;
 }

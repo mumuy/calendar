@@ -2,9 +2,9 @@
 *   万年历组件
 */
 import {holidayMap,scheduleMap} from './module/data/holiday';
-import {sFestival,lFestival} from './module/festival';
-import {getDateString} from './module/method';
+import {getDateString} from './module/tool';
 import {getSolarMonthDays} from './module/solar';
+import {sFestival,lFestival,oFestival,tFestival} from './module/festival';
 import calendar from './calendar';
 
 class WidgetCalendar extends HTMLElement {
@@ -474,7 +474,7 @@ class WidgetCalendar extends HTMLElement {
             }
             let festivals = item['festival'].split(' ').filter(function(value){
                 if(value.length<=3){
-                    return Object.values(sFestival).includes(value)||Object.values(lFestival).includes(value);
+                    return Object.values(sFestival).includes(value)||Object.values(lFestival).includes(value)||Object.values(oFestival).includes(value)||Object.values(tFestival).includes(value);
                 }
             });
             let festival = festivals.length?festivals[0]:'';

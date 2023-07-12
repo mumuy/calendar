@@ -1,5 +1,5 @@
-import {getDateString} from './method';
-import {getOffsetBySolar} from './solar';
+import {getDateString} from './tool';
+import {getTimestampBySolar} from './solar';
 import {getTermDate} from './term';
 
 // 天干
@@ -38,7 +38,7 @@ export function getGanZhiMonth(sYear,sMonth,sDay){
 
 // 获取干支日
 export function getGanZhiDay(sYear,sMonth,sDay){
-    let offset = getOffsetBySolar(sYear,sMonth,sDay);
+    let offset = Math.round((getTimestampBySolar(sYear, sMonth, sDay) -getTimestampBySolar(1900, 1, 30))/86400000);
     let gzIndex = offset+39;
     gzIndex = gzIndex%60>0?gzIndex%60:gzIndex%60+60;
     let gan = gzIndex%10;

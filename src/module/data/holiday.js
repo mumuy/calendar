@@ -1,5 +1,5 @@
 // 假期
-const holidayMap = {
+export const holidayMap = {
     '2011':[
         {
             value:'2011-01-01',
@@ -396,7 +396,7 @@ const holidayMap = {
     ]
 };
 // 假期放假安排
-const scheduleMap = {
+export const scheduleMap = {
 	'2011': {
 		'04-02': 0,
 		'04-03': 1,
@@ -868,8 +868,3 @@ const scheduleMap = {
 		'10-08': 0
 	}
 };
-
-export {
-    holidayMap,
-    scheduleMap
-}

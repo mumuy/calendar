@@ -1,8 +1,12 @@
 import {
     monthData,
     minYear,
+    minMonth,
+    minDay,
     maxYear
 } from './data/map';
+
+const startTime = Date.UTC(minYear, minMonth-1, minDay, 0, 0, 0);
 
 // 获取农历年闰月
 export function getLeapMonth(lYear){
@@ -33,19 +37,28 @@ export function getLunarMonthDays(lYear,lMonth,isLeap){
     return days;
 }
 
-// 获取偏移天数（参考日期：1900年1月30日） - 通过农历
-export function getOffsetByLunar(lYear,lMonth,lDay,isLeap){
-    let offset = 0;
-    let data = parseInt(monthData[lYear - minYear],32);
-    let leapMonth = getLeapMonth(lYear);
+// 农历日期转时间戳
+export function getTimestampByLunar(lYear,lMonth,lDay,isLeap){
+    // 有效性验证
     if(lYear<minYear||lYear>maxYear){
-        return -1;
-    }
-    for(let year=minYear;year<lYear;year++){
-        offset += getLunarYearDays(year);
+        return null;
     }
     if(lMonth<1||lMonth>12){
-        return -1;
+        return null;
+    }
+    let leapMonth = getLeapMonth(lYear);
+    if(isLeap&&leapMonth!=lMonth){
+        return null;
+    }
+    let days = (isLeap?data&1<<16:1<<(17-lMonth))?30:29;
+    if(lDay>days){
+        return null;
+    }
+    // 时间戳获取
+    let offset = 0;
+    let data = parseInt(monthData[lYear - minYear],32);
+    for(let year=minYear;year<lYear;year++){
+        offset += getLunarYearDays(year);
     }
     for(let month=1;month<lMonth||isLeap&&month==lMonth;month++){
         offset += data&1<<(16 - month)?30:29;
@@ -53,16 +66,13 @@ export function getOffsetByLunar(lYear,lMonth,lDay,isLeap){
     if(isLeap&&lMonth>leapMonth){
         offset += data&1<<16?30:29;
     }
-    let days = (isLeap?data&1<<16:1<<(17-lMonth))?30:29;
-    if(lDay>days){
-        return -1;
-    }
     offset += lDay;
-    return offset;
+    return startTime+offset*86400000;
 }
 
-// 获取农历日期（参考日期：1900年1月30日）
-export function getLunarByOffset(offset){
+// 时间戳转农历日期
+export function getLunarByTimestamp(timestamp){
+    let offset = Math.floor((timestamp - startTime)/86400000);
     let lYear = 0, lMonth = 0, lDay = 0, isLeap = false;
     let days;
     if(offset<0){

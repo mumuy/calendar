@@ -1,13 +1,12 @@
-import {
-    weekMap
-} from './data/map';
+// 星期
+const weekMap = ['日','一','二','三','四','五','六'];
 
-// 获取偏移天数（参考日期：1900年1月30日） - 通过公历
-export function getOffsetBySolar(sYear,sMonth,sDay){
-    return Math.round((Date.UTC(sYear, sMonth-1, sDay, 0, 0, 0) - Date.UTC(1900, 0, 30, 0, 0, 0))/86400000);
-}
+// 公历日期转时间戳
+export function getTimestampBySolar(sYear,sMonth,sDay){
+    return Date.UTC(sYear, sMonth-1, sDay, 0, 0, 0);
+};
 
-// 获取公历日期
+// 通过时间戳获取日期
 export function getSolarByTimestamp(timestamp){
     let now = new Date(timestamp);
     let week = now.getDay();
@@ -21,7 +20,7 @@ export function getSolarByTimestamp(timestamp){
 }
 
 // 获取公历一个月天数
-export function getSolarMonthDays(year,month){
-    let day = new Date(year,month,0);
+export function getSolarMonthDays(sYear,sMonth){
+    let day = new Date(sYear,sMonth,0);
     return  day.getDate();
 }
