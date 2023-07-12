@@ -138,7 +138,7 @@ export function getLunarByTimestamp(timestamp){
         lMonth:lMonth,
         lDay:lDay,
         isLeap:isLeap,
-        lMonthZH:(isLeap?'闰':'')+monthMap[lMonth-1]+'月',
+        lMonthZH:(isLeap&&leapMonth==lMonth?'闰':'')+monthMap[lMonth-1]+'月',
         lDayZH:dayMap[lDay-1]
     };
 }
