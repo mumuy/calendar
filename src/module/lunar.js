@@ -124,9 +124,9 @@ export function getLunarByTimestamp(timestamp){
         }
         count += days;
         if(leapMonth&&lMonth==leapMonth){
-            isLeap = true;
             days = data&1<<16?30:29;
             if(count+days>=offset){
+                isLeap = true;
                 break;
             }
             count += days;
