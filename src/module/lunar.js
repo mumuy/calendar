@@ -124,9 +124,9 @@ export function getLunarByTimestamp(timestamp){
         }
         count += days;
         if(leapMonth&&lMonth==leapMonth){
-            isLeap = true;
             days = data&1<<16?30:29;
             if(count+days>=offset){
+                isLeap = true;
                 break;
             }
             count += days;
@@ -138,7 +138,7 @@ export function getLunarByTimestamp(timestamp){
         lMonth:lMonth,
         lDay:lDay,
         isLeap:isLeap,
-        lMonthZH:(isLeap&&leapMonth==lMonth?'闰':'')+monthMap[lMonth-1]+'月',
+        lMonthZH:(isLeap?'闰':'')+monthMap[lMonth-1]+'月',
         lDayZH:dayMap[lDay-1]
     };
 }
