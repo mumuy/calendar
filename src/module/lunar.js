@@ -102,7 +102,7 @@ export function getLunarByTimestamp(timestamp){
     let offset = Math.floor((timestamp - startTime)/86400000);
     let lYear = 0, lMonth = 0, lDay = 0, isLeap = false;
     let days;
-    if(offset<0){
+    if(offset<=0){
         return null;
     }
     let count = 0;

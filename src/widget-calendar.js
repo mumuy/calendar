@@ -478,11 +478,11 @@ class WidgetCalendar extends HTMLElement {
                 }
             });
             let festival = festivals.length?festivals[0]:'';
-            html += `<td class="`+classnameList.join(' ')+`" data-id="`+i+`">
-                <a href="javascript:;" class="`+(item_date==_.date?'current':'')+`">
-                    <span class="s1">`+item['sDay']+`</span>
-                    <span class="s2">`+(item['term']||festival||item['lDayZH'])+`</span>
-                    `+(sign&&map[sign]?'<i>'+map[sign]+'</i>':'')+`
+            html += `<td class="${classnameList.join(' ')}" data-id="`+i+`">
+                <a href="javascript:;" class="${item_date==_.date?'current':''}">
+                    <span class="s1">${item['sDay']}</span>
+                    <span class="s2">${item['term']||festival||item['lDayZH']||'-'}</span>
+                    ${sign&&map[sign]?'<i>'+map[sign]+'</i>':''}
                 </a>
             </td>`;
             if(i%7==6&&i<len-1){
@@ -492,12 +492,22 @@ class WidgetCalendar extends HTMLElement {
         html+='</tr>';
         _.$year.value = thatDay['sYear'];
         _.$month.value = thatDay['sMonth'];
-        _.$info.innerHTML = '<p>'+that_date+' '+thatDay['weekZH']+'</p>\
-        <div class="day">'+thatDay['sDay']+'</div>\
-        <div class="sub"><p>'+thatDay['lMonthZH']+thatDay['lDayZH']+'</p>\
-        <p>'+thatDay['gzYearZH']+'年 【'+thatDay['animal']+'年】</p>\
-        <p>'+thatDay['gzMonthZH']+'月 '+thatDay['gzDayZH']+'日</p></div>\
-        <div class="festival"><p>'+thatDay['festival'].replace(/\s/g,'</p><p>')+'</p></div>';
+        _.$info.innerHTML = `<p>${that_date} ${thatDay['weekZH']}</p>
+        <div class="day">${thatDay['sDay']}</div>
+        <div class="sub">
+            `+(function(){
+                if(thatDay['gzYearZH']){
+                    return `
+                        <p>${thatDay['lMonthZH']+thatDay['lDayZH']}</p>
+                        <p>${thatDay['gzYearZH']}年 【${thatDay['animal']}年】</p>
+                        <p>${thatDay['gzMonthZH']}月 ${thatDay['gzDayZH']}日</p>
+                    `;
+                }else{
+                    return ``;
+                }
+            })()+`
+        </div>
+        <div class="festival"><p>${thatDay['festival'].replace(/\s/g,'</p><p>')}</p></div>`;
         _.$tbody.innerHTML = html;
 
         _.dispatchEvent(new CustomEvent('onChange',{'detail':thatDay}));

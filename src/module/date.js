@@ -21,6 +21,20 @@ export function getDateInfo(timestamp){
         result['term'] = getTerm(result['sYear'],result['sMonth'],result['sDay']);
         festivals = festivals.concat(getTermFestivalsBySolar(result['sYear'],result['sMonth'],result['sDay']));
         festivals = festivals.concat(getFestivalsByLunar(result['lYear'],result['lMonth'],result['lDay']));
+    }else{
+        Object.assign(result,{
+            lYear:null,
+            lMonth:null,
+            lDay:null,
+            isLeap:false,
+            lMonthZH:'',
+            lDayZH:'',
+            gzYearZH:'',
+            gzMonthZH:'',
+            gzDayZH:'',
+            animal:'',
+            term:''
+        });
     }
     festivals = festivals.concat(getFestivalsBySolar(result['sYear'],result['sMonth'],result['sDay']));
     result['festival'] = festivals.join(' ');
