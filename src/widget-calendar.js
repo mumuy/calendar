@@ -169,12 +169,14 @@ class WidgetCalendar extends HTMLElement {
         _.$month.value = thatDay['sMonth'];
         _.$info.innerHTML = `<p>${that_date} ${thatDay['weekZH']}</p>
             <div class="day">${thatDay['sDay']}</div>
-            <div class="sub">
+            <div class="detail">
                 <p>${thatDay['lMonthZH']}${thatDay['lDayZH']}</p>
                 <p>${thatDay['gzYearZH']}年 【${thatDay['animal']}年】</p>
                 <p>${thatDay['gzMonthZH']}月 ${thatDay['gzDayZH']}日</p>
             </div>
-            <div class="festival"><p>${thatDay['festival'].replace(/\s/g,'</p><p>')}</p></div>
+            <div class="list">
+                <div class="item"><p>${thatDay['festival'].replace(/\s/g,'</p><p>')}</p></div>
+            </div>
         `;
         _.$tbody.innerHTML = html;
 
@@ -232,7 +234,7 @@ class WidgetCalendar extends HTMLElement {
         let _ = this;
 
         // 样式
-        let themeColor = this.getAttribute('theme')||'#2095f2';
+        let themeColor = this.getAttribute('theme-color')||'#2095f2';
         const $style = document.createElement('style');
         $style.textContent = `
             *{
@@ -256,22 +258,30 @@ class WidgetCalendar extends HTMLElement {
                 text-align: center;
                 color: #fff;
             }
+            .mod-calendar .info a{
+                color: #fff;
+            }
             .mod-calendar .info p {
-                line-height: 22px;
+                line-height: 20px;
             }
             .mod-calendar .info .day {
                 width: 80px;
                 height: 80px;
-                margin: 15px auto 7px;
+                margin: 15px auto;
                 line-height: 80px;
                 font-size: 48px;
                 background: #fb0;
                 border-radius: 8px;
             }
-            .mod-calendar .info .festival {
-                margin: 15px 10px;
-                padding-top: 15px;
-                border-top: 1px dotted #fefefe
+            .mod-calendar .info .detail{
+                margin-bottom: 15px;
+            }
+            .mod-calendar .info .list{
+                padding: 10px 0;
+                border-top: 1px dotted rgba(255,255,255,0.5);
+            }
+            .mod-calendar .info .list .item{
+                padding: 5px 0;
             }
             .mod-calendar .box {
                 margin-right: 180px;
@@ -416,29 +426,6 @@ class WidgetCalendar extends HTMLElement {
                 border: 1px solid #fb0;
             }
             @media screen and (max-width: 640px) {
-            	.mod-panel{
-            		border: none;
-            		background: none;
-            		margin-bottom: 10px;
-            	}
-            	.mod-panel .hd{
-            		padding: 0;
-            		margin-bottom: 0;
-            		line-height: 22px;
-            	}
-            	.mod-panel .hd h1 {
-            	    line-height: 36px;
-            	    font-size: 18px;
-            	}
-            	.mod-panel .hd img{
-            		width: 80px;
-            		height: 50px;
-            	}
-
-            	.inner{
-            		overflow:visible;
-            	}
-
             	.mod-calendar{
             		width: 100%;
             		margin-bottom: 12px;
@@ -458,29 +445,30 @@ class WidgetCalendar extends HTMLElement {
             		float: left;
             		width: 58px;
             		height: 58px;
-            		margin: 7px 0 12px;
+            		margin: 6px 0;
             		line-height: 58px;
             		font-size: 24px;
             	}
-            	.mod-calendar .info .sub{
-            		margin-left: 70px;
+            	.mod-calendar .info .detail{
             		padding-top: 5px;
+                    margin-left: 70px;
+                    margin-bottom: 10px;
             	}
-            	.mod-calendar .sub p{
-            		line-height: 21px;
-            	}
-            	.mod-calendar .info .festival{
+            	.mod-calendar .info .list{
             		position: absolute;
             		top: 10px;
-            		right: 9px;
-            		margin: 0;
+            		right: 10px;
             		padding:0;
             		border-top: none;
             	}
+                .mod-calendar .info .list .item{
+                    padding: 0;
+                }
+                .mod-calendar .info .item p{
+                    text-align:right;
+                }
             	.mod-calendar .box{
             		margin-right: 0;
-            		padding:10px 0;
-            		border: none;
             	}
             	.mod-calendar .selector span{
             		float: left;
@@ -641,4 +629,6 @@ class WidgetCalendar extends HTMLElement {
     }
 }
 
-customElements.define('widget-calendar', WidgetCalendar);
+if(!customElements.get('widget-calendar')){
+    customElements.define('widget-calendar', WidgetCalendar);
+}
