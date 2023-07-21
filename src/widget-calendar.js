@@ -8,11 +8,12 @@ import {sFestival,lFestival,oFestival,tFestival} from './module/festival';
 import calendar from './calendar';
 
 class WidgetCalendar extends HTMLElement {
+    #shadow
     constructor() {
         super();
 
-        const $shadow = this.attachShadow({mode:'open'});
-        $shadow.innerHTML = `<div class="mod-calendar">
+        this.#shadow = this.attachShadow({mode:'open'});
+        this.#shadow.innerHTML = `<div class="mod-calendarSo">
             <div class="info"></div>
             <div class="box">
                 <div class="selector">
@@ -61,7 +62,179 @@ class WidgetCalendar extends HTMLElement {
             </div>
         </div>`;
 
+        // 全局变量
+        let _ = this;
+        _.$module = _.shadowRoot.querySelector('.mod-calendar');
+        _.$tbody = _.$module.querySelector('tbody');
+        _.$year = _.$module.querySelector('.year');
+        _.$month = _.$module.querySelector('.month');
+        _.$holiday = _.$module.querySelector('.holiday');
+        _.$goback = _.$module.querySelector('.goback');
+        _.$prev_year = _.$module.querySelector('.prev-year');
+        _.$next_year = _.$module.querySelector('.next-year');
+        _.$prev_month = _.$module.querySelector('.prev-month');
+        _.$next_month = _.$module.querySelector('.next-month');
+        _.$info = _.$module.querySelector('.info');
+
+        _.today = calendar.getToday();
+        let today_date = getDateString(_.today['sYear'],_.today['sMonth'],_.today['sDay']);
+        _.date = _.getAttribute('date')||today_date;    // 选中日期
+        _.data = [];    // 选中日期所在月份数据
+        _.day = 1;      // 当月几号
+    }
+    formatTable(param){
+        let _ = this;
+        let thatDay = _.today;
+        if(param){
+            thatDay = calendar.getDateBySolar(+param['year'],+param['month'],+param['day']);
+        }
+        let that_date = getDateString(thatDay['sYear'],thatDay['sMonth'],thatDay['sDay']);
+        if(that_date!=_.date){
+            _.setAttribute('date',that_date);
+        }
+
+        //获取日历信息
+        let firstDay = calendar.getDateBySolar(thatDay['sYear'],thatDay['sMonth'],1);
+        let monthDays = getSolarMonthDays(thatDay['sYear'],thatDay['sMonth']);
+        _.data = [];
+        // 上月日期
+        for(let i=firstDay['week'];i>0;i--){
+            let obj = calendar.getDateBySolar(firstDay['sYear'],firstDay['sMonth'],firstDay['sDay']-i);
+            _.data.push(obj);
+        }
+        // 当月日期
+        for(let i=0;i<monthDays;i++){
+            let obj = calendar.getDateBySolar(firstDay['sYear'],firstDay['sMonth'],firstDay['sDay']+i);
+            _.data.push(obj);
+        }
+        // 下月日期
+        let lastDay = _.data.at(-1);
+        for(let i=1;lastDay['week']+i<7;i++){
+            let obj = calendar.getDateBySolar(lastDay['sYear'],lastDay['sMonth'],lastDay['sDay']+i);
+            _.data.push(obj);
+        }
+        // 是否增加一行
+        if(_.data.length<=35){
+            let lastDay = _.data.at(-1);
+            for(let i=1;_.data.length<42;i++){
+                let obj = calendar.getDateBySolar(lastDay['sYear'],lastDay['sMonth'],lastDay['sDay']+i);
+                _.data.push(obj);
+            }
+        }
+
+        // 格式化结构
+        let map = {
+            'work':'班',
+            'holiday':'休'
+        };
+        let html = '<tr>';
+        for(let i=0,len=_.data.length;i<len;i++){
+            let item = _.data[i];
+            let item_date = getDateString(item['sYear'],item['sMonth'],item['sDay']);
+            let classnameList = [];
+            if(item_date==that_date){
+                classnameList.push('active');
+            }
+            if(item['sYear']!=thatDay['sYear']||item['sMonth']!=thatDay['sMonth']){
+                classnameList.push('disabled');
+            }
+            let sign = '';
+            if(scheduleMap[item['sYear']]){
+                let holiday = scheduleMap[item['sYear']];
+                let dateStr = getDateString(item['sMonth'],item['sDay']);
+                if(typeof holiday[dateStr] != 'undefined'){
+                    sign = holiday[dateStr]?'holiday':'work';
+                    classnameList.push(sign);
+                }
+            }
+            let festivals = item['festival'].split(' ').filter(function(value){
+                if(value.length<=3){
+                    return Object.values(sFestival).includes(value)||Object.values(lFestival).includes(value)||Object.values(oFestival).includes(value)||Object.values(tFestival).includes(value);
+                }
+            });
+            let festival = festivals.length?festivals[0]:'';
+            html += `<td class="`+classnameList.join(' ')+`" data-id="`+i+`">
+                <a href="javascript:;" class="`+(item_date==_.date?'current':'')+`">
+                    <span class="s1">`+item['sDay']+`</span>
+                    <span class="s2">`+(item['term']||festival||item['lDayZH'])+`</span>
+                    `+(sign&&map[sign]?'<i>'+map[sign]+'</i>':'')+`
+                </a>
+            </td>`;
+            if(i%7==6&&i<len-1){
+                html+='</tr><tr>';
+            }
+        }
+        html+='</tr>';
+        _.$year.value = thatDay['sYear'];
+        _.$month.value = thatDay['sMonth'];
+        _.$info.innerHTML = `<p>${that_date} ${thatDay['weekZH']}</p>
+            <div class="day">${thatDay['sDay']}</div>
+            <div class="detail">
+                <p>${thatDay['lMonthZH']}${thatDay['lDayZH']}</p>
+                <p>${thatDay['gzYearZH']}年 【${thatDay['animal']}年】</p>
+                <p>${thatDay['gzMonthZH']}月 ${thatDay['gzDayZH']}日</p>
+            </div>
+            <div class="list">
+                <div class="item"><p>${thatDay['festival'].replace(/\s/g,'</p><p>')}</p></div>
+            </div>
+        `;
+        _.$tbody.innerHTML = html;
+
+        _.dispatchEvent(new CustomEvent('onChange',{'detail':thatDay}));
+    };
+    formatSetting(year){
+        let _ = this;
+        year = year||(new Date()).getFullYear();
+        _.$holiday.innerHTML = '';
+        let $o = new Option("假日安排","");
+        _.$holiday.add($o);
+        if(holidayMap[year]){
+            let items = holidayMap[year];
+            for(let i=0;i<items.length;i++){
+                let $option = new Option(items[i]['name'],items[i]['value']);
+                _.$holiday.add($option);
+            }
+        }else{
+            const list = ['元旦','春节','清明','劳动节','端午节','中秋节','国庆节'];
+            for(let m=1;m<=12;m++){
+                for(let d=1;d<=31;d++){
+                    let date = calendar.getDateBySolar(year,m,d);
+                    if(date['sMonth']==m&&date['sDay']==d){
+                        let types = [];
+                        if(date['term']){
+                            types.push(date['Term']);
+                        }
+                        if(date['festival']){
+                            types = [].concat(types,date['festival'].split(' '));
+                        }
+                        types.forEach(function(type){
+                            if(list.indexOf(type)>-1){
+                                let $option = new Option(type,date['sYear']+'-'+date['sMonth']+'-'+date['sDay']);
+                                _.$holiday.add($option);
+                            }
+                        });
+                    }
+                }
+            }
+        }
+    };
+    formatDate(date){
+        let _ = this;
+        _.date = date;
+        if(_.date){
+            let [year,month,day] = _.date.split('-');
+            _.formatTable({'year':year,'month':month,'day':day});
+            _.formatSetting(year);
+        }else{
+            _.formatTable();
+            _.formatSetting();
+        }
+    }
+    connectedCallback () {
+        let _ = this;
+
         // 样式
+        let themeColor = this.getAttribute('theme-color')||'#2095f2';
         const $style = document.createElement('style');
         $style.textContent = `
             *{
@@ -75,7 +248,7 @@ class WidgetCalendar extends HTMLElement {
             .mod-calendar {
                 display: inline-block;
                 width: 600px;
-                background: #2095f2;
+                background: ${themeColor};
             }
             .mod-calendar .info {
                 float: right;
@@ -85,26 +258,34 @@ class WidgetCalendar extends HTMLElement {
                 text-align: center;
                 color: #fff;
             }
+            .mod-calendar .info a{
+                color: #fff;
+            }
             .mod-calendar .info p {
-                line-height: 22px;
+                line-height: 20px;
             }
             .mod-calendar .info .day {
                 width: 80px;
                 height: 80px;
-                margin: 15px auto 7px;
+                margin: 15px auto;
                 line-height: 80px;
                 font-size: 48px;
                 background: #fb0;
                 border-radius: 8px;
             }
-            .mod-calendar .info .festival {
-                margin: 15px 10px;
-                padding-top: 15px;
-                border-top: 1px dotted #fefefe
+            .mod-calendar .info .detail{
+                margin-bottom: 15px;
+            }
+            .mod-calendar .info .list{
+                padding: 10px 0;
+                border-top: 1px dotted rgba(255,255,255,0.5);
+            }
+            .mod-calendar .info .list .item{
+                padding: 5px 0;
             }
             .mod-calendar .box {
                 margin-right: 180px;
-                border: 2px solid #2095f2;
+                border: 2px solid ${themeColor};
                 background: #fff;
             }
             .mod-calendar .selector {
@@ -245,29 +426,6 @@ class WidgetCalendar extends HTMLElement {
                 border: 1px solid #fb0;
             }
             @media screen and (max-width: 640px) {
-            	.mod-panel{
-            		border: none;
-            		background: none;
-            		margin-bottom: 10px;
-            	}
-            	.mod-panel .hd{
-            		padding: 0;
-            		margin-bottom: 0;
-            		line-height: 22px;
-            	}
-            	.mod-panel .hd h1 {
-            	    line-height: 36px;
-            	    font-size: 18px;
-            	}
-            	.mod-panel .hd img{
-            		width: 80px;
-            		height: 50px;
-            	}
-
-            	.inner{
-            		overflow:visible;
-            	}
-
             	.mod-calendar{
             		width: 100%;
             		margin-bottom: 12px;
@@ -287,29 +445,30 @@ class WidgetCalendar extends HTMLElement {
             		float: left;
             		width: 58px;
             		height: 58px;
-            		margin: 7px 0 12px;
+            		margin: 6px 0;
             		line-height: 58px;
             		font-size: 24px;
             	}
-            	.mod-calendar .info .sub{
-            		margin-left: 70px;
+            	.mod-calendar .info .detail{
             		padding-top: 5px;
+                    margin-left: 70px;
+                    margin-bottom: 10px;
             	}
-            	.mod-calendar .sub p{
-            		line-height: 21px;
-            	}
-            	.mod-calendar .info .festival{
+            	.mod-calendar .info .list{
             		position: absolute;
             		top: 10px;
-            		right: 9px;
-            		margin: 0;
+            		right: 10px;
             		padding:0;
             		border-top: none;
             	}
+                .mod-calendar .info .list .item{
+                    padding: 0;
+                }
+                .mod-calendar .info .item p{
+                    text-align:right;
+                }
             	.mod-calendar .box{
             		margin-right: 0;
-            		padding:10px 0;
-            		border: none;
             	}
             	.mod-calendar .selector span{
             		float: left;
@@ -385,183 +544,8 @@ class WidgetCalendar extends HTMLElement {
             	}
             }
         `;
-        $shadow.appendChild($style);
+        _.#shadow.appendChild($style);
 
-        // 全局变量
-        let _ = this;
-        _.$module = _.shadowRoot.querySelector('.mod-calendar');
-        _.$tbody = _.$module.querySelector('tbody');
-        _.$year = _.$module.querySelector('.year');
-        _.$month = _.$module.querySelector('.month');
-        _.$holiday = _.$module.querySelector('.holiday');
-        _.$goback = _.$module.querySelector('.goback');
-        _.$prev_year = _.$module.querySelector('.prev-year');
-        _.$next_year = _.$module.querySelector('.next-year');
-        _.$prev_month = _.$module.querySelector('.prev-month');
-        _.$next_month = _.$module.querySelector('.next-month');
-        _.$info = _.$module.querySelector('.info');
-
-        _.today = calendar.getToday();
-        let today_date = getDateString(_.today['sYear'],_.today['sMonth'],_.today['sDay']);
-        _.date = _.getAttribute('date')||today_date;    // 选中日期
-        _.data = [];    // 选中日期所在月份数据
-        _.day = 1;      // 当月几号
-    }
-    formatTable(param){
-        let _ = this;
-        let thatDay = _.today;
-        if(param){
-            thatDay = calendar.Solar(+param['year'],+param['month'],+param['day']);
-        }
-        let that_date = getDateString(thatDay['sYear'],thatDay['sMonth'],thatDay['sDay']);
-        if(that_date!=_.date){
-            _.setAttribute('date',that_date);
-        }
-
-        //获取日历信息
-        let firstDay = calendar.Solar(thatDay['sYear'],thatDay['sMonth'],1);
-        let monthDays = getSolarMonthDays(thatDay['sYear'],thatDay['sMonth']);
-        _.data = [];
-        // 上月日期
-        for(let i=firstDay['week'];i>0;i--){
-            let obj = calendar.Solar(firstDay['sYear'],firstDay['sMonth'],firstDay['sDay']-i);
-            _.data.push(obj);
-        }
-        // 当月日期
-        for(let i=0;i<monthDays;i++){
-            let obj = calendar.Solar(firstDay['sYear'],firstDay['sMonth'],firstDay['sDay']+i);
-            _.data.push(obj);
-        }
-        // 下月日期
-        let lastDay = _.data.at(-1);
-        for(let i=1;lastDay['week']+i<7;i++){
-            let obj = calendar.Solar(lastDay['sYear'],lastDay['sMonth'],lastDay['sDay']+i);
-            _.data.push(obj);
-        }
-        // 是否增加一行
-        if(_.data.length<=35){
-            let lastDay = _.data.at(-1);
-            for(let i=1;_.data.length<42;i++){
-                let obj = calendar.Solar(lastDay['sYear'],lastDay['sMonth'],lastDay['sDay']+i);
-                _.data.push(obj);
-            }
-        }
-
-        // 格式化结构
-        let map = {
-            'work':'班',
-            'holiday':'休'
-        };
-        let html = '<tr>';
-        for(let i=0,len=_.data.length;i<len;i++){
-            let item = _.data[i];
-            let item_date = getDateString(item['sYear'],item['sMonth'],item['sDay']);
-            let classnameList = [];
-            if(item_date==that_date){
-                classnameList.push('active');
-            }
-            if(item['sYear']!=thatDay['sYear']||item['sMonth']!=thatDay['sMonth']){
-                classnameList.push('disabled');
-            }
-            let sign = '';
-            if(scheduleMap[item['sYear']]){
-                let holiday = scheduleMap[item['sYear']];
-                let dateStr = getDateString(item['sMonth'],item['sDay']);
-                if(typeof holiday[dateStr] != 'undefined'){
-                    sign = holiday[dateStr]?'holiday':'work';
-                    classnameList.push(sign);
-                }
-            }
-            let festivals = item['festival'].split(' ').filter(function(value){
-                if(value.length<=3){
-                    return Object.values(sFestival).includes(value)||Object.values(lFestival).includes(value)||Object.values(oFestival).includes(value)||Object.values(tFestival).includes(value);
-                }
-            });
-            let festival = festivals.length?festivals[0]:'';
-            html += `<td class="${classnameList.join(' ')}" data-id="`+i+`">
-                <a href="javascript:;" class="${item_date==_.date?'current':''}">
-                    <span class="s1">${item['sDay']}</span>
-                    <span class="s2">${item['term']||festival||item['lDayZH']||'-'}</span>
-                    ${sign&&map[sign]?'<i>'+map[sign]+'</i>':''}
-                </a>
-            </td>`;
-            if(i%7==6&&i<len-1){
-                html+='</tr><tr>';
-            }
-        }
-        html+='</tr>';
-        _.$year.value = thatDay['sYear'];
-        _.$month.value = thatDay['sMonth'];
-        _.$info.innerHTML = `<p>${that_date} ${thatDay['weekZH']}</p>
-        <div class="day">${thatDay['sDay']}</div>
-        <div class="sub">
-            `+(function(){
-                if(thatDay['gzYearZH']){
-                    return `
-                        <p>${thatDay['lMonthZH']+thatDay['lDayZH']}</p>
-                        <p>${thatDay['gzYearZH']}年 【${thatDay['animal']}年】</p>
-                        <p>${thatDay['gzMonthZH']}月 ${thatDay['gzDayZH']}日</p>
-                    `;
-                }else{
-                    return ``;
-                }
-            })()+`
-        </div>
-        <div class="festival"><p>${thatDay['festival'].replace(/\s/g,'</p><p>')}</p></div>`;
-        _.$tbody.innerHTML = html;
-
-        _.dispatchEvent(new CustomEvent('onChange',{'detail':thatDay}));
-    };
-    formatSetting(year){
-        let _ = this;
-        year = year||(new Date()).getFullYear();
-        _.$holiday.innerHTML = '';
-        let $o = new Option("假日安排","");
-        _.$holiday.add($o);
-        if(holidayMap[year]){
-            let items = holidayMap[year];
-            for(let i=0;i<items.length;i++){
-                let $option = new Option(items[i]['name'],items[i]['value']);
-                _.$holiday.add($option);
-            }
-        }else{
-            const list = ['元旦','春节','清明','劳动节','端午节','中秋节','国庆节'];
-            for(let m=1;m<=12;m++){
-                for(let d=1;d<=31;d++){
-                    let date = calendar.Solar(year,m,d);
-                    if(date['sMonth']==m&&date['sDay']==d){
-                        let types = [];
-                        if(date['term']){
-                            types.push(date['Term']);
-                        }
-                        if(date['festival']){
-                            types = [].concat(types,date['festival'].split(' '));
-                        }
-                        types.forEach(function(type){
-                            if(list.indexOf(type)>-1){
-                                let $option = new Option(type,date['sYear']+'-'+date['sMonth']+'-'+date['sDay']);
-                                _.$holiday.add($option);
-                            }
-                        });
-                    }
-                }
-            }
-        }
-    };
-    formatDate(date){
-        let _ = this;
-        _.date = date;
-        if(_.date){
-            let [year,month,day] = _.date.split('-');
-            _.formatTable({'year':year,'month':month,'day':day});
-            _.formatSetting(year);
-        }else{
-            _.formatTable();
-            _.formatSetting();
-        }
-    }
-    connectedCallback () {
-        let _ = this;
         _.$year.onchange = function(){
             let year = _.$year.value;
             let month = _.$month.value;
@@ -627,7 +611,7 @@ class WidgetCalendar extends HTMLElement {
                 let data = _.data[id];
                 _.day = data['sDay'];
                 _.formatTable({'year':data['sYear'],'month':data['sMonth'],'day':data['sDay']});
-                _.dispatchEvent(new CustomEvent('onSelected',{'detail':calendar.Solar(data['sYear'],data['sMonth'],data['sDay'])}));
+                _.dispatchEvent(new CustomEvent('onSelected',{'detail':calendar.getDateBySolar(data['sYear'],data['sMonth'],data['sDay'])}));
             }
         };
 
@@ -645,4 +629,6 @@ class WidgetCalendar extends HTMLElement {
     }
 }
 
-customElements.define('widget-calendar', WidgetCalendar);
+if(!customElements.get('widget-calendar')){
+    customElements.define('widget-calendar', WidgetCalendar);
+}

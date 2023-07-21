@@ -1,7 +1,8 @@
 const gulp = require('gulp');
-const rename = require("gulp-rename");
 const rollup = require('rollup');
 const terser = require('@rollup/plugin-terser');
+const resolve = require('@rollup/plugin-node-resolve');
+const babel = require('@rollup/plugin-babel');
 const pkg = require('./package');
 
 // copyright
@@ -25,7 +26,12 @@ gulp.task('main', () => {
     return rollup.rollup({
         input: './src/calendar.js',
         plugins: [
-            terser()
+            terser(),
+            resolve(),
+            babel({
+                babelHelpers: 'runtime',
+                exclude:'node_modules/**'
+            })
         ]
     }).then(bundle => {
         return bundle.write({
@@ -41,7 +47,12 @@ gulp.task('widget', () => {
     return rollup.rollup({
         input: './src/widget-calendar.js',
         plugins: [
-            terser()
+            terser(),
+            resolve(),
+            babel({
+                babelHelpers: 'runtime',
+                exclude:'node_modules/**'
+            })
         ]
     }).then(bundle => {
         return bundle.write({
