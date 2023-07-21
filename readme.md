@@ -9,10 +9,13 @@
 
 ```js
 // 农历日期: 2022年(大致)闰四月初十
-calendar.Lunar(2022,4,10,true);
+calendar.getDateByLunar(2022,4,10,true);
 
 // 公历日期：2022年10月1日
-calendar.Solar(2022,10,1);
+calendar.getDateBySolar(2022,10,1);
+
+// 今天
+calendar.getToday();
 ```
 
 ## 返回结果
