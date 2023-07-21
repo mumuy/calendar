@@ -86,7 +86,7 @@ class WidgetCalendar extends HTMLElement {
         let _ = this;
         let thatDay = _.today;
         if(param){
-            thatDay = calendar.Solar(+param['year'],+param['month'],+param['day']);
+            thatDay = calendar.getDateBySolar(+param['year'],+param['month'],+param['day']);
         }
         let that_date = getDateString(thatDay['sYear'],thatDay['sMonth'],thatDay['sDay']);
         if(that_date!=_.date){
@@ -94,30 +94,30 @@ class WidgetCalendar extends HTMLElement {
         }
 
         //获取日历信息
-        let firstDay = calendar.Solar(thatDay['sYear'],thatDay['sMonth'],1);
+        let firstDay = calendar.getDateBySolar(thatDay['sYear'],thatDay['sMonth'],1);
         let monthDays = getSolarMonthDays(thatDay['sYear'],thatDay['sMonth']);
         _.data = [];
         // 上月日期
         for(let i=firstDay['week'];i>0;i--){
-            let obj = calendar.Solar(firstDay['sYear'],firstDay['sMonth'],firstDay['sDay']-i);
+            let obj = calendar.getDateBySolar(firstDay['sYear'],firstDay['sMonth'],firstDay['sDay']-i);
             _.data.push(obj);
         }
         // 当月日期
         for(let i=0;i<monthDays;i++){
-            let obj = calendar.Solar(firstDay['sYear'],firstDay['sMonth'],firstDay['sDay']+i);
+            let obj = calendar.getDateBySolar(firstDay['sYear'],firstDay['sMonth'],firstDay['sDay']+i);
             _.data.push(obj);
         }
         // 下月日期
         let lastDay = _.data.at(-1);
         for(let i=1;lastDay['week']+i<7;i++){
-            let obj = calendar.Solar(lastDay['sYear'],lastDay['sMonth'],lastDay['sDay']+i);
+            let obj = calendar.getDateBySolar(lastDay['sYear'],lastDay['sMonth'],lastDay['sDay']+i);
             _.data.push(obj);
         }
         // 是否增加一行
         if(_.data.length<=35){
             let lastDay = _.data.at(-1);
             for(let i=1;_.data.length<42;i++){
-                let obj = calendar.Solar(lastDay['sYear'],lastDay['sMonth'],lastDay['sDay']+i);
+                let obj = calendar.getDateBySolar(lastDay['sYear'],lastDay['sMonth'],lastDay['sDay']+i);
                 _.data.push(obj);
             }
         }
@@ -198,7 +198,7 @@ class WidgetCalendar extends HTMLElement {
             const list = ['元旦','春节','清明','劳动节','端午节','中秋节','国庆节'];
             for(let m=1;m<=12;m++){
                 for(let d=1;d<=31;d++){
-                    let date = calendar.Solar(year,m,d);
+                    let date = calendar.getDateBySolar(year,m,d);
                     if(date['sMonth']==m&&date['sDay']==d){
                         let types = [];
                         if(date['term']){
@@ -611,7 +611,7 @@ class WidgetCalendar extends HTMLElement {
                 let data = _.data[id];
                 _.day = data['sDay'];
                 _.formatTable({'year':data['sYear'],'month':data['sMonth'],'day':data['sDay']});
-                _.dispatchEvent(new CustomEvent('onSelected',{'detail':calendar.Solar(data['sYear'],data['sMonth'],data['sDay'])}));
+                _.dispatchEvent(new CustomEvent('onSelected',{'detail':calendar.getDateBySolar(data['sYear'],data['sMonth'],data['sDay'])}));
             }
         };
 

@@ -689,7 +689,7 @@ document.querySelector('widget-calendar').addEventListener('onChange',function(e
 					var sYear = $sYear.val();
 					var sMonth = $sMonth.val();
 					var sDay = $sDay.val();
-					var html = formatTable(calendar.Solar(sYear,sMonth,sDay));
+					var html = formatTable(calendar.getDateBySolar(sYear,sMonth,sDay));
 					$('#demo1 .table-inner').html(html);
 				});
 				$document.on('click','.J_lunar2solar',function(){
@@ -697,7 +697,7 @@ document.querySelector('widget-calendar').addEventListener('onChange',function(e
 					var lMonth = +$lMonth.val();
 					var lDay = +$lDay.val();
 					var isLeap = $isLeap.prop('checked');
-					var html = formatTable(calendar.Lunar(lYear,lMonth,lDay,isLeap));
+					var html = formatTable(calendar.getDateByLunar(lYear,lMonth,lDay,isLeap));
 					$('#demo2 .table-inner').html(html);
 				});
 			})();
