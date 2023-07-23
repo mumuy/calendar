@@ -187,10 +187,8 @@ class WidgetCalendar extends HTMLElement {
                 font-size: 14px;
                 font-family: Arial,Helvetica,"Microsoft Yahei";
                 color: #333;
-                --theme-color: #2095f2;
-                --info-text-color: #ffffff;
-                --day-background-color: #ffbb00;
-                --day-text-color: #ffffff;
+                --primary-color: #2095f2;
+                --secondary-color: #ffaa00;
             }
             *{
                 padding:0;
@@ -202,7 +200,7 @@ class WidgetCalendar extends HTMLElement {
             }
             .mod-calendar {
                 padding: 2px;
-                background: var(--theme-color);
+                background: var(--primary-color);
             }
             .mod-calendar .info {
                 float: right;
@@ -210,10 +208,10 @@ class WidgetCalendar extends HTMLElement {
                 width: 180px;
                 padding-top: 15px;
                 text-align: center;
-                color: var(--info-text-color);
+                color: #fff;
             }
             .mod-calendar .info a{
-                color: var(--info-text-color);
+                color: #fff;
             }
             .mod-calendar .info p {
                 line-height: 20px;
@@ -224,8 +222,8 @@ class WidgetCalendar extends HTMLElement {
                 margin: 15px auto;
                 line-height: 80px;
                 font-size: 48px;
-                background: var(--day-background-color);
-                color: var(--day-text-color);
+                background: var(--secondary-color);
+                color: #fff;
                 border-radius: 8px;
             }
             .mod-calendar .info .detail{
@@ -265,8 +263,8 @@ class WidgetCalendar extends HTMLElement {
                 vertical-align: middle;
             }
             .mod-calendar .selector a:hover {
-                border-color: #fb0;
-                color: #fb0;
+                border-color: var(--secondary-color);
+                color: var(--secondary-color);
             }
             .mod-calendar .selector .goback {
                 margin-left: 7px;
@@ -348,44 +346,55 @@ class WidgetCalendar extends HTMLElement {
                 font-style: normal;
                 color: #fff;
             }
-            .mod-calendar table tbody .s1 {
+            .mod-calendar table .s1 {
                 font-size: 18px;
                 color: #212121;
             }
-            .mod-calendar table tbody .s2 {
+            .mod-calendar table .s2 {
                 font-size: 13px;
                 color: #757575;
             }
-            .mod-calendar table tbody .active a {
-                border: 1px solid #cccccc;
+            .mod-calendar table td.active a {
+                border: 1px solid var(--secondary-color);
             }
-            .mod-calendar table tbody .holiday a {
+            .mod-calendar table td.holiday a {
                 background: #f1f9f1
             }
-            .mod-calendar table tbody .holiday.active a,.mod-calendar table tbody .holiday a:hover{
+            .mod-calendar table td.holiday.active a,.mod-calendar table td.holiday a:hover{
                 border: 1px solid #4bae4f;
             }
-            .mod-calendar table tbody .holiday i {
+            .mod-calendar table td.holiday i {
                 color: #4bae4f;
             }
-            .mod-calendar table tbody .work a {
+            .mod-calendar table td.today{
+                background: var(--secondary-color);
+            }
+            .mod-calendar table td.today a{
+                border: 1px solid var(--secondary-color);
+            }
+            .mod-calendar table td.today .s1{
+                color: #fff;
+            }
+            .mod-calendar table td.today .s2{
+                color: rgba(255,255,255,0.8);
+            }
+            .mod-calendar table td.work a {
                 background: #fef0ef;
             }
-            .mod-calendar table tbody .work.active a,.mod-calendar table tbody .work a:hover{
+            .mod-calendar table td.work.active a,.mod-calendar table td.work a:hover{
                 border: 1px solid #f44336;
             }
-            .mod-calendar table tbody .work i {
+            .mod-calendar table td.work i {
                 color: #f44336;
             }
-            .mod-calendar table tbody .disabled a {
+            .mod-calendar table td.disabled a {
                 opacity: 0.4;
             }
-            .mod-calendar table tbody a.current{
-                border: 1px solid #fb0;
-            }
             @media screen and (max-width: 640px) {
-                .mod-calendar{
+                :host{
                     width: 100%;
+                }
+                .mod-calendar{
                     margin-bottom: 12px;
                     font-size: 12px;
                 }
@@ -433,7 +442,7 @@ class WidgetCalendar extends HTMLElement {
                     float: left;
                     position: relative;
                     width: 33.33%;
-                    border:1px solid #ccc;
+                    border: 1px solid #ebebeb;
                     margin-right: -1px;
                     text-align: center;
                     box-sizing: border-box;
@@ -458,37 +467,6 @@ class WidgetCalendar extends HTMLElement {
                     margin-right: 0;
                     border-left-color: transparent;
                 }
-                .mod-calendar table tbody a{
-                    width: auto;
-                }
-                .mod-calendar table tr{
-                    border-top: none;
-                }
-                .mod-calendar table th, .mod-calendar table td{
-                    position: relative;
-                    border: 1px solid #ccc;
-                }
-                .mod-calendar table td{
-                    height: 48px;
-                    line-height: 16px;
-                }
-                .mod-calendar table .today{
-                    background: #fc0;
-                }
-                .mod-calendar table .today a{
-                    border-right: none;
-                }
-                .mod-calendar .s2{
-                    font-size: 12px;
-                    color: #333;
-                }
-                .mod-calendar tbody a.active, .mod-calendar tbody a:hover{
-                    padding: 7px 1px;
-                    border:1px solid #fc0;
-                }
-                .mod-calendar table td.disabled .s1, .mod-calendar table td.disabled .s2{
-                    color: #999;
-                }
                 .mod-calendar .selector .goback{
                     position: absolute;
                     top: 75px;
@@ -503,6 +481,25 @@ class WidgetCalendar extends HTMLElement {
                 .mod-calendar .selector .goback:hover{
                     border-color:#ffbb00;
                     color: #fff;
+                }
+                .mod-calendar table tbody a{
+                    width: auto;
+                }
+                .mod-calendar table tr{
+                    border-top: none;
+                }
+                .mod-calendar table th, .mod-calendar table td{
+                    position: relative;
+                }
+                .mod-calendar table td{
+                    height: 48px;
+                    line-height: 16px;
+                }
+                .mod-calendar table .s2{
+                    font-size: 12px;
+                }
+                .mod-calendar table td a.active, .mod-calendar table td a:hover{
+                    padding: 7px 1px;
                 }
             }
         `;
@@ -560,6 +557,9 @@ class WidgetCalendar extends HTMLElement {
             if(item['sYear']!=thatDay['sYear']||item['sMonth']!=thatDay['sMonth']){
                 classnameList.push('disabled');
             }
+            if(item['date']==_.today['date']){
+                classnameList.push('today');
+            }
             let sign = '';
             if(scheduleMap[item['sYear']]){
                 let holiday = scheduleMap[item['sYear']];
@@ -576,7 +576,7 @@ class WidgetCalendar extends HTMLElement {
             });
             let festival = festivals.length?festivals[0]:'';
             html += `<td class="`+classnameList.join(' ')+`" data-id="`+i+`">
-                <a href="javascript:;" class="`+(item_date==_.date?'current':'')+`">
+                <a href="javascript:;">
                     <span class="s1">`+item['sDay']+`</span>
                     <span class="s2">`+(item['term']||festival||item['lDayZH'])+`</span>
                     `+(sign&&map[sign]?'<i>'+map[sign]+'</i>':'')+`
