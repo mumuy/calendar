@@ -2,7 +2,7 @@
 
 ## 网页组件
 ```html
-<widget-calendar date="2023-01-01" theme-color="#fe5668"></widget-calendar>
+<widget-calendar date="2023-01-01"></widget-calendar>
 ```
 
 ```html
