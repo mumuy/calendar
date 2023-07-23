@@ -2,7 +2,36 @@
 
 ## 网页组件
 ```html
-<widget-calendar date="2023-01-01"></widget-calendar>
+<widget-calendar date="2023-01-01" theme-color="#fe5668"></widget-calendar>
+```
+
+```html
+<widget-calendar>
+    <div slot="item">
+        <p>双鱼座</p>
+    </div>    
+</widget-calendar>
+```
+
+#### 自定义事件-选中日期: onSelect
+
+```js
+document.querySelector('widget-calendar').addEventListener('onSelect',function(event){
+}
+```
+
+#### 自定义事件-切换日期: onChange
+
+```js
+document.querySelector('widget-calendar').addEventListener('onChange',function(event){
+}
+```
+
+#### 自定义事件-初始化: onInit
+
+```js
+document.querySelector('widget-calendar').addEventListener('onInit',function(event){
+}
 ```
 
 ## 方法调用
@@ -22,6 +51,7 @@ calendar.getToday();
 
 ```js
 {
+    "date":'2022-10-01',
     "sYear":2022,
     "sMonth":10,
     "sDay":1,

@@ -11,6 +11,7 @@ export function getSolarByTimestamp(timestamp){
     let now = new Date(timestamp);
     let week = now.getDay();
     return {
+        date:now.toISOString().substr(0,10),
         sYear:now.getFullYear(),
         sMonth:now.getMonth()+1,
         sDay:now.getDate(),

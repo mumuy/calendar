@@ -45,6 +45,10 @@
 						<div class="hd">
 							<h1>中国农历公历转换<span class="tag">开源算法</span></h1>
 							<p>轻松获取农历公历日期、星期、干支、生肖、节气、节日等信息</p>
+							<p>
+								<a class="btn" href="https://passer-by.com/calendar/dist/calendar.min.js" target="_blank">算法脚本</a>
+								<a class="btn" href="https://passer-by.com/calendar/dist/widget-calendar.min.js" target="_blank">组件脚本</a>
+							</p>
 						</div>
 						<div class="bd">
 							<div id="demo1" class="box">
@@ -578,12 +582,18 @@
 								<div class="c-ft">
 <p>【事件测试】<span id="test"></span></p>
 <br>
-<h4>自定义事件-选中日期: onSelected</h4>
+<h4>标签结构</h4>
 <code>
 <pre>
-document.querySelector('widget-calendar').addEventListener('onSelected',function(event){
+&lt;widget-calendar&gt;&lt;/widget-calendar&gt;
+</pre>
+</code>
+<h4>自定义事件-选中日期: onSelect</h4>
+<code>
+<pre>
+document.querySelector('widget-calendar').addEventListener('onSelect',function(event){
 	let data = event.detail;
-	document.getElementById('test').innerText='onSelected：'+data['sYear']+'-'+data['sMonth']+'-'+data['sDay'];
+	document.getElementById('test').innerText='onSelect：'+data['sYear']+'-'+data['sMonth']+'-'+data['sDay'];
 });
 </pre>
 </code>
@@ -596,15 +606,28 @@ document.querySelector('widget-calendar').addEventListener('onChange',function(e
 });
 </pre>
 </code>
+<h4>自定义事件-初始化: onInit</h4>
+<code>
+<pre>
+document.querySelector('widget-calendar').addEventListener('onInit',function(event){
+	let data = event.detail;
+	document.getElementById('test').innerText='onInit：'+data['sYear']+'-'+data['sMonth']+'-'+data['sDay'];
+});
+</pre>
+</code>
 								</div>
 								<script type="text/javascript">
-									document.querySelector('widget-calendar').addEventListener('onSelected',function(event){
+									document.querySelector('widget-calendar').addEventListener('onSelect',function(event){
 										let data = event.detail;
-										document.getElementById('test').innerText='onSelected：'+data['sYear']+'-'+data['sMonth']+'-'+data['sDay'];
+										document.getElementById('test').innerText='onSelect：'+data['sYear']+'-'+data['sMonth']+'-'+data['sDay'];
 									});
 									document.querySelector('widget-calendar').addEventListener('onChange',function(event){
 										let data = event.detail;
 										document.getElementById('test').innerText='onChange：'+data['sYear']+'-'+data['sMonth']+'-'+data['sDay'];
+									});
+									document.querySelector('widget-calendar').addEventListener('onInit',function(event){
+										let data = event.detail;
+										document.getElementById('test').innerText='onInit：'+data['sYear']+'-'+data['sMonth']+'-'+data['sDay'];
 									});
 								</script>
 							</div>
