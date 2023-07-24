@@ -184,12 +184,14 @@ class WidgetCalendar extends HTMLElement {
         const $style = document.createElement('style');
         $style.textContent = `
             :host {
-                display: inline-block;
-                width: 600px;
+                display: block;
+                width: 100%;
+                max-width: 600px;
                 white-space: initial;
                 font-size: 14px;
                 font-family: Arial,Helvetica,"Microsoft Yahei";
                 color: #333;
+                container-type: inline-size;
                 --primary-color: #2095f2;
                 --secondary-color: #ffaa00;
             }
@@ -398,13 +400,9 @@ class WidgetCalendar extends HTMLElement {
                 background: none;
                 text-align: center;
             }
-            @media screen and (max-width: 640px) {
-                :host{
-                    width: 100%;
-                }
+            @container (max-width: 560px){
                 .mod-calendar{
                     flex-direction: column;
-                    margin-bottom: 12px;
                     font-size: 12px;
                 }
                 .mod-calendar .info{
