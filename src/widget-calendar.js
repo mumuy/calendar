@@ -236,6 +236,9 @@ class WidgetCalendar extends HTMLElement {
             .mod-calendar .info .list .item{
                 padding: 5px 0;
             }
+            .mod-calendar .info .list .item a{
+                color: #fff;
+            }
             .mod-calendar .info .list ::slotted([slot="item"]) {
                 padding: 5px 0!important;
             }
