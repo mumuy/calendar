@@ -184,8 +184,9 @@ class WidgetCalendar extends HTMLElement {
         const $style = document.createElement('style');
         $style.textContent = `
             :host {
-                display: block;
+                display: inline-block;
                 width: 100%;
+                min-width: 300px;
                 max-width: 600px;
                 white-space: initial;
                 font-size: 14px;
