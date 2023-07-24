@@ -128,7 +128,8 @@ class WidgetCalendar extends HTMLElement {
         }
     }
     render(){
-        this.shadowRoot.innerHTML = `<div class="mod-calendar">
+        const mode = this.getAttribute('mode')||'default';
+        this.shadowRoot.innerHTML = `<div class="mod-calendar mode-${mode}">
             <div class="info"></div>
             <div class="box">
                 <div class="selector">
@@ -140,7 +141,7 @@ class WidgetCalendar extends HTMLElement {
                                 for(let i=1900;i<=2100;i++){
                                     list.push('<option value="'+i+'">'+i+'年</option>');
                                 }
-                                return list;
+                                return list.join('');
                             })()+`
                         </select>
                         <a class="next next-year" href="javascript:;">&gt;</a>
@@ -153,7 +154,7 @@ class WidgetCalendar extends HTMLElement {
                                 for(let i=1;i<=12;i++){
                                     list.push('<option value="'+i+'">'+i+'月</option>');
                                 }
-                                return list;
+                                return list.join('');
                             })()+`
                         </select>
                         <a class="next next-month" href="javascript:;">&gt;</a>
@@ -163,7 +164,9 @@ class WidgetCalendar extends HTMLElement {
                             <option value="">假日安排</option>
                         </select>
                     </span>
-                    <a class="goback" href="javascript:;">返回今天</a>
+                    <span>
+                        <a class="goback" href="javascript:;">返回今天</a>
+                    </span>
                 </div>
                 <div class="table">
                     <table>
@@ -199,11 +202,12 @@ class WidgetCalendar extends HTMLElement {
                 color:#333;
             }
             .mod-calendar {
+                display: flex;
                 padding: 2px;
                 background: var(--primary-color);
+                flex-direction: row-reverse;
             }
             .mod-calendar .info {
-                float: right;
                 position: relative;
                 width: 180px;
                 padding-top: 15px;
@@ -243,17 +247,19 @@ class WidgetCalendar extends HTMLElement {
                 padding: 5px 0!important;
             }
             .mod-calendar .box {
-                margin-right: 180px;
-                background: #fff;
+                flex: 1;
             }
             .mod-calendar .selector {
                 position: relative;
                 padding: 5px 12px;
+                background: #fff;
                 vertical-align: middle;
                 overflow: hidden;
             }
             .mod-calendar .selector span {
-                float: left;
+                display: inline-block;
+                background: #fff;
+                margin: 0 2px;
             }
             .mod-calendar .selector a {
                 float: left;
@@ -269,22 +275,13 @@ class WidgetCalendar extends HTMLElement {
                 border-color: var(--secondary-color);
                 color: var(--secondary-color);
             }
-            .mod-calendar .selector .goback {
-                margin-left: 7px;
-            }
-            .mod-calendar .selector .prev {
-                left: 1px;
-            }
-            .mod-calendar .selector .next {
-                margin-right: 7px;
-                right: 1px;
-            }
             .mod-calendar .selector select {
                 float: left;
                 min-width: 60px;
                 height: 26px;
                 padding-left: 4px;
                 border: 1px solid #ebebeb;
+                margin: 0 -1px;
                 background: #fff;
                 line-height: 24px;
                 vertical-align: middle;
@@ -301,6 +298,7 @@ class WidgetCalendar extends HTMLElement {
             .mod-calendar table {
                 width: 100%;
                 table-layout: fixed;
+                background: #fff;
                 color: #666;
                 border-collapse: collapse;
                 border-spacing: 0;
@@ -393,16 +391,23 @@ class WidgetCalendar extends HTMLElement {
             .mod-calendar table td.disabled a {
                 opacity: 0.4;
             }
+            .mode-simple .info{
+                display: none;
+            }
+            .mode-simple .selector{
+                background: none;
+                text-align: center;
+            }
             @media screen and (max-width: 640px) {
                 :host{
                     width: 100%;
                 }
                 .mod-calendar{
+                    flex-direction: column;
                     margin-bottom: 12px;
                     font-size: 12px;
                 }
                 .mod-calendar .info{
-                    float: none;
                     width: auto;
                     padding-top: 10px;
                     padding-left: 10px;
@@ -438,17 +443,19 @@ class WidgetCalendar extends HTMLElement {
                 .mod-calendar .info .list ::slotted([slot="item"]) {
                     padding: 2px 0!important;
                 }
-                .mod-calendar .box{
-                    margin-right: 0;
-                }
                 .mod-calendar .selector span{
-                    float: left;
                     position: relative;
-                    width: 33.33%;
+                    width: 32%;
                     border: 1px solid #ebebeb;
-                    margin-right: -1px;
+                    margin: 0;
                     text-align: center;
                     box-sizing: border-box;
+                }
+                .mod-calendar .selector span:has(.goback){
+                    display: none;
+                }
+                .mod-calendar .selector span:last-child{
+                    display: none;
                 }
                 .mod-calendar .selector select{
                     float: none;
