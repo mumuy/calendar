@@ -188,6 +188,7 @@ class WidgetCalendar extends HTMLElement {
                 width: 100%;
                 min-width: 300px;
                 max-width: 600px;
+                vertical-align: bottom;
                 white-space: initial;
                 font-size: 14px;
                 font-family: Arial,Helvetica,"Microsoft Yahei";
