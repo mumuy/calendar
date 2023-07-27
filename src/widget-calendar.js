@@ -14,11 +14,24 @@ class WidgetCalendar extends HTMLElement {
         // 全局变量
         let _ = this;
         _.today = calendar.getToday();
-        let today_date = getDateString(_.today['sYear'],_.today['sMonth'],_.today['sDay']);
-        _.date = _.getAttribute('date')||today_date;    // 选中日期
         _.currentDateInfo = _.today;
         _.currentMonthData = [];    // 当前日期所在月份数据
         _.currentMonthDay = 1;     // 当前日期当月几号
+    }
+    static get observedAttributes(){
+        return ['date','mode'];
+    }
+    get date(){
+        let today_date = getDateString(this.today['sYear'],this.today['sMonth'],this.today['sDay']);
+        return this.getAttribute('date')||today_date;
+    }
+    set date(date){
+        this.setAttribute('date',date);
+    }
+    get mode(){
+        return this.getAttribute('mode')||'default';
+    }
+    attributeChangedCallback(name, oldValue, newValue){
     }
     connectedCallback () {
         let _ = this;
@@ -105,31 +118,19 @@ class WidgetCalendar extends HTMLElement {
                 _.currentMonthDay = data['sDay'];
                 let that_date = getDateString(data['sYear'],data['sMonth'],data['sDay']);
                 if(that_date!=_.date){
-                    _.setAttribute('date',that_date);
+                    _.date = that_date;
+                    _.formatDate(_.date);
                 }
                 _.dispatchEvent(new CustomEvent('onSelect',{'detail':calendar.getDateBySolar(data['sYear'],data['sMonth'],data['sDay'])}));
             }
         };
-        _.formatDate(_.date);
+        this.formatDate(_.date);
         setTimeout(function(){
             _.dispatchEvent(new CustomEvent('onInit',{'detail':_.currentDateInfo}));
         },1);
     }
-    static get observedAttributes(){
-        return ['date'];
-    }
-    attributeChangedCallback(name, oldValue, newValue){
-        let _ = this;
-        if(!oldValue){
-            return false
-        }
-        if(name=='date'){
-            _.formatDate(newValue);
-        }
-    }
     render(){
-        const mode = this.getAttribute('mode')||'default';
-        this.shadowRoot.innerHTML = `<div class="mod-calendar mode-${mode}">
+        this.shadowRoot.innerHTML = `<div class="mod-calendar mode-${this.mode}">
             <div class="info"></div>
             <div class="box">
                 <div class="selector">
