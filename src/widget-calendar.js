@@ -197,6 +197,7 @@ class WidgetCalendar extends HTMLElement {
                 --primary-color: #2095f2;
                 --secondary-color: #ffaa00;
                 --base-size: calc(100cqw / 600);
+                --base-size-mobile: clamp(0.8px,calc(100cqw / 480),1px);
             }
             *{
                 padding:0;
@@ -408,49 +409,49 @@ class WidgetCalendar extends HTMLElement {
             @container (max-width: 480px){
                 .mod-calendar{
                     flex-direction: column;
-                    --base-size: clamp(0.8px,calc(100cqw / 480),1px);
-                    font-size: calc(var(--base-size) * 12);
+                    font-size: calc(var(--base-size-mobile) * 12);
                 }
                 .mod-calendar .info{
                     width: auto;
-                    padding-top: calc(var(--base-size) * 10);
-                    padding-left: calc(var(--base-size) * 10);
+                    padding-top: calc(var(--base-size-mobile) * 10);
+                    padding-left: calc(var(--base-size-mobile) * 10);
                     overflow:hidden;
                 }
                 .mod-calendar .info p{
                     text-align: left;
+                    line-height: calc(var(--base-size-mobile) * 18);
                 }
                 .mod-calendar .info .day{
                     float: left;
-                    width: calc(var(--base-size) * 56);
-                    height: calc(var(--base-size) * 56);
-                    margin: calc(var(--base-size) * 6) 0;
-                    line-height: calc(var(--base-size) * 56);
-                    font-size: calc(var(--base-size) * 24);
+                    width: calc(var(--base-size-mobile) * 56);
+                    height: calc(var(--base-size-mobile) * 56);
+                    margin: calc(var(--base-size-mobile) * 6) 0;
+                    line-height: calc(var(--base-size-mobile) * 56);
+                    font-size: calc(var(--base-size-mobile) * 24);
                 }
                 .mod-calendar .info .detail{
-                    padding-top: calc(var(--base-size) * 5);
-                    margin-left: calc(var(--base-size) * 70);
-                    margin-bottom: calc(var(--base-size) * 10);
+                    padding-top: calc(var(--base-size-mobile) * 5);
+                    margin-left: calc(var(--base-size-mobile) * 70);
+                    margin-bottom: calc(var(--base-size-mobile) * 10);
                 }
                 .mod-calendar .info .list{
                     position: absolute;
-                    top: calc(var(--base-size) * 10);
-                    right: calc(var(--base-size) * 10);
+                    top: calc(var(--base-size-mobile) * 10);
+                    right: calc(var(--base-size-mobile) * 10);
                     padding:0;
                     border-top: none;
                     text-aign: right;
                 }
                 .mod-calendar .info .list .item{
-                    padding: calc(var(--base-size) * 2) 0;
+                    padding: calc(var(--base-size-mobile) * 2) 0;
                 }
                 .mod-calendar .info .list ::slotted([slot="item"]) {
-                    padding: calc(var(--base-size) * 2) 0!important;
+                    padding: calc(var(--base-size-mobile) * 2) 0!important;
                 }
                 .mod-calendar .selector span{
                     position: relative;
                     width: 32%;
-                    border: calc(var(--base-size) * 1); solid #ebebeb;
+                    border: calc(var(--base-size-mobile) * 1); solid #ebebeb;
                     margin: 0;
                     text-align: center;
                     box-sizing: border-box;
@@ -483,14 +484,14 @@ class WidgetCalendar extends HTMLElement {
                 }
                 .mod-calendar .selector .goback{
                     position: absolute;
-                    top: calc(var(--base-size) * 75);
-                    right: calc(var(--base-size) * 10);
-                    height: calc(var(--base-size) * 20);
+                    top: calc(var(--base-size-mobile) * 75);
+                    right: calc(var(--base-size-mobile) * 10);
+                    height: calc(var(--base-size-mobile) * 20);
                     background: #ffbb00;
-                    line-height: calc(var(--base-size) * 20);
-                    font-size: calc(var(--base-size) * 14);
+                    line-height: calc(var(--base-size-mobile) * 20);
+                    font-size: calc(var(--base-size-mobile) * 14);
                     color: #fff;
-                    border-radius: calc(var(--base-size) * 3);
+                    border-radius: calc(var(--base-size-mobile) * 3);
                 }
                 .mod-calendar .selector .goback:hover{
                     border-color:#ffbb00;
@@ -498,7 +499,7 @@ class WidgetCalendar extends HTMLElement {
                 }
                 .mod-calendar table tbody a{
                     width: auto;
-                    line-height: calc(var(--base-size) * 18);
+                    line-height: calc(var(--base-size-mobile) * 18);
                 }
                 .mod-calendar table tr{
                     border-top: none;
@@ -507,11 +508,11 @@ class WidgetCalendar extends HTMLElement {
                     position: relative;
                 }
                 .mod-calendar table td{
-                    height: calc(var(--base-size) * 48);
-                    line-height: calc(var(--base-size) * 16);
+                    height: calc(var(--base-size-mobile) * 48);
+                    line-height: calc(var(--base-size-mobile) * 16);
                 }
                 .mod-calendar table .s2{
-                    font-size: calc(var(--base-size) * 12);
+                    font-size: calc(var(--base-size-mobile) * 12);
                 }
             }
         `;
