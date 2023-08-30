@@ -196,7 +196,7 @@ class WidgetCalendar extends HTMLElement {
                 container-type: inline-size;
                 --primary-color: #2095f2;
                 --secondary-color: #ffaa00;
-                --base-size: calc(100cqw / 600);
+                --base-size: clamp(0.8px,calc(100cqw / 600),1px);
                 --base-size-mobile: clamp(0.8px,calc(100cqw / 480),1px);
             }
             *{
