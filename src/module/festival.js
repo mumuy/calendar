@@ -226,4 +226,5 @@ export function getFestivalsByLunar(lYear,lMonth,lDay){
             festivals.push(lFestival2[dateStr]);
         }
     }
+    return festivals;
 }
