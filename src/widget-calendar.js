@@ -52,15 +52,17 @@ class WidgetCalendar extends HTMLElement {
         _.$next_month = _.$module.querySelector('.next-month');
         _.$info = _.$module.querySelector('.info');
 
+        let _year = 
+
         _.$year.onchange = function(){
-            let year = _.$year.value;
-            let month = _.$month.value;
+            let year = _.$year.value||_.$year.getAttribute('data-value');
+            let month = _.$month.value||_.$month.getAttribute('data-value');
             _.formatTable({'year':year,'month':month,'day':_.currentMonthDay});
             _.formatSetting(year);
         };
         _.$month.onchange = function(){
-            let year = _.$year.value;
-            let month = _.$month.value;
+            let year = _.$year.value||_.$year.getAttribute('data-value');
+            let month = _.$month.value||_.$month.getAttribute('data-value');
             _.formatTable({'year':year,'month':month,'day':_.currentMonthDay});
         };
         _.$holiday.onchange = function(){
@@ -75,22 +77,22 @@ class WidgetCalendar extends HTMLElement {
             _.formatSetting();
         };
         _.$prev_year.onclick = function(){
-            let year = _.$year.value;
-            let month = _.$month.value;
+            let year = _.$year.value||_.$year.getAttribute('data-value');
+            let month = _.$month.value||_.$month.getAttribute('data-value');
             year--;
             _.formatTable({'year':year,'month':month,'day':_.currentMonthDay});
             _.formatSetting(year);
         };
         _.$next_year.onclick = function(){
-            let year = _.$year.value;
-            let month = _.$month.value;
+            let year = _.$year.value||_.$year.getAttribute('data-value');
+            let month = _.$month.value||_.$month.getAttribute('data-value');
             year++;
             _.formatTable({'year':year,'month':month,'day':_.currentMonthDay});
             _.formatSetting(year);
         };
         _.$prev_month.onclick = function(){
-            let year = _.$year.value;
-            let month = _.$month.value;
+            let year = _.$year.value||_.$year.getAttribute('data-value');
+            let month = _.$month.value||_.$month.getAttribute('data-value');
             month--;
             _.formatTable({'year':year,'month':month,'day':_.currentMonthDay});
             if(month==0){
@@ -98,8 +100,8 @@ class WidgetCalendar extends HTMLElement {
             }
         };
         _.$next_month.onclick = function(){
-            let year = _.$year.value;
-            let month = _.$month.value;
+            let year = _.$year.value||_.$year.getAttribute('data-value');
+            let month = _.$month.value||_.$month.getAttribute('data-value');
             month++;
             _.formatTable({'year':year,'month':month,'day':_.currentMonthDay});
             if(month==13){
@@ -124,7 +126,7 @@ class WidgetCalendar extends HTMLElement {
                 _.dispatchEvent(new CustomEvent('onSelect',{'detail':calendar.getDateBySolar(data['sYear'],data['sMonth'],data['sDay'])}));
             }
         };
-        this.formatDate(_.date);
+        _.formatDate(_.date);
         setTimeout(function(){
             _.dispatchEvent(new CustomEvent('onInit',{'detail':_.currentDateInfo}));
         },1);
@@ -591,7 +593,7 @@ class WidgetCalendar extends HTMLElement {
             html += `<td class="`+classnameList.join(' ')+`" data-id="`+i+`">
                 <a href="javascript:;">
                     <span class="s1">`+item['sDay']+`</span>
-                    <span class="s2">`+(item['term']||festival||item['lDayZH'])+`</span>
+                    <span class="s2">`+(item['term']||festival||item['lDayZH']||'&nbsp;')+`</span>
                     `+(sign&&map[sign]?'<i>'+map[sign]+'</i>':'')+`
                 </a>
             </td>`;
@@ -602,6 +604,8 @@ class WidgetCalendar extends HTMLElement {
         html+='</tr>';
         _.$year.value = thatDay['sYear'];
         _.$month.value = thatDay['sMonth'];
+        _.$year.setAttribute('data-value',thatDay['sYear']);
+        _.$month.setAttribute('data-value',thatDay['sMonth']);
         _.$info.innerHTML = `<p>${that_date} ${thatDay['weekZH']}</p>
             <div class="day">${thatDay['sDay']}</div>
             <div class="detail">
