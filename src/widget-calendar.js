@@ -3,7 +3,7 @@
 */
 import {holidayMap,scheduleMap} from './module/data/holiday';
 import {getDateString} from './module/tool';
-import {getSolarMonthDays} from './module/solar';
+import {getTimestampBySolar,getSolarByTimestamp,getSolarMonthDays} from './module/solar';
 import {sFestival,lFestival,oFestival,tFestival} from './module/festival';
 import calendar from './calendar';
 
@@ -52,78 +52,75 @@ class WidgetCalendar extends HTMLElement {
         _.$next_month = _.$module.querySelector('.next-month');
         _.$info = _.$module.querySelector('.info');
 
-        let _year = 
+        let changeDate = function(year,month,day){
+            day = Math.min(getSolarMonthDays(year,month),day);
+            _.currentMonthDay = day;
+            let timestamp = getTimestampBySolar(year,month,day);
+            let thatDay = getSolarByTimestamp(timestamp);
+            if(thatDay.date!=_.date){
+                _.date = thatDay.date;
+                _.formatDate(_.date);
+            }
+        };
 
         _.$year.onchange = function(){
             let year = _.$year.value||_.$year.getAttribute('data-value');
             let month = _.$month.value||_.$month.getAttribute('data-value');
-            _.formatTable({'year':year,'month':month,'day':_.currentMonthDay});
-            _.formatSetting(year);
+            changeDate(year,month,_.currentMonthDay);
         };
         _.$month.onchange = function(){
             let year = _.$year.value||_.$year.getAttribute('data-value');
             let month = _.$month.value||_.$month.getAttribute('data-value');
-            _.formatTable({'year':year,'month':month,'day':_.currentMonthDay});
+            changeDate(year,month,_.currentMonthDay);
         };
         _.$holiday.onchange = function(){
             let value = _.$holiday.value;
             if(value){
                 let [year,month,day] = value.split('-');
-                _.formatTable({'year':year,'month':month,'day':day});
+                changeDate(year,month,day);
             }
         };
         _.$goback.onclick = function(){
-            _.formatTable();
-            _.formatSetting();
+            if(_.today!=_.date){
+                _.date = _.today;
+                _.formatDate();
+            }
         };
         _.$prev_year.onclick = function(){
             let year = _.$year.value||_.$year.getAttribute('data-value');
             let month = _.$month.value||_.$month.getAttribute('data-value');
             year--;
-            _.formatTable({'year':year,'month':month,'day':_.currentMonthDay});
-            _.formatSetting(year);
+            changeDate(year,month,_.currentMonthDay);
         };
         _.$next_year.onclick = function(){
             let year = _.$year.value||_.$year.getAttribute('data-value');
             let month = _.$month.value||_.$month.getAttribute('data-value');
             year++;
-            _.formatTable({'year':year,'month':month,'day':_.currentMonthDay});
-            _.formatSetting(year);
+            changeDate(year,month,_.currentMonthDay);
         };
         _.$prev_month.onclick = function(){
             let year = _.$year.value||_.$year.getAttribute('data-value');
             let month = _.$month.value||_.$month.getAttribute('data-value');
             month--;
-            _.formatTable({'year':year,'month':month,'day':_.currentMonthDay});
-            if(month==0){
-                _.formatSetting(--year);
-            }
+            changeDate(year,month,_.currentMonthDay);
         };
         _.$next_month.onclick = function(){
             let year = _.$year.value||_.$year.getAttribute('data-value');
             let month = _.$month.value||_.$month.getAttribute('data-value');
             month++;
-            _.formatTable({'year':year,'month':month,'day':_.currentMonthDay});
-            if(month==13){
-                _.formatSetting(++year);
-            }
+            changeDate(year,month,_.currentMonthDay);
         };
         _.$tbody.onclick = function(event){
-            event = event || window.event;
-            let target = event.target || event.srcElement;
+            let target = event.target;
             while(target.tagName!='TD'&&target.tagName!='TABLE'){
                 target = target.parentNode;
             }
             let id = target.getAttribute('data-id');
             if(target.tagName=='TD'&&id){
-                let data = _.currentMonthData[id];
-                _.currentMonthDay = data['sDay'];
-                let that_date = getDateString(data['sYear'],data['sMonth'],data['sDay']);
-                if(that_date!=_.date){
-                    _.date = that_date;
-                    _.formatDate(_.date);
-                }
-                _.dispatchEvent(new CustomEvent('onSelect',{'detail':calendar.getDateBySolar(data['sYear'],data['sMonth'],data['sDay'])}));
+                let thatDay = _.currentMonthData[id];
+                _.currentMonthDay = thatDay['sDay'];
+                changeDate(thatDay['sYear'],thatDay['sMonth'],thatDay['sDay']);
+                _.dispatchEvent(new CustomEvent('onSelect',{'detail':calendar.getDateBySolar(thatDay['sYear'],thatDay['sMonth'],thatDay['sDay'])}));
             }
         };
         _.formatDate(_.date);
@@ -661,14 +658,15 @@ class WidgetCalendar extends HTMLElement {
     }
     formatDate(date){
         let _ = this;
-        _.date = date;
-        if(_.date){
-            let [year,month,day] = _.date.split('-');
-            _.formatTable({'year':year,'month':month,'day':day});
+        if(date){
+            _.date = date;
+            let [year,month,day] = date.split('-');
             _.formatSetting(year);
+            _.formatTable({'year':year,'month':month,'day':day});
         }else{
-            _.formatTable();
+            _.date = _.today['date'];
             _.formatSetting();
+            _.formatTable();
         }
     }
 }
