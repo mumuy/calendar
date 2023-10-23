@@ -583,8 +583,13 @@ class WidgetCalendar extends HTMLElement {
             }
             let festivals = item['festival'].split(' ').filter(function(value){
                 if(value.length<=3){
-                    return Object.values(sFestival).includes(value)||Object.values(lFestival).includes(value)||Object.values(oFestival).includes(value)||Object.values(tFestival).includes(value);
+                    // console.log('[@@@@@@]',Object.values(sFestival),Object.values(sFestival).map(item=>item.name));
+                    return Object.values(sFestival).flat().map(item=>item.name).includes(value)
+                    ||Object.values(lFestival).flat().map(item=>item.name).includes(value)
+                    ||Object.values(oFestival).flat().map(item=>item.name).includes(value)
+                    ||Object.values(tFestival).flat().map(item=>item.name).includes(value);
                 }
+                return false;
             });
             let festival = festivals.length?festivals[0]:'';
             html += `<td class="`+classnameList.join(' ')+`" data-id="`+i+`">
