@@ -146,7 +146,7 @@ export const sFestival2 = {
         'found':''
     }],
     '04-15':[{
-        'name':'家安全教育日',
+        'name':'国家安全教育日',
         'found':'2015-07-01'
     }],
     '04-22':[{
@@ -468,7 +468,7 @@ export const oFestival = {
     }],
 };
 // 节气推算节日
-export const tFestival = ['初伏','中伏','末伏','出伏','复活节'];
+export const tFestival = ['寒食节','初伏','中伏','末伏','出伏','复活节'];
 
 // 通过公历获取节日
 export function getFestivalsBySolar(sYear,sMonth,sDay){
@@ -506,6 +506,13 @@ export function getTermFestivalsBySolar(sYear,sMonth,sDay){
     let festivals = [];
     let termDate = getTermDate(sYear);
     let dayTime = 86400000;
+    // 寒食节
+    let hanshi = new Date(sYear,3,termDate[6]-1);
+    let time = hanshi.getTime();
+    let solar = getSolarByTimestamp(time);
+    if(solar['sYear']==sYear&&solar['sMonth']==sMonth&&solar['sDay']==sDay){
+        festivals.push('寒食节');
+    }
     // 三伏天
     let xiazhi = new Date(sYear,5,termDate[11]);
     let qiufen = new Date(sYear,7,termDate[14]);
@@ -567,14 +574,11 @@ export function getFestivalsByLunar(lYear,lMonth,lDay){
     let festivals = [];
     let dateFull = getDateString(lYear,lMonth,lDay);
     let dateKey = getDateString(lMonth,lDay);
-    console.log('[dateFull]',dateFull,dateKey);
     if(lMonth==12&&lDay==getLunarMonthDays(lYear,12)){
         festivals.push(lFestival['12-30']);
     }else{
         if(lFestival[dateKey]){
-            console.log('test',lFestival[dateKey].filter(item=>(dateFull>=item.found)));
             let list = lFestival[dateKey].filter(item=>(dateFull>=item.found)).map(item=>item.name);
-            console.log('list',list);
             if(list.length){
                 festivals.push(list.join(' '));
             }
