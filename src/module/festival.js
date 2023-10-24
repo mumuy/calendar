@@ -604,7 +604,7 @@ export function getFestivalsByLunar(lYear,lMonth,lDay){
     let dateFull = getDateString(lYear,lMonth,lDay);
     let dateKey = getDateString(lMonth,lDay);
     if(lMonth==12&&lDay==getLunarMonthDays(lYear,12)){
-        festivals.push(lFestival['12-30']);
+        festivals.push(lFestival['12-30'][0]['name']);
     }else{
         if(lFestival[dateKey]){
             let list = lFestival[dateKey].filter(item=>(dateFull>=item.found)).map(item=>item.name);
