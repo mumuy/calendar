@@ -400,7 +400,7 @@ export const holidayMap = {
             name:'元旦'
         },
         {
-            value:'2024-01-10',
+            value:'2024-02-10',
             name:'春节'
         },
         {
