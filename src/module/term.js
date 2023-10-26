@@ -1,4 +1,4 @@
-import {minYear,maxYear} from './data/config';
+import {minYear,maxYear} from './config/base';
 
 // 24节气最小日期
 const termMinDate = [4, 19, 3, 18, 4, 19, 4, 19, 4, 20, 4, 20, 6, 22, 6, 22, 6, 22, 7, 22, 6, 21, 6, 21];

@@ -3,7 +3,7 @@ import {
     minMonth,
     minDay,
     maxYear
-} from './data/config';
+} from './config/base';
 // 闰月数据压缩：1位闰月大小+12位平月大小及4位长度闰月月份转2进制，再转32进制
 const monthData = [
     'iuo','in0','19bg','l6l','1kj0','1mag','2pak','ll0','16mg','lei',
