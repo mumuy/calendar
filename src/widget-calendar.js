@@ -8,7 +8,7 @@ import {getTimestampBySolar,getSolarByTimestamp,getSolarMonthDays} from './modul
 import {sFestival,lFestival,oFestival,tFestival} from './module/festival';
 import calendar from './calendar';
 
-import styleSheet from './style/widget.js';
+import styleSheet from './style/widget.css' with { type: 'css'};
 
 class WidgetCalendar extends HTMLElement {
     constructor() {
