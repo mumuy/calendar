@@ -45,5 +45,7 @@
         "build": "rollup -c",
         "watch": "rollup -wc"
     },
-    "homepage": "https://passer-by.com/calendar/"
+    "homepage": "https://passer-by.com/calendar/",
+    "directories": {
+    }
 }
