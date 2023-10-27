@@ -3,6 +3,11 @@ module.exports = {
     plugins: [
         '@babel/plugin-transform-runtime',
         '@babel/plugin-proposal-class-properties',
-        '@babel/plugin-syntax-import-attributes'
+        [
+            '@babel/plugin-syntax-import-attributes',
+            {
+                deprecatedAssertSyntax: true
+            }
+        ]
     ]
 }

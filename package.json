@@ -22,6 +22,11 @@
     "bugs": {
         "url": "https://github.com/mumuy/calendar/issues"
     },
+    "engines": {
+        "node": ">=18",
+        "yarn": "please-use-npm",
+        "npm": ">=8"
+    },
     "devDependencies": {
         "@babel/core": "^7.22.9",
         "@babel/plugin-proposal-class-properties": "^7.18.6",

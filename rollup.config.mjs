@@ -1,11 +1,11 @@
-const terser = require('@rollup/plugin-terser');        // 代码压缩
-const resolve = require('@rollup/plugin-node-resolve'); // 使用node_modules包
-const babel = require('@rollup/plugin-babel');          // ECMAScript转码
-const importAssertionsPlugin = require('rollup-plugin-import-assert').importAssertionsPlugin;
-const importAssertions = require('acorn-import-assertions').importAssertions;
-const pkg = require('./package');                       // 获取package信息
+import resolve from '@rollup/plugin-node-resolve';          // 使用node_modules包
+import terser from '@rollup/plugin-terser';                 // 代码压缩
+import babel from '@rollup/plugin-babel';                   // ECMAScript兼容
+import {importAssertionsPlugin} from 'rollup-plugin-import-assert';
+import {importAssertions} from 'acorn-import-assertions';
+import pkg from './package.json' assert { type:'json' };     // 获取package信息
 
-// 版权调整
+// 版权信息
 const repository = pkg.repository.url.replace(/(.+)(:\/\/.+)\.git$/,'https$2');
 const now = new Date();
 const date = (new Date(now.getTime()-now.getTimezoneOffset()*60000)).toISOString().substr(0,10);
@@ -22,7 +22,17 @@ const banner = `/*!
  * Created on: ${date}
  */`;
 
-module.exports = [{
+const commonPlugins = [
+    resolve(),
+    importAssertionsPlugin(),
+    terser(),
+    babel({
+        babelHelpers: 'runtime',
+        exclude:'node_modules/**'
+    })
+];
+
+ export default [{
     input: './src/calendar.js',
     output:[{
         file: pkg.main,
@@ -31,19 +41,11 @@ module.exports = [{
         banner
     },{
         file: pkg.module,
-        format: 'esm',
+        format: 'es',
         banner
     }],
     acornInjectPlugins: [ importAssertions ],
-    plugins: [
-        resolve(),
-        importAssertionsPlugin(),
-        terser(),
-        babel({
-            babelHelpers: 'runtime',
-            exclude:'node_modules/**'
-        })
-    ],
+    plugins: commonPlugins,
     watch: {
         exclude: 'node_modules/**'
     }
@@ -55,15 +57,7 @@ module.exports = [{
         banner
     }],
     acornInjectPlugins: [ importAssertions ],
-    plugins: [
-        resolve(),
-        importAssertionsPlugin(),
-        terser(),
-        babel({
-            babelHelpers: 'runtime',
-            exclude:'node_modules/**'
-        })
-    ],
+    plugins: commonPlugins,
     watch: {
         exclude: 'node_modules/**'
     }
