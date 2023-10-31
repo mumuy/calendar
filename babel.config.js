@@ -6,7 +6,7 @@ module.exports = {
         [
             '@babel/plugin-syntax-import-attributes',
             {
-                deprecatedAssertSyntax: true
+                "deprecatedAssertSyntax": true
             }
         ]
     ]
