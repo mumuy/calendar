@@ -1,8 +1,8 @@
-import {getDateString} from './tool';
-import {getSolarByTimestamp} from './solar';
-import {getLunarByTimestamp,getLunarMonthDays} from './lunar';
-import {getTermDate} from './term';
-import {getGanZhiDay} from './ganzhi';
+import {getDateString} from './tool.js';
+import {getSolarByTimestamp} from './solar.js';
+import {getLunarByTimestamp,getLunarMonthDays} from './lunar.js';
+import {getTermDate} from './term.js';
+import {getGanZhiDay} from './ganzhi.js';
 
 // 公历主要节日
 export const sFestival = {

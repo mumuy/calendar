@@ -1,6 +1,6 @@
-import {getDateString} from './tool';
-import {getTimestampBySolar} from './solar';
-import {getTermDate} from './term';
+import {getDateString} from './tool.js';
+import {getTimestampBySolar} from './solar.js';
+import {getTermDate} from './term.js';
 
 // 天干
 const ganMap = ['甲','乙','丙','丁','戊','己','庚','辛','壬','癸'];

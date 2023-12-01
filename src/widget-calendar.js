@@ -1,12 +1,12 @@
 /*
 *   万年历组件
 */
-import {minYear,maxYear} from './module/config/base';
-import {holidayMap,scheduleMap} from './module/config/holiday';
-import {getDateString} from './module/tool';
-import {getTimestampBySolar,getSolarByTimestamp,getSolarMonthDays} from './module/solar';
-import {sFestival,lFestival,oFestival,tFestival} from './module/festival';
-import calendar from './calendar';
+import {minYear,maxYear} from './module/config/base.js';
+import {holidayMap,scheduleMap} from './module/config/holiday.js';
+import {getDateString} from './module/tool.js';
+import {getTimestampBySolar,getSolarByTimestamp,getSolarMonthDays} from './module/solar.js';
+import {sFestival,lFestival,oFestival,tFestival} from './module/festival.js';
+import calendar from './calendar.js';
 
 import styleSheet from './style/widget.css' with { type: 'css'};
 

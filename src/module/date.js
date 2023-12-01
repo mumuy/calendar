@@ -1,10 +1,10 @@
-import {getSolarByTimestamp} from './solar';
-import {getLunarByTimestamp} from './lunar';
-import {getTerm} from './term';
-import {getGanZhiYear,getGanZhiMonth,getGanZhiDay} from './ganzhi';
-import {getZodiac} from './zodiac';
-import {getAnimalYear} from './animal';
-import {getFestivalsBySolar,getFestivalsByLunar,getTermFestivalsBySolar} from './festival';
+import {getSolarByTimestamp} from './solar.js';
+import {getLunarByTimestamp} from './lunar.js';
+import {getTerm} from './term.js';
+import {getGanZhiYear,getGanZhiMonth,getGanZhiDay} from './ganzhi.js';
+import {getZodiac} from './zodiac.js';
+import {getAnimalYear} from './animal.js';
+import {getFestivalsBySolar,getFestivalsByLunar,getTermFestivalsBySolar} from './festival.js';
 
 // 获取指定日志下的数据
 export function getDateInfo(timestamp){

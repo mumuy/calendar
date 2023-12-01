@@ -1,4 +1,4 @@
-import {getDateString} from './tool';
+import {getDateString} from './tool.js';
 
 // 星期
 const weekMap = ['日','一','二','三','四','五','六'];

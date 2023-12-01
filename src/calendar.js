@@ -1,6 +1,6 @@
-import {getDateInfo} from './module/date';
-import {getTimestampBySolar} from './module/solar';
-import {getTimestampByLunar} from './module/lunar';
+import {getDateInfo} from './module/date.js';
+import {getTimestampBySolar} from './module/solar.js';
+import {getTimestampByLunar} from './module/lunar.js';
 
 export default {
     getDateBySolar:function(sYear,sMonth,sDay){
