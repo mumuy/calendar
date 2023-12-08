@@ -56,6 +56,7 @@ export function getLunarYearDays(lYear) {
 
 // 获得农历月份天数
 export function getLunarMonthDays(lYear,lMonth,isLeap){
+    let leapMonth = getLeapMonth(lYear);
     let data = parseInt(monthData[lYear - minYear],32);
     let days = data&1<<(16 - lMonth)?30:29;
     if(isLeap&&lMonth==leapMonth){
