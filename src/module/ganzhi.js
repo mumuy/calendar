@@ -23,13 +23,11 @@ export function getGanZhiMonth(sYear,sMonth,sDay){
     termDate.push(31);
     termDate.forEach(function(day,index){
         let month = Math.floor(index/2)+1;
-        if(getDateString(month,day)>=getDateString(sMonth,sDay)){
-            if(!gzIndex){
-                gzIndex = month;
-            }
+        if(getDateString(sMonth,sDay)>=getDateString(month,day)){
+            gzIndex = month;
         }
     });
-    gzIndex += (sYear-1984)*12-1;
+    gzIndex += (sYear-1984)*12;
     gzIndex = gzIndex%60>0?gzIndex%60:gzIndex%60+60;
     let gan = gzIndex%10;
     let zhi = gzIndex%12;
