@@ -255,7 +255,7 @@ class WidgetCalendar extends HTMLElement {
                     classnameList.push(sign);
                 }
             }
-            let festivals = item['festival'].split(' ').filter(function(value){
+            let festival = item['festival'].split(' ').find(function(value){
                 if(value.length<=3){
                     return Object.values(sFestival).flat().map(item=>item.name).includes(value)
                     ||Object.values(lFestival).flat().map(item=>item.name).includes(value)
@@ -264,12 +264,11 @@ class WidgetCalendar extends HTMLElement {
                 }
                 return false;
             });
-            let festival = festivals.length?festivals[0]:'';
-            html += `<td class="`+classnameList.join(' ')+`" data-id="`+i+`">
+            html += `<td class="${classnameList.join(' ')}" data-id="`+i+`">
                 <a href="javascript:;">
-                    <span class="s1">`+item['sDay']+`</span>
-                    <span class="s2">`+(item['term']||festival||item['lDayZH']||'&nbsp;')+`</span>
-                    `+(sign&&map[sign]?'<i>'+map[sign]+'</i>':'')+`
+                    <span class="s1">${item['sDay']}</span>
+                    <span class="s2">${item['term']||festival||item['lDayZH']||'&nbsp;'}</span>
+                    ${sign&&map[sign]?'<i>'+map[sign]+'</i>':''}
                 </a>
             </td>`;
             if(i%7==6&&i<len-1){
