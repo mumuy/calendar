@@ -213,14 +213,14 @@ class WidgetCalendar extends HTMLElement {
             _.currentMonthData.push(obj);
         }
         // 下月日期
-        let lastDay = _.currentMonthData.at(-1);
+        let lastDay = _.currentMonthData[_.currentMonthData.length-1];
         for(let i=1;lastDay['week']+i<7;i++){
             let obj = calendar.getDateBySolar(lastDay['sYear'],lastDay['sMonth'],lastDay['sDay']+i);
             _.currentMonthData.push(obj);
         }
         // 是否增加一行
         if(_.currentMonthData.length<=35){
-            let lastDay = _.currentMonthData.at(-1);
+            let lastDay = _.currentMonthData[_.currentMonthData.length-1];
             for(let i=1;_.currentMonthData.length<42;i++){
                 let obj = calendar.getDateBySolar(lastDay['sYear'],lastDay['sMonth'],lastDay['sDay']+i);
                 _.currentMonthData.push(obj);
