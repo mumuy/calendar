@@ -255,10 +255,15 @@ class WidgetCalendar extends HTMLElement {
                     classnameList.push(sign);
                 }
             }
-            let festival = item['festival'].split(' ').find(function(value){
+            let lunar_festival = item['festival'].split(' ').find(function(value){
+                if(value.length<=3){
+                    return Object.values(lFestival).flat().map(item=>item.name).includes(value);
+                }
+                return false;
+            });
+            let other_festival = item['festival'].split(' ').find(function(value){
                 if(value.length<=3){
                     return Object.values(sFestival).flat().map(item=>item.name).includes(value)
-                    ||Object.values(lFestival).flat().map(item=>item.name).includes(value)
                     ||Object.values(oFestival).flat().map(item=>item.name).includes(value)
                     ||tFestival.includes(value);
                 }
@@ -267,7 +272,7 @@ class WidgetCalendar extends HTMLElement {
             html += `<td class="${classnameList.join(' ')}" data-id="`+i+`">
                 <a href="javascript:;">
                     <span class="s1">${item['sDay']}</span>
-                    <span class="s2">${item['term']||festival||item['lDayZH']||'&nbsp;'}</span>
+                    <span class="s2">${lunar_festival||item['term']||other_festival||item['lDayZH']||'&nbsp;'}</span>
                     ${sign&&map[sign]?'<i>'+map[sign]+'</i>':''}
                 </a>
             </td>`;
@@ -276,6 +281,13 @@ class WidgetCalendar extends HTMLElement {
             }
         }
         html+='</tr>';
+
+        let lunar_festivals = thatDay['festival'].split(' ').filter(function(value){
+            return Object.values(lFestival).flat().map(item=>item.name).includes(value);
+        });
+        let other_festivals = thatDay['festival'].split(' ').filter(function(value){
+            return !Object.values(lFestival).flat().map(item=>item.name).includes(value);
+        });
         _.$year.value = thatDay['sYear'];
         _.$month.value = thatDay['sMonth'];
         _.$year.setAttribute('data-value',thatDay['sYear']);
@@ -289,7 +301,7 @@ class WidgetCalendar extends HTMLElement {
             </div>
             <div class="list">
                 <slot name="item"></slot>
-                <div class="item">${thatDay['festival'].trim().split(' ').map(value=>`<p>${value}</p>`).join('')}</div>
+                <div class="item">${lunar_festivals.map(value=>`<p>${value}</p>`).join('')+thatDay['term'].split(' ').map(value=>`<p>${value}</p>`).join('')+other_festivals.map(value=>`<p>${value}</p>`).join('')}</div>
             </div>
         `;
         _.$tbody.innerHTML = html;
