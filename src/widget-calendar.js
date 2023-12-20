@@ -321,7 +321,7 @@ class WidgetCalendar extends HTMLElement {
                 let $option = new Option(items[i]['name'],items[i]['value']);
                 _.$holiday.add($option);
             }
-        }else{
+        }else if(year>=2011){
             const list = ['元旦','春节','清明','劳动节','端午节','中秋节','国庆节'];
             for(let m=1;m<=12;m++){
                 for(let d=1;d<=31;d++){
