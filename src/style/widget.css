@@ -15,8 +15,8 @@
 }
 @supports (width: 100cqw) {
     :host {
-        --base-size: clamp(0.8px,calc(100cqw / 600),1px);
-        --base-size-mobile: clamp(0.8px,calc(100cqw / 480),1px);
+        --base-size: clamp(1px,calc(100cqw / 600),1.1px);
+        --base-size-mobile: clamp(1px,calc(100cqw / 480),1.1px);
     }
 }
 *{
@@ -81,15 +81,15 @@ a{
     padding: calc(var(--base-size) * 4) calc(var(--base-size) * 6);
     background: #fff;
     vertical-align: middle;
+    height: calc(var(--base-size)*26);
     text-align: center;
-    white-space: nowrap;
     overflow: hidden;
 }
 .mod-calendar .selector span {
     display: inline-block;
     vertical-align: middle;
     background: #fff;
-    margin: 0 calc(var(--base-size) * 1);
+    margin: 0 calc(var(--base-size) * 1) calc(var(--base-size) * 5);
 }
 .mod-calendar .selector a {
     float: left;
@@ -261,13 +261,16 @@ a{
         right: calc(var(--base-size-mobile) * 10);
         padding:0;
         border-top: none;
-        text-aign: right;
+        text-align: right;
     }
     .mod-calendar .info .list .item{
         padding: calc(var(--base-size-mobile) * 2) 0;
     }
     .mod-calendar .info .list ::slotted([slot="item"]) {
         padding: calc(var(--base-size-mobile) * 2) 0!important;
+    }
+    .mod-calendar .selector{
+        overflow: visible;
     }
     .mod-calendar .selector span{
         position: relative;
@@ -278,10 +281,9 @@ a{
         box-sizing: border-box;
     }
     .mod-calendar .selector span:has(.goback){
-        display: none;
-    }
-    .mod-calendar .selector span:last-child{
-        display: none;
+        position: absolute;
+        right: 0px;
+        top: -106px;
     }
     .mod-calendar .selector select{
         float: none;
@@ -308,14 +310,14 @@ a{
         top: calc(var(--base-size-mobile) * 75);
         right: calc(var(--base-size-mobile) * 10);
         height: calc(var(--base-size-mobile) * 20);
-        background: #ffbb00;
+        background: var(--secondary-color);
         line-height: calc(var(--base-size-mobile) * 20);
-        font-size: calc(var(--base-size-mobile) * 14);
+        font-size: calc(var(--base-size-mobile) * 12);
         color: #fff;
         border-radius: calc(var(--base-size-mobile) * 3);
     }
     .mod-calendar .selector .goback:hover{
-        border-color:#ffbb00;
+        border-color:var(--secondary-color);
         color: #fff;
     }
     .mod-calendar table tbody a{
