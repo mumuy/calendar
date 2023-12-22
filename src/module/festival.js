@@ -489,23 +489,14 @@ export function getFestivalsBySolar(sYear,sMonth,sDay){
     let dateFull = getDateString(sYear,sMonth,sDay);
     let dateKey = getDateString(sMonth,sDay);
     if(sFestival[dateKey]){
-        let list = sFestival[dateKey].filter(item=>(dateFull>=item.found)).map(item=>item.name);
-        if(list.length){
-            festivals.push(list.join(' '));
-        }
+        festivals = festivals.concat(sFestival[dateKey].filter(item=>(dateFull>=item.found)).map(item=>item.name));
     }
     if(sFestival2[dateKey]){
-        let list = sFestival2[dateKey].filter(item=>(dateFull>=item.found)).map(item=>item.name);
-        if(list.length){
-            festivals.push(list.join(' '));
-        }
+        festivals = festivals.concat(sFestival2[dateKey].filter(item=>(dateFull>=item.found)).map(item=>item.name));
     }
     dateKey = getDateString(sMonth,index,week);
     if(oFestival[dateKey]){
-        let list = oFestival[dateKey].filter(item=>(dateFull>=item.found)).map(item=>item.name);
-        if(list.length){
-            festivals.push(list.join(' '));
-        }
+        festivals = festivals.concat(oFestival[dateKey].filter(item=>(dateFull>=item.found)).map(item=>item.name));
     }
     return festivals;
 }
@@ -532,7 +523,7 @@ export function getTermFestivalsBySolar(sYear,sMonth,sDay){
         for(let time = xiazhi.getTime();time<=qiufen.getTime();time+=dayTime){
             let solar = getSolarByTimestamp(time);
             let ganzhi = getGanZhiDay(solar['sYear'],solar['sMonth'],solar['sDay']);
-            if(ganzhi.indexOf('庚')>-1){
+            if(ganzhi.includes('庚')){
                 count++;
                 if(solar['sYear']==sYear&&solar['sMonth']==sMonth&&solar['sDay']==sDay){
                     if(count==3){
@@ -547,7 +538,7 @@ export function getTermFestivalsBySolar(sYear,sMonth,sDay){
         for(let time = qiufen.getTime();time<=qiufen.getTime()+dayTime*20;time+=dayTime){
             let solar = getSolarByTimestamp(time);
             let ganzhi = getGanZhiDay(solar['sYear'],solar['sMonth'],solar['sDay']);
-            if(ganzhi.indexOf('庚')>-1){
+            if(ganzhi.includes('庚')){
                 count++;
                 if(solar['sYear']==sYear&&solar['sMonth']==sMonth&&solar['sDay']==sDay){
                     if(count==1){
@@ -615,16 +606,10 @@ export function getFestivalsByLunar(lYear,lMonth,lDay){
         festivals.push(lFestival['12-30'][0]['name']);
     }else{
         if(lFestival[dateKey]){
-            let list = lFestival[dateKey].filter(item=>(dateFull>=item.found)).map(item=>item.name);
-            if(list.length){
-                festivals.push(list.join(' '));
-            }
+            festivals = festivals.concat(lFestival[dateKey].filter(item=>(dateFull>=item.found)).map(item=>item.name));
         }
         if(lFestival2[dateKey]){
-            let list = lFestival2[dateKey].filter(item=>(dateFull>=item.found)).map(item=>item.name);
-            if(list.length){
-                festivals.push(list.join(' '));
-            }
+            festivals = festivals.concat(lFestival2[dateKey].filter(item=>(dateFull>=item.found)).map(item=>item.name));
         }
     }
     return festivals;
