@@ -12,7 +12,7 @@ export default {
         return timestamp?getDateInfo(timestamp):null;
     },
     getToday:function(){
-        let timestamp = (new Date()).getTime();
+        let timestamp = Date.now();
         return getDateInfo(timestamp);
     }
 };

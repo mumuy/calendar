@@ -508,19 +508,18 @@ export function getTermFestivalsBySolar(sYear,sMonth,sDay){
     let dayTime = 86400000;
     // 寒食节
     (function(){
-        let hanshi = new Date(sYear,3,termDate[6]-1);
-        let time = hanshi.getTime();
-        let solar = getSolarByTimestamp(time);
+        let hanshi_time = Date.parse(sYear,3,termDate[6]-1);
+        let solar = getSolarByTimestamp(hanshi_time);
         if(solar['sYear']==sYear&&solar['sMonth']==sMonth&&solar['sDay']==sDay){
             festivals.push('寒食节');
         }
     })();
     // 三伏天
     (function(){
-        let xiazhi = new Date(sYear,5,termDate[11]);
-        let qiufen = new Date(sYear,7,termDate[14]);
+        let xiazhi_time = Date.parse(sYear,5,termDate[11]);
+        let qiufen_time = Date.parse(sYear,7,termDate[14]);
         let count = 0;
-        for(let time = xiazhi.getTime();time<=qiufen.getTime();time+=dayTime){
+        for(let time = xiazhi_time;time<=qiufen_time;time+=dayTime){
             let solar = getSolarByTimestamp(time);
             let ganzhi = getGanZhiDay(solar['sYear'],solar['sMonth'],solar['sDay']);
             if(ganzhi.includes('庚')){
@@ -535,7 +534,7 @@ export function getTermFestivalsBySolar(sYear,sMonth,sDay){
             }
         }
         count = 0;
-        for(let time = qiufen.getTime();time<=qiufen.getTime()+dayTime*20;time+=dayTime){
+        for(let time = qiufen_time;time<=qiufen_time+dayTime*20;time+=dayTime){
             let solar = getSolarByTimestamp(time);
             let ganzhi = getGanZhiDay(solar['sYear'],solar['sMonth'],solar['sDay']);
             if(ganzhi.includes('庚')){
@@ -552,11 +551,11 @@ export function getTermFestivalsBySolar(sYear,sMonth,sDay){
     })();
     // 数九
     (function(){
-        let termDate_prev = getTermDate(sYear-1);
-        let dongzhi_prev = new Date(sYear-1,11,termDate_prev[23]);
-        let dongzhi = new Date(sYear,11,termDate[23]);
+        let last_termDate = getTermDate(sYear-1);
+        let last_dongzhi_time = Date.parse(sYear-1,11,last_termDate[23]);
+        let dongzhi_time = Date.parse(sYear,11,termDate[23]);
         let count = 0;
-        for(let time = dongzhi_prev.getTime();time<=dongzhi_prev.getTime()+8*9*dayTime;time+=9*dayTime){
+        for(let time = last_dongzhi_time;time<=last_dongzhi_time+8*9*dayTime;time+=9*dayTime){
             let solar = getSolarByTimestamp(time);
             if(solar['sYear']==sYear&&solar['sMonth']==sMonth&&solar['sDay']==sDay){
                 festivals.push(shujiu[count]);
@@ -564,7 +563,7 @@ export function getTermFestivalsBySolar(sYear,sMonth,sDay){
             count++;
         }
         count = 0;
-        for(let time = dongzhi.getTime();time<=dongzhi.getTime()+8*9*dayTime;time+=9*dayTime){
+        for(let time = dongzhi_time;time<=dongzhi_time+8*9*dayTime;time+=9*dayTime){
             let solar = getSolarByTimestamp(time);
             if(solar['sYear']==sYear&&solar['sMonth']==sMonth&&solar['sDay']==sDay){
                 festivals.push(shujiu[count]);
@@ -574,10 +573,10 @@ export function getTermFestivalsBySolar(sYear,sMonth,sDay){
     })();
     // 复活节
     (function(){
-        let chunfen = new Date(sYear,2,termDate[5]);
+        let chunfen_time = Date.parse(sYear,2,termDate[5]);
         let hasFullMoon = false;
         let hasSunDay = false;
-        for(let time = chunfen.getTime();time<=chunfen.getTime()+30*dayTime;time+=dayTime){
+        for(let time = chunfen_time;time<=chunfen_time+30*dayTime;time+=dayTime){
             if(!hasFullMoon){
                 let lunar = getLunarByTimestamp(time);
                 if(lunar['lDay']==15){
