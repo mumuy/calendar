@@ -335,7 +335,7 @@ class WidgetCalendar extends HTMLElement {
                             types = [].concat(types,date['festival'].split(' '));
                         }
                         types.forEach(function(type){
-                            if(list.indexOf(type)>-1){
+                            if(list.includes(type)){
                                 let $option = new Option(type,date['sYear']+'-'+date['sMonth']+'-'+date['sDay']);
                                 _.$holiday.add($option);
                             }
