@@ -208,13 +208,10 @@ a {
     color: #f44336;
 }
 .mod-calendar table td.today a {
-    background: #fff9ef;
+    background: #fff2dd;
 }
 .mod-calendar table td.today.active a, .mod-calendar table td.today a:hover {
     border: calc(var(--base-size) * 1) solid var(--secondary-color);
-}
-.mod-calendar table td.today .s1 {
-    color: var(--secondary-color);
 }
 .mod-calendar table td.disabled a {
     opacity: 0.4;
