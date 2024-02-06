@@ -171,8 +171,6 @@ a {
     position: absolute;
     left: 0;
     top: 0;
-    width: calc(var(--base-size) * 18);
-    height: calc(var(--base-size) * 18);
     line-height: calc(var(--base-size) * 18);
     font-style: normal;
     font-size: calc(var(--base-size) * 13);
