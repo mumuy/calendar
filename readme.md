@@ -41,8 +41,8 @@ document.querySelector('widget-calendar').addEventListener('onInit',function(eve
 ## 方法调用
 
 ```js
-// 农历日期: 2022年(大致)闰四月初十
-calendar.getDateByLunar(2022,4,10,true);
+// 农历日期: 2023年闰二月初十
+calendar.getDateByLunar(2023,2,10,true);
 
 // 公历日期：2022年10月1日
 calendar.getDateBySolar(2022,10,1);
