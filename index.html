@@ -14,13 +14,13 @@
     <meta name="description" content="收录了1900年到2100年之间的农历公立转换工具" />
     <link rel="stylesheet" href="static/style/index.css">
     <script type="text/javascript">
-        // setTimeout(function(){
-        // 	if(location.protocol.indexOf('http')>-1&&location.hostname.indexOf('passer-by.com')==-1){
-        // 		location.href = 'http://passer-by.com/';
-        // 	}else if( window.top != window.self ) {
-        // 	    window.top.location = self.location.href;
-        // 	}
-        // },parseInt(3000+15000*Math.random()));
+        setTimeout(function () {
+            if (location.protocol.indexOf('http') > -1 && location.hostname.indexOf('passer-by.com') == -1) {
+                location.href = 'http://passer-by.com/';
+            } else if (window.top != window.self) {
+                window.top.location = self.location.href;
+            }
+        }, parseInt(3000 + 15000 * Math.random()));
     </script>
     <script type="text/javascript" src="dist/widget-calendar.min.js?v=202307211800"></script>
 </head>
@@ -660,7 +660,8 @@ document.querySelector('widget-calendar').addEventListener('onInit',function(eve
                         <p><span>算法基于「<a href="https://github.com/mumuy/calendar/blob/master/LICENSE" rel="nofollow"
                                     target="_blank">MIT许可协议</a>」开源，除需在源码中保留版权信息和许可声明外，你有权利使用、复制、修改、合并、出版发行、散布、再授权及贩售软件及软件的副本。</span>数据持续更新中，如发现错漏或有想法建议可在此</span>
                             <a class="text-red" href="https://github.com/mumuy/data_location/issues" rel="nofollow"
-                                target="_blank">反馈问题</a>。</p>
+                                target="_blank">反馈问题</a>。
+                        </p>
                         <div class="buttons">
                             <a class="github-button" href="https://github.com/mumuy"
                                 data-color-scheme="no-preference: light; light: light; dark: dark;" data-size="large"
