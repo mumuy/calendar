@@ -88,10 +88,10 @@ export function getTimestampByLunar(lYear,lMonth,lDay,isLeap){
     for(let year=minYear;year<lYear;year++){
         offset += getLunarYearDays(year);
     }
-    for(let month=1;month<lMonth||isLeap&&month==lMonth;month++){
+    for(let month=1;month<lMonth||isLeap&&month==lMonth&&lMonth==leapMonth;month++){
         offset += data&1<<(16 - month)?30:29;
     }
-    if(isLeap&&lMonth>leapMonth){
+    if(leapMonth&&lMonth>leapMonth){
         offset += data&1<<16?30:29;
     }
     offset += lDay;
