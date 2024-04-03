@@ -329,7 +329,7 @@ class WidgetCalendar extends HTMLElement {
                     if(date['sMonth']==m&&date['sDay']==d){
                         let types = [];
                         if(date['term']){
-                            types.push(date['Term']);
+                            types.push(date['term']);
                         }
                         if(date['festival']){
                             types = [].concat(types,date['festival'].split(' '));
