@@ -35,6 +35,9 @@ class WidgetCalendar extends HTMLElement {
         return this.getAttribute('mode')||'default';
     }
     attributeChangedCallback(name, oldValue, newValue){
+        if(name=='date'&&oldValue!=newValue){
+            this.formatDate(newValue);
+        }
     }
     connectedCallback () {
         let _ = this;
