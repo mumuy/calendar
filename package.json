@@ -1,6 +1,6 @@
 {
     "name": "calendar-tool",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "Chinese lunar calendar",
     "author": "HaoLe Zheng",
     "license": "MIT",
@@ -27,6 +27,9 @@
         "yarn": "please-use-npm",
         "npm": ">=8"
     },
+    "files":[
+        "dist"
+    ],
     "devDependencies": {
         "@babel/core": "^7.24.4",
         "@babel/plugin-syntax-import-attributes": "^7.24.1",

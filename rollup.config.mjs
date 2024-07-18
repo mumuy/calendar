@@ -53,7 +53,7 @@ const commonPlugins = [
     input: './src/widget-calendar.js',
     output:[{
         file: './dist/widget-calendar.min.js',
-        format: 'iife',
+        format: 'umd',
         banner
     }],
     acornInjectPlugins: [ importAssertions ],
