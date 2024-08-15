@@ -13,7 +13,7 @@ import styleSheet from './style/widget.css' with { type: 'css'};
 class WidgetCalendar extends HTMLElement {
     constructor() {
         super();
-
+        this.attachShadow({mode:'open'});
         // 全局变量
         let _ = this;
         _.today = calendar.getToday();
@@ -42,7 +42,6 @@ class WidgetCalendar extends HTMLElement {
     connectedCallback () {
         let _ = this;
         // 模板
-        _.attachShadow({mode:'open'});
         if(_.shadowRoot.adoptedStyleSheets){
             _.shadowRoot.adoptedStyleSheets = [styleSheet];
         }else{
@@ -51,7 +50,6 @@ class WidgetCalendar extends HTMLElement {
             $style.textContent = [...styleSheet.cssRules].map(item=>item.cssText).join('');
             _.shadowRoot.appendChild($style);
         }
-
         _.render();
         // 节点
         _.$module = _.shadowRoot.querySelector('.mod-calendar');
