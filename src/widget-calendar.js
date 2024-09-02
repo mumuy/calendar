@@ -28,11 +28,14 @@ class WidgetCalendar extends HTMLElement {
         let today_date = getDateString(this.today['sYear'],this.today['sMonth'],this.today['sDay']);
         return this.getAttribute('date')||today_date;
     }
-    set date(date){
-        this.setAttribute('date',date);
+    set date(value){
+        this.setAttribute('date',value);
     }
     get mode(){
         return this.getAttribute('mode')||'default';
+    }
+    set mode(value){
+        this.setAttribute('mode',value);
     }
     attributeChangedCallback(name, oldValue, newValue){
         if(name=='date'&&oldValue!=newValue){
