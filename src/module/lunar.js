@@ -28,12 +28,25 @@ const monthData = [
     '1qb8','1l90','1ml0','2ql6','lmg','in0','1aek','18mg','1kag','1sii',
     '1l90'
 ];
+// 年份
+const yearZhMap = ['〇', '一', '二', '三', '四', '五', '六', '七', '八', '九'];
 // 月份
 const monthMap = ['正','二','三','四','五','六','七','八','九','十','冬','腊'];
 // 十位
 const dayMap = ['初一','初二','初三','初四','初五','初六','初七','初八','初九','初十','十一','十二','十三','十四','十五','十六','十七','十八','十九','二十','廿一','廿二','廿三','廿四','廿五','廿六','廿七','廿八','廿九','三十'];
 // 参考时间点
 const startTime = Date.UTC(minYear, minMonth-1, minDay, 0, 0, 0);
+
+// 数字转换成中文年份
+function convertYearNumToZh(year){
+    return String(year).split('').map(num => yearZhMap[Number(num)]).join('');
+}
+
+// 中文转换成数字年份
+function convertYearZhToNum(year){
+    year = year.replace(/零/g, "〇");
+    return year.split('').map(num => yearZhMap.indexOf(num)).join('');
+}
 
 // 获取农历年闰月
 export function getLeapMonth(lYear){
@@ -139,6 +152,7 @@ export function getLunarByTimestamp(timestamp){
         lMonth:lMonth,
         lDay:lDay,
         isLeap:isLeap,
+        lYearZH:convertYearNumToZh(lYear),
         lMonthZH:(isLeap?'闰':'')+monthMap[lMonth-1]+'月',
         lDayZH:dayMap[lDay-1]
     };
