@@ -576,7 +576,7 @@ export function getTermFestivalsBySolar(sYear,sMonth,sDay){
         let chunfen_time = new Date(sYear,2,termDate[5]).getTime();
         let hasFullMoon = false;
         let hasSunDay = false;
-        for(let time = chunfen_time;time<=chunfen_time+60*dayTime;time+=dayTime){
+        for(let time = chunfen_time;time<=chunfen_time+31*dayTime;time+=dayTime){
             if(!hasFullMoon){
                 let lunar = getLunarByTimestamp(time);
                 if(lunar['lDay']==15){
