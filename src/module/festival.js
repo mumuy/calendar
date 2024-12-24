@@ -449,7 +449,7 @@ export const lFestival = {
 export const lFestival2 = {
     '03-23':[{
         'name':'妈祖圣诞',
-        'found':'960'
+        'found':'0960'
     }],
     '06-24':[{
         'name':'火把节',
