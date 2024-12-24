@@ -447,6 +447,10 @@ export const lFestival = {
 };
 // 农历非主要节日
 export const lFestival2 = {
+    '03-23':[{
+        'name':'妈祖圣诞',
+        'found':'960'
+    }],
     '06-24':[{
         'name':'火把节',
         'found':''
