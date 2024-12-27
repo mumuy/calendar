@@ -223,7 +223,7 @@ a:hover{
     border-radius: 6px;
 }
 .mod-panel .bd pre{
-    white-space: wrap;
+    white-space: break-spaces;
     word-break: break-all;
     word-wrap: break-word;
 }
