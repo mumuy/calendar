@@ -46,18 +46,21 @@
             </div>
         </div>
         <div class="container">
-            <div class="mod-panel">
-                <div class="inner">
+            <div class="inner">
+                <div class="mod-panel">
                     <div class="hd">
                         <h1>中国农历公历转换<span class="tag">开源算法</span></h1>
                         <p>轻松获取农历公历日期、星期、干支、生肖、节气、节日等信息</p>
-                        <p>
-                            <a class="btn" href="https://passer-by.com/calendar/dist/calendar.min.js"
-                                target="_blank">算法脚本</a>
-                            <a class="btn btn-orange" href="https://passer-by.com/calendar/dist/widget-calendar.min.js"
-                                target="_blank">组件脚本</a>
-                            <a class="btn btn-green" href="https://passer-by.com/datex/" target="_blank">时间格式化</a>
-                        </p>
+                        <div class="buttons">
+                            <a class="btn btn-green" href="https://passer-by.com/datex/timezone.html" target="_blank">
+                                <img src="./static/image/icon-time.png" width="24" height="24"/>
+                                <span>世界时间</span>
+                            </a>
+                            <a class="btn btn-orange" href="https://passer-by.com/datex/" target="_blank">
+                                <img src="./static/image/icon-format.png" width="24" height="24"/>
+                                <span>时间格式化</span>
+                            </a>
+                        </div>
                     </div>
                     <div class="bd">
                         <div id="demo1" class="box">
@@ -642,9 +645,7 @@ document.querySelector('widget-calendar').addEventListener('onInit',function(eve
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="mod-article">
-                <div class="inner">
+                <div class="mod-article">
                     <div class="bd">
                         <p>农历是我国古代用以指导农业生产生活的传统历法，自夏朝始，称为夏历。农历属于一种阴阳历，是以月球绕地球一周为一月，十二月为一年，月亮号为太阴，故谓之太阴历，简称为阴历。由于阴历的一年只有354天，少于太阳回归年的365天，所以夏历采用置闰月的方法，使得阴历的年份与阳历的年份大概保持一致。夏历将太阴历配合了闰年及二十四节气，使得太阴历的年周期同步于太阳历。农历24节气是按太阳年24等分而得，这是阳历部分，农历的月日及闰法属于阴历部分，编在一起就成了和阴阳合历，我们平常没注意，叫惯了阴历不加区分。
                         </p>
@@ -678,14 +679,25 @@ document.querySelector('widget-calendar').addEventListener('onInit',function(eve
                                 data-icon="octicon-download" data-size="large"
                                 aria-label="Download mumuy/calendar on GitHub">Download</a>
                         </div>
+                        <br>
+                        <p>日历转换脚本：</p>
+                        <code><a href="https://passer-by.com/calendar/dist/calendar.min.js" target="_blank" rel="nofollow">https://passer-by.com/calendar/dist/calendar.min.js</a></code>
+                        <p>万年历组件脚本：</p>
+                        <code><a href="https://passer-by.com/calendar/dist/widget-calendar.min.js" target="_blank" rel="nofollow">https://passer-by.com/calendar/dist/widget-calendar.min.js</a></code>
                     </div>
                 </div>
             </div>
+            <script type="text/javascript" src="https://passer-by.com/public/script/projects.js"></script>
             <div class="mod-foot">
                 <div class="inner">
                     <div class="bd">
                         <p>Copyright &copy; <a href="http://passer-by.com">passer-by.com</a></p>
                     </div>
+                </div>
+            </div>
+            <div class="mod-fixedbar">
+                <div class="bd">
+                    <a href="javascript:;"><img src="./static/image/gotop.png" width="24" height="24"></a>
                 </div>
             </div>
         </div>
@@ -749,9 +761,28 @@ document.querySelector('widget-calendar').addEventListener('onInit',function(eve
                 $('#demo2 .table-inner').html(html);
             });
         })();
+
+        // 底部滚动
+        (function () {
+            let timer = null;
+            let $gotop = document.querySelector('.mod-fixedbar a');
+            $gotop.addEventListener('click', function () {
+                cancelAnimationFrame(timer);
+                let scrollTop = document.body.scrollTop || document.documentElement.scrollTop;
+                let move = scrollTop / 18;
+                timer = requestAnimationFrame(function fn() {
+                    var oTop = document.body.scrollTop || document.documentElement.scrollTop;
+                    if (oTop > 0) {
+                        document.body.scrollTop = document.documentElement.scrollTop = oTop - move;
+                        timer = requestAnimationFrame(fn);
+                    } else {
+                        cancelAnimationFrame(timer);
+                    }
+                });
+            });
+        })();
     </script>
     <script async defer src="https://cdn.bootcdn.net/ajax/libs/github-buttons/2.21.1/buttons.min.js"></script>
-    <script type="text/javascript" src="https://passer-by.com/public/script/projects.js"></script>
     <script type="text/javascript" src="https://passer-by.com/public/script/stat.js"></script>
 </body>
 </html>

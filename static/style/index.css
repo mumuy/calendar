@@ -129,23 +129,33 @@ a:hover{
 	margin: 0 3px;
 	color: #fd7474;
 }
+.mod-panel .buttons{
+    margin-bottom: 20px;
+    padding: 10px;
+    border-radius: 6px;
+    line-height: 32px;
+}
 .mod-panel .btn {
     display: inline-block;
-    height: 36px;
-    min-width: 90px;
-    padding:0 12px;
-    margin: 0 8px;
+    height: 44px;
+    min-width: 120px;
+    padding:0 20px;
+    margin: 0 5px;
     background: #2095f2;
     border: medium none;
-    line-height: 36px;
+    box-shadow: 2px 2px 4px rgba(0,0,0,0.05);
+    line-height: 42px;
     text-align: center;
     vertical-align: middle;
-    font-size: 15px;
+    font-size: 16px;
     color: #fff;
     cursor: pointer;
     outline: none;
-    border-radius: 4px;
+    border-radius: 21px;
     text-decoration: none;
+}
+.mod-panel .btn img,.mod-panel .btn span{
+    vertical-align: middle;
 }
 .mod-panel .btn:hover{
 	background: #1b85da;
@@ -207,9 +217,15 @@ a:hover{
 }
 .mod-panel .bd code{
     display: block;
+    margin-bottom: 20px;
     padding: 15px;
     background: #f8f8f8;
     border-radius: 6px;
+}
+.mod-panel .bd pre{
+    white-space: wrap;
+    word-break: break-all;
+    word-wrap: break-word;
 }
 .mod-panel .bd .table-inner{
     padding-top:20px;
@@ -492,6 +508,19 @@ a:hover{
     line-height: 30px;
 }
 
+.mod-fixedbar .bd a{
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    display: block;
+    width: 48px;
+    height: 48px;
+    background: rgba(255,255,255,0.8);
+    box-shadow: 1px 1px 6px rgba(0,0,0,0.1);
+    line-height: 48px;
+    text-align: center;
+}
+
 @media screen and (max-width: 1020px) {
     .header{
         margin-bottom: 10px;
@@ -513,7 +542,7 @@ a:hover{
     }
     .mod-panel .hd{
         float: none;
-        padding-top: 0;
+        padding: 0 0 10px;
         width: auto;
         margin-bottom: 15px;
     }
@@ -557,8 +586,8 @@ a:hover{
 }
 
 @media screen and (max-width: 640px) {
-    .mod-panel .inner{
-        padding: 10px;
+    .inner{
+        padding: 0 10px;
     }
     .mod-panel .bd .c-bd{
         padding: 15px 10px;
@@ -566,7 +595,22 @@ a:hover{
     .mod-panel .bd input[type="text"]{
         width: 200px;
     }
-    .mod-panel .bd .btn{
+    .mod-panel .buttons{
+        margin-bottom: 10px;
+        padding: 10px 0;
+    }
+    .mod-panel .btn{
         min-width: 64px;
+        margin: 2px 1px;
+        padding: 0 15px;
+        height: 36px;
+        line-height: 35px;
+        font-size: 14px;
+    }
+    .mod-panel .btn img{
+        display: none;
+    }
+    .mod-panel .bd .c-ft {
+        padding: 10px;
     }
 }
