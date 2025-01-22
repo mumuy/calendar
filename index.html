@@ -595,38 +595,25 @@
                                 <p>【事件测试】<span id="test"></span></p>
                                 <br>
                                 <h4>标签结构</h4>
-                                <code>
-<pre>
-&lt;widget-calendar&gt;&lt;/widget-calendar&gt;
-</pre>
-</code>
+<widget-code language="html">&lt;widget-calendar&gt;&lt;/widget-calendar&gt;</widget-code>
+<br>
                                 <h4>自定义事件-选中日期: onSelect</h4>
-                                <code>
-<pre>
-document.querySelector('widget-calendar').addEventListener('onSelect',function(event){
+<widget-code language="javascript">document.querySelector('widget-calendar').addEventListener('onSelect',function(event){
 	let data = event.detail;
-	document.getElementById('test').innerText='onSelect：'+data['sYear']+'-'+data['sMonth']+'-'+data['sDay'];
-});
-</pre>
-</code>
+	document.getElementById('test').innerText=`onSelect：${data['sYear']}-${data['sMonth']}-${data['sDay']}`;
+});</widget-code>
+<br>
                                 <h4>自定义事件-切换日期: onChange</h4>
-                                <code>
-<pre>
-document.querySelector('widget-calendar').addEventListener('onChange',function(event){
+<widget-code language="javascript">document.querySelector('widget-calendar').addEventListener('onChange',function(event){
 	let data = event.detail;
-	document.getElementById('test').innerText='onChange：'+data['sYear']+'-'+data['sMonth']+'-'+data['sDay'];
-});
-</pre>
-</code>
+	document.getElementById('test').innerText=`onChange：${data['sYear']}-${data['sMonth']}-${data['sDay']}`;
+});</widget-code>
+<br>
                                 <h4>自定义事件-初始化: onInit</h4>
-                                <code>
-<pre>
-document.querySelector('widget-calendar').addEventListener('onInit',function(event){
+<widget-code language="javascript">document.querySelector('widget-calendar').addEventListener('onInit',function(event){
 	let data = event.detail;
-	document.getElementById('test').innerText='onInit：'+data['sYear']+'-'+data['sMonth']+'-'+data['sDay'];
-});
-</pre>
-</code>
+	document.getElementById('test').innerText=`onInit：${data['sYear']}-${data['sMonth']}-${data['sDay']}`;
+});</widget-code>
                             </div>
                             <script type="text/javascript">
                                 document.querySelector('widget-calendar').addEventListener('onSelect', function (event) {
@@ -703,6 +690,7 @@ document.querySelector('widget-calendar').addEventListener('onInit',function(eve
         </div>
     </div>
     <script type="text/javascript" src="https://jquerywidget.com/public/script/jquery.min.js"></script>
+    <script type="text/javascript" src="https://passer-by.com/widget-code/dist/widget-code.min.js?v=202401042300"></script>
     <script type="text/javascript" src="dist/calendar.min.js"></script>
     <script type="text/javascript">
         (function () {
