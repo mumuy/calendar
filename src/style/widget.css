@@ -333,4 +333,8 @@ a {
     .mod-calendar table .s2 {
         font-size: calc(var(--base-size-mobile) * 12);
     }
+
+    .mode-simple .selector span:has(.goback){
+        display: none;
+    }
 }
