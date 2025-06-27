@@ -604,23 +604,28 @@ export function getTermFestivalsBySolar(sYear,sMonth,sDay){
     })();
     // 复活节
     (function(){
-        let chunfen_time = new Date(sYear,2,termDate[5]).getTime();
-        let hasFullMoon = false;
-        let hasSunDay = false;
-        for(let time = chunfen_time;time<=chunfen_time+31*dayTime;time+=dayTime){
-            if(!hasFullMoon){
-                let lunar = getLunarByTimestamp(time);
-                if(lunar['lDay']==15){
-                    hasFullMoon = true;
-                }
-            }else if(!hasSunDay){
-                let solar = getSolarByTimestamp(time);
-                if(solar['week']==0){
-                    hasSunDay = true;
-                    if(solar['sYear']==sYear&&solar['sMonth']==sMonth&&solar['sDay']==sDay){
-                        festivals.push('复活节');
-                    }
-                }
+        const getEasterDate = function(Y){
+            if(Y<1900||Y>2100){
+                return null;
+            }
+            const N = Y-1900;
+            const A = N % 19;
+            const Q = Math.floor(N / 4);
+            const B = Math.floor((7*A+1) / 19);
+            const M = (11*A+4-B) % 29;
+            const W = (N+Q+31-M) % 7;
+            const D = 25-M-W;
+            if(D>0){
+                return [4,D];
+            }else{
+                return [3,31+D];
+            }
+        };
+        const result = getEasterDate(sYear);
+        if(result){
+            const [Month,Day] = result;
+            if(Month==sMonth&&Day==sDay){
+                festivals.push('复活节');
             }
         }
     })();
