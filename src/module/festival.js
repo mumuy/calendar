@@ -1,6 +1,6 @@
 import {getDateString} from './tool.js';
 import {getSolarByTimestamp} from './solar.js';
-import {getLunarByTimestamp,getLunarMonthDays} from './lunar.js';
+import {getLunarMonthDays} from './lunar.js';
 import {getTermDate} from './term.js';
 import {getGanZhiDay} from './ganzhi.js';
 
