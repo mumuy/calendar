@@ -19,7 +19,7 @@ class WidgetCalendar extends HTMLElement {
         _.today = calendar.getToday();
         _.currentDateInfo = _.today;
         _.currentMonthData = [];    // 当前日期所在月份数据
-        _.currentMonthDay = 1;     // 当前日期当月几号
+        _.currentMonthDay = 1;      // 当前日期当月几号
     }
     static get observedAttributes(){
         return ['date','mode'];
@@ -74,7 +74,6 @@ class WidgetCalendar extends HTMLElement {
             let thatDay = getSolarByTimestamp(timestamp);
             if(thatDay.date!=_.date){
                 _.date = thatDay.date;
-                _.formatDate(_.date);
             }
         };
 
@@ -96,9 +95,8 @@ class WidgetCalendar extends HTMLElement {
             }
         };
         _.$goback.onclick = function(){
-            if(_.today!=_.date){
-                _.date = _.today;
-                _.formatDate();
+            if(_.today.date!=_.date){
+                _.date = _.today.date;
             }
         };
         _.$prev_year.onclick = function(){
@@ -247,7 +245,7 @@ class WidgetCalendar extends HTMLElement {
             if(item['sYear']!=thatDay['sYear']||item['sMonth']!=thatDay['sMonth']){
                 classnameList.push('disabled');
             }
-            if(item['date']==_.today['date']){
+            if(item['date']==_.today.date){
                 classnameList.push('today');
             }
             let sign = '';
@@ -299,9 +297,9 @@ class WidgetCalendar extends HTMLElement {
         _.$info.innerHTML = `<p>${that_date} ${thatDay['weekZH']}</p>
             <div class="day">${thatDay['sDay']}</div>
             <div class="detail">
-                <p>${thatDay['lMonthZH']}${thatDay['lDayZH']}</p>
-                <p>${thatDay['gzYearZH']}年 【${thatDay['animal']}年】</p>
-                <p>${thatDay['gzMonthZH']}月 ${thatDay['gzDayZH']}日</p>
+                ${thatDay['lMonthZH']?`<p>${thatDay['lMonthZH']}${thatDay['lDayZH']}</p>`:``}
+                ${thatDay['gzYearZH']?`<p>${thatDay['gzYearZH']}年 【${thatDay['animal']}年】</p>`:``}
+                ${thatDay['gzMonthZH']?`<p>${thatDay['gzMonthZH']}月 ${thatDay['gzDayZH']}日</p>`:``}
             </div>
             <div class="list">
                 <slot name="item"></slot>
@@ -357,7 +355,7 @@ class WidgetCalendar extends HTMLElement {
             _.formatSetting(year);
             _.formatTable({'year':year,'month':month,'day':day});
         }else{
-            _.date = _.today['date'];
+            _.date = _.today.date;
             _.formatSetting();
             _.formatTable();
         }

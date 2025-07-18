@@ -47,13 +47,15 @@ export function getTermDate(sYear){
 // 获取节气
 export function getTerm(sYear,sMonth,sDay){
     let term = '';
-    let termDate = getTermDate(sYear);
-    termDate.push(31);
-    termDate.forEach(function(day,index){
-        let month = Math.floor(index/2)+1;
-        if(sMonth==month&&sDay==day){
-            term = termMap[index];
-        }
-    });
+    const termDate = getTermDate(sYear);
+    if(termDate){
+        termDate.push(31);
+        termDate.forEach(function(day,index){
+            let month = Math.floor(index/2)+1;
+            if(sMonth==month&&sDay==day){
+                term = termMap[index];
+            }
+        });
+    }
     return term;
 }

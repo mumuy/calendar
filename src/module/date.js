@@ -6,37 +6,33 @@ import {getZodiac} from './zodiac.js';
 import {getAnimalYear} from './animal.js';
 import {getFestivalsBySolar,getFestivalsByLunar,getTermFestivalsBySolar} from './festival.js';
 
-// 获取指定日志下的数据
+// 获取指定日期的数据
 export function getDateInfo(timestamp){
-    let result = getSolarByTimestamp(timestamp);
-    result['zodiac'] =  getZodiac(result['sMonth'],result['sDay']);
-    let festivals = [];
-    let temp = getLunarByTimestamp(timestamp);
-    if(temp){
-        Object.assign(result,temp);
-        result['gzYearZH'] = getGanZhiYear(result['lYear']);
-        result['gzMonthZH'] = getGanZhiMonth(result['sYear'],result['sMonth'],result['sDay']);
-        result['gzDayZH'] = getGanZhiDay(result['sYear'],result['sMonth'],result['sDay']);
-        result['animal'] = getAnimalYear(result['lYear']);
-        result['term'] = getTerm(result['sYear'],result['sMonth'],result['sDay']);
-        festivals = festivals.concat(getTermFestivalsBySolar(result['sYear'],result['sMonth'],result['sDay']));
-        festivals = festivals.concat(getFestivalsByLunar(result['lYear'],result['lMonth'],result['lDay']));
-    }else{
-        Object.assign(result,{
+    const solar = getSolarByTimestamp(timestamp);
+    const lunar = getLunarByTimestamp(timestamp);
+    return Object.assign(
+        {
             lYear:null,
             lMonth:null,
             lDay:null,
             isLeap:false,
             lMonthZH:'',
             lDayZH:'',
-            gzYearZH:'',
-            gzMonthZH:'',
-            gzDayZH:'',
-            animal:'',
-            term:''
-        });
-    }
-    festivals = festivals.concat(getFestivalsBySolar(result['sYear'],result['sMonth'],result['sDay']));
-    result['festival'] = festivals.join(' ');
-    return result;
+        },
+        solar,
+        lunar||{},
+        {
+            zodiac:getZodiac(solar['sMonth'],solar['sDay']),                                    // 星座
+            term:lunar?getTerm(solar['sYear'],solar['sMonth'],solar['sDay']):'',                // 节气
+            animal:lunar?getAnimalYear(lunar['lYear']):'',                                      // 生肖
+            gzYearZH:lunar?getGanZhiYear(lunar['lYear']):'',                                    // 干支年
+            gzMonthZH:getGanZhiMonth(solar['sYear'],solar['sMonth'],solar['sDay']),             // 干支月
+            gzDayZH:getGanZhiDay(solar['sYear'],solar['sMonth'],solar['sDay']),                 // 干支日
+            festival:[].concat(
+                getFestivalsBySolar(solar['sYear'],solar['sMonth'],solar['sDay']),              // 公历节日
+                getTermFestivalsBySolar(solar['sYear'],solar['sMonth'],solar['sDay']),          // 节气相关节日
+                lunar?getFestivalsByLunar(lunar['lYear'],lunar['lMonth'],lunar['lDay']):[]      // 农历节日
+            ).join(' ')
+        }
+    );
 }

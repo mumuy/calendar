@@ -25,6 +25,5 @@ export function getSolarByTimestamp(timestamp){
 
 // 获取公历一个月天数
 export function getSolarMonthDays(sYear,sMonth){
-    let day = new Date(sYear,sMonth,0);
-    return  day.getDate();
+    return  new Date(sYear,sMonth,0).getDate();
 }

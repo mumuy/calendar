@@ -18,20 +18,24 @@ export function getGanZhiYear(lYear){
 
 // 获取干支月
 export function getGanZhiMonth(sYear,sMonth,sDay){
-    let gzIndex = 0;
-    let termDate = getTermDate(sYear);
-    termDate.push(31);
-    termDate.forEach(function(day,index){
-        let month = Math.floor(index/2)+1;
-        if(getDateString(sMonth,sDay)>=getDateString(month,day)){
-            gzIndex = month;
-        }
-    });
-    gzIndex += (sYear-1984)*12;
-    gzIndex = gzIndex%60>0?gzIndex%60:gzIndex%60+60;
-    let gan = gzIndex%10;
-    let zhi = gzIndex%12;
-    return ganList[gan]+zhiList[zhi];
+    let gzYear = '';
+    const termDate = getTermDate(sYear);
+    if(termDate){
+        let gzIndex = 0;
+        termDate.push(31);
+        termDate.forEach(function(day,index){
+            let month = Math.floor(index/2)+1;
+            if(getDateString(sMonth,sDay)>=getDateString(month,day)){
+                gzIndex = month;
+            }
+        });
+        gzIndex += (sYear-1984)*12;
+        gzIndex = gzIndex%60>0?gzIndex%60:gzIndex%60+60;
+        let gan = gzIndex%10;
+        let zhi = gzIndex%12;
+        gzYear = ganList[gan]+zhiList[zhi];
+    }
+    return gzYear;
 }
 
 // 获取干支日
