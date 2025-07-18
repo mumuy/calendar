@@ -3,9 +3,9 @@ import {getTimestampBySolar} from './solar.js';
 import {getTermDate} from './term.js';
 
 // 天干
-const ganMap = ['甲','乙','丙','丁','戊','己','庚','辛','壬','癸'];
+const ganList = ['甲','乙','丙','丁','戊','己','庚','辛','壬','癸'];
 // 地支
-const zhiMap = ['子','丑','寅','卯','辰','巳','午','未','申','酉','戌','亥'];
+const zhiList = ['子','丑','寅','卯','辰','巳','午','未','申','酉','戌','亥'];
 
 // 获取干支年: 1984年为甲子年
 export function getGanZhiYear(lYear){
@@ -13,7 +13,7 @@ export function getGanZhiYear(lYear){
     gzIndex = gzIndex%60>0?gzIndex%60:gzIndex%60+60;
     let gan = gzIndex%10;
     let zhi = gzIndex%12;
-    return ganMap[gan]+zhiMap[zhi];
+    return ganList[gan]+zhiList[zhi];
 }
 
 // 获取干支月
@@ -31,7 +31,7 @@ export function getGanZhiMonth(sYear,sMonth,sDay){
     gzIndex = gzIndex%60>0?gzIndex%60:gzIndex%60+60;
     let gan = gzIndex%10;
     let zhi = gzIndex%12;
-    return ganMap[gan]+zhiMap[zhi];
+    return ganList[gan]+zhiList[zhi];
 }
 
 // 获取干支日
@@ -41,5 +41,5 @@ export function getGanZhiDay(sYear,sMonth,sDay){
     gzIndex = gzIndex%60>0?gzIndex%60:gzIndex%60+60;
     let gan = gzIndex%10;
     let zhi = gzIndex%12;
-    return ganMap[gan]+zhiMap[zhi];
+    return ganList[gan]+zhiList[zhi];
 }

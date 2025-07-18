@@ -512,24 +512,18 @@ export const tFestival = ['寒食节','初伏','中伏','末伏','出伏','复�
 
 // 通过公历获取节日
 export function getFestivalsBySolar(sYear,sMonth,sDay){
-    let festivals = [];
-    let now = new Date(sYear,sMonth-1,sDay);
-    let date = now.getDate();
-    let week = now.getDay();
-    let index = Math.ceil(date/7);
-    let dateFull = getDateString(sYear,sMonth,sDay);
-    let dateKey = getDateString(sMonth,sDay);
-    if(sFestival[dateKey]){
-        festivals = festivals.concat(sFestival[dateKey].filter(item=>(dateFull>=item.found)).map(item=>item.name));
-    }
-    if(sFestival2[dateKey]){
-        festivals = festivals.concat(sFestival2[dateKey].filter(item=>(dateFull>=item.found)).map(item=>item.name));
-    }
-    dateKey = getDateString(sMonth,index,week);
-    if(oFestival[dateKey]){
-        festivals = festivals.concat(oFestival[dateKey].filter(item=>(dateFull>=item.found)).map(item=>item.name));
-    }
-    return festivals;
+    const now = new Date(sYear,sMonth-1,sDay);
+    const date = now.getDate();
+    const week = now.getDay();
+    const index = Math.ceil(date/7);
+    const dateFull = getDateString(sYear,sMonth,sDay);
+    return [
+        sFestival[getDateString(sMonth,sDay)],
+        sFestival2[getDateString(sMonth,sDay)],
+        oFestival[getDateString(sMonth,index,week)]
+    ].flatMap(function(list = []){
+        return list.filter(item=>(dateFull>=item.found)).map(item=>item.name);
+    });
 }
 
 // 获取节气作用节日
@@ -635,17 +629,17 @@ export function getTermFestivalsBySolar(sYear,sMonth,sDay){
 // 通过农历获取节日
 export function getFestivalsByLunar(lYear,lMonth,lDay){
     let festivals = [];
-    let dateFull = getDateString(lYear,lMonth,lDay);
-    let dateKey = getDateString(lMonth,lDay);
-    if(lMonth==12&&lDay==getLunarMonthDays(lYear,12)){
+    const dateFull = getDateString(lYear,lMonth,lDay);
+    const dateKey = getDateString(lMonth,lDay);
+    if(lMonth==12&&lDay==getLunarMonthDays(lYear,12)){  // 除夕特殊处理
         festivals.push(lFestival['12-30'][0]['name']);
     }else{
-        if(lFestival[dateKey]){
-            festivals = festivals.concat(lFestival[dateKey].filter(item=>(dateFull>=item.found)).map(item=>item.name));
-        }
-        if(lFestival2[dateKey]){
-            festivals = festivals.concat(lFestival2[dateKey].filter(item=>(dateFull>=item.found)).map(item=>item.name));
-        }
+        festivals = festivals.concat([
+            lFestival[dateKey],
+            lFestival2[dateKey]
+        ].flatMap(function(list = []){
+            return list.filter(item=>(dateFull>=item.found)).map(item=>item.name);
+        }));
     }
     return festivals;
 }
