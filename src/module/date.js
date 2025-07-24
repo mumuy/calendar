@@ -23,9 +23,9 @@ export function getDateInfo(timestamp){
         lunar||{},
         {
             zodiac:getZodiac(solar['sMonth'],solar['sDay']),                                    // 星座
-            term:lunar?getTerm(solar['sYear'],solar['sMonth'],solar['sDay']):'',                // 节气
-            animal:lunar?getAnimalYear(lunar['lYear']):'',                                      // 生肖
-            gzYearZH:lunar?getGanZhiYear(lunar['lYear']):'',                                    // 干支年
+            term:getTerm(solar['sYear'],solar['sMonth'],solar['sDay']),                         // 节气
+            animal:getAnimalYear(solar['sYear'],solar['sMonth'],solar['sDay']),                 // 生肖
+            gzYearZH:getGanZhiYear(solar['sYear'],solar['sMonth'],solar['sDay']),               // 干支年
             gzMonthZH:getGanZhiMonth(solar['sYear'],solar['sMonth'],solar['sDay']),             // 干支月
             gzDayZH:getGanZhiDay(solar['sYear'],solar['sMonth'],solar['sDay']),                 // 干支日
             festival:[].concat(
