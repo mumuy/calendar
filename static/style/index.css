@@ -12,10 +12,10 @@
 }
 
 .mod-poster{
-    margin-bottom: 50px;
+    margin-bottom: 25px;
 }
 .mod-poster .bd{
-    padding: 50px 0;
+    padding: 60px 0;
 	line-height: 24px;
 }
 .mod-poster .bd h1{
@@ -407,9 +407,7 @@
         margin-bottom: 25px;
     }
     .mod-poster .bd{
-        float: none;
-        padding: 0 0 10px;
-        width: auto;
+        padding: 25px 0;
         margin-bottom: 15px;
     }
     .mod-poster .bd h1{
