@@ -340,7 +340,7 @@
                                 </select>
                                 <button class="J_solar2lunar btn">公历转农历</button>
                             </div>
-                            <div class="table-inner"></div>
+                            <div class="result-container"></div>
                         </div>
                     </section>
                     <section id="demo2" class="mod-panel">
@@ -603,7 +603,7 @@
                                 </label>
                                 <button class="J_lunar2solar btn">农历转公历</button>
                             </div>
-                            <div class="table-inner"></div>
+                            <div class="result-container"></div>
                         </div>
                     </section>
                     <section class="mod-panel">
@@ -739,32 +739,36 @@
                 var $isLeap = $('input[name="isLeap"]');
                 var formatTable = function (data) {
                     if (data) {
-                        return `<table>
-                                <thead>
-                                    <tr>
-                                        <th>公历</th>
-                                        <th>农历</th>
-                                        <th>生肖</th>
-                                        <th>星期</th>
-                                        <th>星座</th>
-                                        <th>节日</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>${data['sYear']}年${data['sMonth']}月${data['sDay']}日</td>
-                                        <td>${data['gzYearZH']}年${data['isLeap'] ? '闰' : ''}${data['lMonthZH']}${data['lDayZH']}</td>
-                                        <td>${data['animal']}</td>
-                                        <td>${data['weekZH']}</td>
-                                        <td>${data['zodiac']}</td>
-                                        <td>${data['festival'] || data['term'] || '-'}</td>
-                                    </tr>
-                                </tbody>
-                            </table>`;
+                        return `
+                            <div class="table-inner">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>公历</th>
+                                            <th>农历</th>
+                                            <th>生肖</th>
+                                            <th>星期</th>
+                                            <th>星座</th>
+                                            <th>节日</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>${data['sYear']}年${data['sMonth']}月${data['sDay']}日</td>
+                                            <td>${data['gzYearZH']}年${data['isLeap'] ? '闰' : ''}${data['lMonthZH']}${data['lDayZH']}</td>
+                                            <td>${data['animal']}</td>
+                                            <td>${data['weekZH']}</td>
+                                            <td>${data['zodiac']}</td>
+                                            <td>${data['festival'] || data['term'] || '-'}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        `;
                     } else {
                         return `<div class="none">
-                                <p>日期可能存在错误！</p>
-                            </div>`;
+                            <p>日期可能存在错误！</p>
+                        </div>`;
                     }
                 };
 
@@ -773,7 +777,7 @@
                     var sMonth = $sMonth.val();
                     var sDay = $sDay.val();
                     var html = formatTable(calendar.getDateBySolar(sYear, sMonth, sDay));
-                    $('#demo1 .table-inner').html(html);
+                    $('#demo1 .result-container').html(html);
                 });
                 $document.on('click', '.J_lunar2solar', function () {
                     var lYear = +$lYear.val();
@@ -781,7 +785,7 @@
                     var lDay = +$lDay.val();
                     var isLeap = $isLeap.prop('checked');
                     var html = formatTable(calendar.getDateByLunar(lYear, lMonth, lDay, isLeap));
-                    $('#demo2 .table-inner').html(html);
+                    $('#demo2 .result-container').html(html);
                 });
             })();
         </script>
