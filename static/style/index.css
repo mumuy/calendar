@@ -12,11 +12,11 @@
 }
 
 .mod-poster{
-    margin-bottom: 75px;
+    margin-bottom: 50px;
 }
 .mod-poster .bd{
-    padding: 35px 0;
-	line-height: 22px;
+    padding: 50px 0;
+	line-height: 24px;
 }
 .mod-poster .bd h1{
     margin-bottom: 10px;
@@ -112,11 +112,12 @@
     line-height: 24px;
 }
 .mod-panel .hd .title{
+    display: inline-block;
     font-size: 18px;
     font-weight: bold;  
     color: var(--title-color);
 }
-.mod-panel .bd .more{
+.mod-panel .hd .more{
     float: right;
     text-decoration: none;
     color: #999;
@@ -170,16 +171,20 @@
     font-size: 15px;
     font-weight: bold;
 }
+.mod-panel .bd thead{
+    background: #f6f8fa;
+}
 .mod-panel .bd th,.mod-panel .bd td{
     padding: 6px 12px;
-    border: 1px solid #e2e2e2;
-    line-height: 22px;
+    border: 1px solid #e1e6ea;
+    line-height: 24px;
 }
 .mod-panel .bd td.th{
-    background: #f5f5f5;
+    background: #f6f8fa;
 }
-.mod-panel .bd thead{
-    background: #f5f5f5;
+.mod-panel .bd td p{
+    margin-bottom: 0;
+    text-indent: 0;
 }
 .mod-panel .bd select{
     height: 36px;
@@ -190,7 +195,7 @@
     outline: none;
     border-radius: 4px;
 }
-.mod-panel .bd input[type="text"]{
+.mod-panel .bd input[type="text"],.mod-panel .bd input[type="search"]{
     width: 240px;
     height: 36px;
     padding: 0 10px;
@@ -274,6 +279,20 @@
 }
 .mod-panel .input-wrapper span{
     margin-right: 5px;
+}
+.mod-panel .suggestion{
+	background: #fff;
+}
+.mod-panel .suggestion ul{
+	border:1px solid #ebebeb;
+}
+.mod-panel .suggestion li{
+	padding:0 10px;
+	line-height: 30px;
+	cursor: pointer;
+}
+.mod-panel .suggestion .active{
+	background: #ccc;
 }
 
 .mod-intro{
