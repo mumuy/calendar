@@ -253,6 +253,12 @@
 	background: #f0f0f0;
 	color: #aaa;
 }
+.mod-panel .bd .text-green{
+    color: #4bae4f;
+}
+.mod-panel .bd .text-red{
+    color:#f56954;
+}
 .mod-panel .bd textarea{
     display: block;
 	width: 100%;
@@ -267,12 +273,6 @@
 }
 .mod-panel .bd label{
     white-space: nowrap;
-}
-.mod-panel .bd .text-green{
-    color: #4bae4f;
-}
-.mod-panel .bd .text-red{
-    color:#f56954;
 }
 .mod-panel .input-wrapper{
     line-height: 24px;
