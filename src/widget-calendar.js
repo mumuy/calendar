@@ -184,7 +184,15 @@ class WidgetCalendar extends HTMLElement {
                 <div class="table">
                     <table>
                         <thead>
-                            <tr><th>日</th><th>一</th><th>二</th><th>三</th><th>四</th><th>五</th><th>六</th></tr>
+                            <tr>
+                                <th><span>日</span></th>
+                                <th><span>一</span></th>
+                                <th><span>二</span></th>
+                                <th><span>三</span></th>
+                                <th><span>四</span></th>
+                                <th><span>五</span></th>
+                                <th><span>六</span></th>
+                            </tr>
                         </thead>
                         <tbody>
                         </tbody>
@@ -294,7 +302,7 @@ class WidgetCalendar extends HTMLElement {
         _.$month.value = thatDay['sMonth'];
         _.$year.setAttribute('data-value',thatDay['sYear']);
         _.$month.setAttribute('data-value',thatDay['sMonth']);
-        _.$info.innerHTML = `<p>${that_date} ${thatDay['weekZH']}</p>
+        _.$info.innerHTML = `<div class="date">${that_date} ${thatDay['weekZH']}</div>
             <div class="day">${thatDay['sDay']}</div>
             <div class="detail">
                 ${thatDay['lMonthZH']?`<p>${thatDay['lMonthZH']}${thatDay['lDayZH']}</p>`:``}

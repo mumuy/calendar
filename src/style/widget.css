@@ -6,7 +6,7 @@
     vertical-align: bottom;
     white-space: initial;
     font-family: Arial, Helvetica, "Microsoft Yahei";
-    color: #333;
+    color: #1f2328;
     container-type: inline-size;
     --primary-color: #2095f2;
     --secondary-color: #ffaa00;
@@ -25,19 +25,21 @@
 }
 a {
     text-decoration: none;
-    color: #333;
+    color: #1f2328;
 }
 .mod-calendar {
     display: flex;
+    gap: calc(var(--base-size) * 4);
     flex-direction: row-reverse;
-    padding: calc(var(--base-size) * 2);
+    padding: calc(var(--base-size) * 4);
     background: var(--primary-color);
+    border-radius: calc(var(--base-size) * 6);
     font-size: calc(var(--base-size) * 14);
 }
 .mod-calendar .info {
     position: relative;
-    width: calc(var(--base-size) * 180);
-    padding-top: calc(var(--base-size) * 15);
+    width: calc(var(--base-size) * 168);
+    padding-top: calc(var(--base-size) * 12);
     text-align: center;
     color: #fff;
 }
@@ -45,7 +47,11 @@ a {
     color: #fff;
 }
 .mod-calendar .info p {
-    line-height: calc(var(--base-size) * 20);
+    line-height: calc(var(--base-size) * 22);
+}
+.mod-calendar .info .date{
+    line-height: calc(var(--base-size) * 24);
+    font-size: calc(var(--base-size) * 16);
 }
 .mod-calendar .info .day {
     width: calc(var(--base-size) * 80);
@@ -53,9 +59,10 @@ a {
     margin: calc(var(--base-size) * 15) auto;
     line-height: calc(var(--base-size) * 80);
     font-size: calc(var(--base-size) * 48);
+    font-weight: bold;
     background: var(--secondary-color);
     color: #fff;
-    border-radius: calc(var(--base-size) * 8);
+    border-radius: calc(var(--base-size) * 12);
 }
 .mod-calendar .info .detail {
     margin-bottom: calc(var(--base-size) * 15);
@@ -75,24 +82,24 @@ a {
 }
 .mod-calendar .box {
     flex: 1;
+    background: #fff;
+    border-radius: calc(var(--base-size) * 6);
 }
 .mod-calendar .selector {
+    display: flex;
+    gap: calc(var(--base-size-mobile) * 8);
+    justify-content: center;
     position: relative;
-    padding: calc(var(--base-size) * 4) calc(var(--base-size) * 6);
-    background: #fff;
+    padding: calc(var(--base-size) * 5) calc(var(--base-size) * 5) 0;
     vertical-align: middle;
     height: calc(var(--base-size)*26);
     text-align: center;
-    overflow: hidden;
 }
 .mod-calendar .selector span {
-    display: inline-block;
+    display: inline-flex;
     vertical-align: middle;
-    background: #fff;
-    margin: 0 calc(var(--base-size) * 1) calc(var(--base-size) * 5);
 }
 .mod-calendar .selector a {
-    float: left;
     position: relative;
     height: calc(var(--base-size) * 24);
     padding: 0 calc(var(--base-size) * 5);
@@ -101,12 +108,51 @@ a {
     line-height: calc(var(--base-size) * 24);
     vertical-align: middle;
 }
+.mod-calendar .selector a.prev,.mod-calendar .selector a.next{
+    position: relative;
+    color: transparent!important;
+}
+.mod-calendar .selector a.prev{
+    border-top-left-radius: calc(var(--base-size) * 4);
+    border-bottom-left-radius: calc(var(--base-size) * 4);
+}
+.mod-calendar .selector a.prev::after{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    content: '';
+    width: calc(var(--base-size) * 6);
+    height: calc(var(--base-size) * 6);
+    margin: calc(var(--base-size) * -4) 0 0 calc(var(--base-size) * -2);
+    border-left: calc(var(--base-size) * 1) solid #333;
+    border-bottom: calc(var(--base-size) * 1) solid #333;
+    transform: rotate(45deg);
+}
+.mod-calendar .selector a.next{
+    border-top-right-radius: calc(var(--base-size) * 4);
+    border-bottom-right-radius: calc(var(--base-size) * 4);
+}
+.mod-calendar .selector a.next::after{
+    position: absolute;
+    right: 50%;
+    top: 50%;
+    content: '';
+    width: calc(var(--base-size) * 6);
+    height: calc(var(--base-size) * 6);
+    margin: calc(var(--base-size) * -4) calc(var(--base-size) * -2) 0 0;
+    border-right: calc(var(--base-size) * 1) solid #333;
+    border-bottom: calc(var(--base-size) * 1) solid #333;
+    transform: rotate(-45deg);
+}
+.mod-calendar .selector a.goback{
+    padding: 0 calc(var(--base-size) * 8);
+    border-radius: calc(var(--base-size) * 4);
+}
 .mod-calendar .selector a:hover {
-    border-color: var(--secondary-color);
-    color: var(--secondary-color);
+    border-color: #d2d9df;
+    background: #f6f8fa;
 }
 .mod-calendar .selector select {
-    float: left;
     min-width: calc(var(--base-size) * 60);
     height: calc(var(--base-size) * 26);
     padding-left: calc(var(--base-size) * 4);
@@ -116,8 +162,11 @@ a {
     line-height: calc(var(--base-size) * 24);
     vertical-align: middle;
     font-size: calc(var(--base-size) * 14);
-    color: #333;
+    color: #1f2328;
     outline: none;
+}
+.mod-calendar .selector select:only-child{
+    border-radius: calc(var(--base-size) * 4);
 }
 .mod-calendar .selector button {
     height: calc(var(--base-size) * 26);
@@ -125,44 +174,62 @@ a {
     line-height: calc(var(--base-size) * 24);
     background: #fafafa;
 }
+.mod-calendar .table{
+    padding: calc(var(--base-size) * 5);
+    background: #fff;
+}
 .mod-calendar table {
     width: 100%;
     table-layout: fixed;
-    background: #fff;
-    color: #666;
+    color: #1f2328;
     border-collapse: collapse;
     border-spacing: 0;
 }
-.mod-calendar table tr {
-    border-top: calc(var(--base-size) * 1) solid #ebebeb;
-}
 .mod-calendar table th, .mod-calendar table td {
-    position: relative;
-    border: calc(var(--base-size) * 1) solid #ebebeb;
     text-align: center;
 }
 .mod-calendar table th {
     line-height: calc(var(--base-size) * 30);
     font-weight: normal;
 }
+.mod-calendar table th span{
+    position: relative;
+    z-index: 9;
+}
 .mod-calendar table td {
     position: relative;
+    border: calc(var(--base-size) * 1) solid #fff;
     line-height: calc(var(--base-size) * 20);
 }
 .mod-calendar table thead {
-    background: #f8f8f8;
+    position: relative;
+}
+.mod-calendar table thead tr{
+    border-bottom: calc(var(--base-size) * 3) solid #fff;
+}
+.mod-calendar table thead th:first-child::after{
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 0;
+    content:'';
+    width: 100%;
+    height: calc(100% - calc(var(--base-size) * 1.5));
+    background: #f6f8fa;
+    border-radius: calc(var(--base-size) * 4);
 }
 .mod-calendar table tbody a {
     display: block;
     position: relative;
     margin: 0 auto;
-    padding: calc(var(--base-size) * 6) 0;
+    padding: calc(var(--base-size) * 5) 0;
     border: calc(var(--base-size) * 1) solid transparent;
+    border-radius: calc(var(--base-size) * 6);
     line-height: calc(var(--base-size) * 20);
     cursor: pointer;
 }
 .mod-calendar table tbody a:hover {
-    border: calc(var(--base-size) * 1) solid #cccccc;
+    border: calc(var(--base-size) * 1) solid #cccccccc;
 }
 .mod-calendar table tbody span {
     display: block;
@@ -171,6 +238,7 @@ a {
     position: absolute;
     left: 0;
     top: 0;
+    padding: 0 calc(var(--base-size) * 3);
     line-height: calc(var(--base-size) * 18);
     font-style: normal;
     font-size: calc(var(--base-size) * 13);
@@ -191,7 +259,7 @@ a {
     background: #f1f9f1
 }
 .mod-calendar table td.holiday.active a, .mod-calendar table td.holiday a:hover {
-    border: calc(var(--base-size) * 1) solid #4bae4f;
+    border: calc(var(--base-size) * 1) solid #4bae4fcc;
 }
 .mod-calendar table td.holiday i {
     color: #4bae4f;
@@ -200,7 +268,7 @@ a {
     background: #fef0ef;
 }
 .mod-calendar table td.work.active a, .mod-calendar table td.work a:hover {
-    border: calc(var(--base-size) * 1) solid #f44336;
+    border: calc(var(--base-size) * 1) solid #f44336cc;
 }
 .mod-calendar table td.work i {
     color: #f44336;
@@ -225,6 +293,7 @@ a {
 @container (max-width: 480px) {
     .mod-calendar {
         flex-direction: column;
+        padding: calc(var(--base-size) * 3);
         font-size: calc(var(--base-size-mobile) * 12);
     }
     .mod-calendar .info {
@@ -236,6 +305,10 @@ a {
     .mod-calendar .info p {
         text-align: left;
         line-height: calc(var(--base-size-mobile) * 18);
+    }
+    .mod-calendar .info .date{
+        text-align: left;
+        font-size: calc(var(--base-size-mobile) * 14);
     }
     .mod-calendar .info .day {
         float: left;
@@ -264,51 +337,25 @@ a {
     .mod-calendar .info .list ::slotted([slot="item"]) {
         padding: calc(var(--base-size-mobile) * 2) 0 !important;
     }
-    .mod-calendar .selector {
-        overflow: visible;
-    }
-    .mod-calendar .selector span {
-        position: relative;
-        width: 32%;
-        border: calc(var(--base-size-mobile) * 1);
-        solid #ebebeb;
-        margin: 0;
-        text-align: center;
-        box-sizing: border-box;
+    .mod-calendar .selector{
+        gap: calc(var(--base-size-mobile) * 6);
     }
     .mod-calendar .selector span:has(.goback) {
         position: absolute;
         right: 0px;
         top: -106px;
+        z-index: 9;
     }
-    .mod-calendar .selector select {
-        float: none;
-        border-color: transparent;
-        padding-left: 0;
-    }
-    .mod-calendar .selector a {
-        position: absolute;
-        top: 0;
-        background: none;
-        border-color: transparent;
-    }
-    .mod-calendar .selector .prev {
-        left: 0;
-        border-right-color: transparent;
-    }
-    .mod-calendar .selector .next {
-        right: 0;
-        margin-right: 0;
-        border-left-color: transparent;
-    }
-    .mod-calendar .selector .goback {
+    .mod-calendar .selector a.goback {
         position: absolute;
         top: calc(var(--base-size-mobile) * 75);
         right: calc(var(--base-size-mobile) * 10);
         height: calc(var(--base-size-mobile) * 20);
+        border-color: transparent;
         background: var(--secondary-color);
         line-height: calc(var(--base-size-mobile) * 20);
         font-size: calc(var(--base-size-mobile) * 12);
+        white-space: nowrap;
         color: #fff;
         border-radius: calc(var(--base-size-mobile) * 3);
     }
@@ -316,15 +363,19 @@ a {
         border-color: var(--secondary-color);
         color: #fff;
     }
+    .mod-calendar .table{
+        padding: calc(var(--base-size-mobile) * 3);
+    }
     .mod-calendar table tbody a {
         width: auto;
         line-height: calc(var(--base-size-mobile) * 18);
     }
+    .mod-calendar table tbody i{
+        padding: 0;
+        font-size: calc(var(--base-size-mobile) * 12);
+    }
     .mod-calendar table tr {
         border-top: none;
-    }
-    .mod-calendar table th, .mod-calendar table td {
-        position: relative;
     }
     .mod-calendar table td {
         height: calc(var(--base-size-mobile) * 48);
