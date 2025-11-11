@@ -176,7 +176,7 @@ a {
 }
 .mod-calendar .table{
     padding: calc(var(--base-size) * 5);
-    background: #fff;
+    border-radius: calc(var(--base-size) * 6);
 }
 .mod-calendar table {
     width: 100%;
