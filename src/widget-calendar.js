@@ -238,15 +238,15 @@ class WidgetCalendar extends HTMLElement {
         }
 
         // 格式化结构
-        let map = {
+        const map = {
             'work':'班',
             'holiday':'休'
         };
         let html = '<tr>';
         for(let i=0,len=_.currentMonthData.length;i<len;i++){
-            let item = _.currentMonthData[i];
-            let item_date = getDateString(item['sYear'],item['sMonth'],item['sDay']);
-            let classnameList = [];
+            const item = _.currentMonthData[i];
+            const item_date = getDateString(item['sYear'],item['sMonth'],item['sDay']);
+            const classnameList = [];
             if(item_date==that_date){
                 classnameList.push('active');
             }
@@ -265,13 +265,13 @@ class WidgetCalendar extends HTMLElement {
                     classnameList.push(sign);
                 }
             }
-            let lunar_festival = item['festival'].split(' ').find(function(value){
+            const lunar_festival = item['festival'].split(' ').find(function(value){
                 if(value.length<=3){
                     return Object.values(lFestival).flat().map(item=>item.name).includes(value);
                 }
                 return false;
             });
-            let other_festival = item['festival'].split(' ').find(function(value){
+            const other_festival = item['festival'].split(' ').find(function(value){
                 if(value.length<=3){
                     return Object.values(sFestival).flat().map(item=>item.name).includes(value)
                     ||Object.values(oFestival).flat().map(item=>item.name).includes(value)
@@ -292,10 +292,10 @@ class WidgetCalendar extends HTMLElement {
         }
         html+='</tr>';
 
-        let lunar_festivals = thatDay['festival'].split(' ').filter(function(value){
+        const lunar_festivals = thatDay['festival'].split(' ').filter(function(value){
             return Object.values(lFestival).flat().map(item=>item.name).includes(value);
         });
-        let other_festivals = thatDay['festival'].split(' ').filter(function(value){
+        const other_festivals = thatDay['festival'].split(' ').filter(function(value){
             return !Object.values(lFestival).flat().map(item=>item.name).includes(value);
         });
         _.$year.value = thatDay['sYear'];
