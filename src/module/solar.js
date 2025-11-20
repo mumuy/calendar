@@ -6,7 +6,7 @@ const weekMap = ['日','一','二','三','四','五','六'];
 // 公历日期转时间戳
 export function getTimestampBySolar(sYear,sMonth,sDay){
     return Date.UTC(sYear, sMonth-1, sDay, 0, 0, 0);
-};
+}
 
 // 通过时间戳获取日期
 export function getSolarByTimestamp(timestamp){

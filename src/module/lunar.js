@@ -78,13 +78,13 @@ export function getTimestampByLunar(lYear,lMonth,lDay,isLeap){
     if(isLeap&&leapMonth!=lMonth){
         return null;
     }
+    let data = parseInt(monthData[lYear - minYear],32);
     let days = (isLeap?data&1<<16:1<<(17-lMonth))?30:29;
     if(lDay>days){
         return null;
     }
     // 时间戳获取
     let offset = 0;
-    let data = parseInt(monthData[lYear - minYear],32);
     for(let year=minYear;year<lYear;year++){
         offset += getLunarYearDays(year);
     }
