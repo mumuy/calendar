@@ -11,8 +11,10 @@ export default {
         let timestamp = getTimestampByLunar(lYear,lMonth,lDay,isLeap);
         return timestamp?getDateInfo(timestamp):null;
     },
-    getToday:function(){
-        let timestamp = Date.now();
+    getDateByTimestamp:function(timestamp){
         return getDateInfo(timestamp);
+    },
+    getToday:function(){
+        return getDateInfo(Date.now());
     }
 };
