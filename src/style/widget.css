@@ -13,12 +13,12 @@
     --base-size: 1px;
     --base-size-mobile: 1px;
 }
-@supports (width: 100cqw) {
+/* @supports (width: 100cqw) {
     :host {
         --base-size: clamp(1px, calc(100cqw / 600), 1.1px);
         --base-size-mobile: clamp(1px, calc(100cqw / 480), 1.1px);
     }
-}
+} */
 * {
     padding: 0;
     margin: 0;
