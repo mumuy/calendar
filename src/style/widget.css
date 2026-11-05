@@ -259,28 +259,10 @@ a {
 }
 .mod-calendar table thead {
     position: relative;
+    background: #f6f8fa;
 }
 .mod-calendar table thead tr{
     border-bottom: calc(var(--base-size) * 3) solid #fff;
-}
-.mod-calendar table thead th:first-child::after{
-    position: absolute;
-    left: 0;
-    top: 0;
-    z-index: 0;
-    content:'';
-    width: 100%;
-    height: calc(100% - calc(var(--base-size) * 1.5));
-    background: #f6f8fa;
-    border-radius: calc(var(--base-size) * 4);
-
-    /* 开启 Safari GPU 渲染并强制裁切 */
-    -webkit-transform: translateZ(0);
-    transform: translateZ(0);
-    -webkit-backface-visibility: hidden;
-    backface-visibility: hidden;
-    -webkit-mask-image: -webkit-radial-gradient(white, black);
-    mask-image: radial-gradient(white, black);
 }
 .mod-calendar table tbody a {
     display: block;
