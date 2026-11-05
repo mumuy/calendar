@@ -13,12 +13,12 @@
     --base-size: 1px;
     --base-size-mobile: 1px;
 }
-/* @supports (width: 100cqw) {
+@supports (container-type: inline-size) {
     :host {
         --base-size: clamp(1px, calc(100cqw / 600), 1.1px);
         --base-size-mobile: clamp(1px, calc(100cqw / 480), 1.1px);
     }
-} */
+}
 * {
     padding: 0;
     margin: 0;
@@ -35,6 +35,12 @@ a {
     background: var(--primary-color);
     border-radius: calc(var(--base-size) * 6);
     font-size: calc(var(--base-size) * 14);
+
+    /* 开启 Safari GPU 渲染并强制裁切 */
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
 }
 .mod-calendar .info {
     position: relative;
@@ -63,6 +69,12 @@ a {
     background: var(--secondary-color);
     color: #fff;
     border-radius: calc(var(--base-size) * 12);
+
+    /* 开启 Safari GPU 渲染并强制裁切 */
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
 }
 .mod-calendar .info .detail {
     margin-bottom: calc(var(--base-size) * 15);
@@ -84,6 +96,12 @@ a {
     flex: 1;
     background: #fff;
     border-radius: calc(var(--base-size) * 6);
+
+    /* 开启 Safari GPU 渲染并强制裁切 */
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
 }
 .mod-calendar .selector {
     display: flex;
@@ -94,6 +112,12 @@ a {
     vertical-align: middle;
     height: calc(var(--base-size)*26);
     text-align: center;
+
+    /* 开启 Safari GPU 渲染并强制裁切 */
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
 }
 .mod-calendar .selector span {
     display: inline-flex;
@@ -107,6 +131,12 @@ a {
     background: #fafafa;
     line-height: calc(var(--base-size) * 24);
     vertical-align: middle;
+
+    /* 开启 Safari GPU 渲染并强制裁切 */
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
 }
 .mod-calendar .selector a.prev,.mod-calendar .selector a.next{
     position: relative;
@@ -147,6 +177,12 @@ a {
 .mod-calendar .selector a.goback{
     padding: 0 calc(var(--base-size) * 8);
     border-radius: calc(var(--base-size) * 4);
+
+    /* 开启 Safari GPU 渲染并强制裁切 */
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
 }
 .mod-calendar .selector a:hover {
     border-color: #d2d9df;
@@ -177,6 +213,12 @@ a {
 .mod-calendar .table{
     padding: calc(var(--base-size) * 5);
     border-radius: calc(var(--base-size) * 6);
+
+    /* 开启 Safari GPU 渲染并强制裁切 */
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
 }
 .mod-calendar table {
     width: 100%;
@@ -217,6 +259,12 @@ a {
     height: calc(100% - calc(var(--base-size) * 1.5));
     background: #f6f8fa;
     border-radius: calc(var(--base-size) * 4);
+
+    /* 开启 Safari GPU 渲染并强制裁切 */
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
 }
 .mod-calendar table tbody a {
     display: block;
@@ -227,6 +275,12 @@ a {
     border-radius: calc(var(--base-size) * 6);
     line-height: calc(var(--base-size) * 20);
     cursor: pointer;
+
+    /* 开启 Safari GPU 渲染并强制裁切 */
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
 }
 .mod-calendar table tbody a:hover {
     border: calc(var(--base-size) * 1) solid #cccccccc;
@@ -358,6 +412,12 @@ a {
         white-space: nowrap;
         color: #fff;
         border-radius: calc(var(--base-size-mobile) * 3);
+
+        /* 开启 Safari GPU 渲染并强制裁切 */
+        -webkit-backface-visibility: hidden;
+        backface-visibility: hidden;
+        -webkit-transform: translate3d(0, 0, 0);
+        transform: translate3d(0, 0, 0);
     }
     .mod-calendar .selector .goback:hover {
         border-color: var(--secondary-color);
