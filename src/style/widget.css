@@ -37,10 +37,12 @@ a {
     font-size: calc(var(--base-size) * 14);
 
     /* 开启 Safari GPU 渲染并强制裁切 */
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
     -webkit-backface-visibility: hidden;
     backface-visibility: hidden;
-    -webkit-transform: translate3d(0, 0, 0);
-    transform: translate3d(0, 0, 0);
+    -webkit-mask-image: -webkit-radial-gradient(white, black);
+    mask-image: radial-gradient(white, black);
 }
 .mod-calendar .info {
     position: relative;
@@ -71,10 +73,12 @@ a {
     border-radius: calc(var(--base-size) * 12);
 
     /* 开启 Safari GPU 渲染并强制裁切 */
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
     -webkit-backface-visibility: hidden;
     backface-visibility: hidden;
-    -webkit-transform: translate3d(0, 0, 0);
-    transform: translate3d(0, 0, 0);
+    -webkit-mask-image: -webkit-radial-gradient(white, black);
+    mask-image: radial-gradient(white, black);
 }
 .mod-calendar .info .detail {
     margin-bottom: calc(var(--base-size) * 15);
@@ -98,10 +102,12 @@ a {
     border-radius: calc(var(--base-size) * 6);
 
     /* 开启 Safari GPU 渲染并强制裁切 */
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
     -webkit-backface-visibility: hidden;
     backface-visibility: hidden;
-    -webkit-transform: translate3d(0, 0, 0);
-    transform: translate3d(0, 0, 0);
+    -webkit-mask-image: -webkit-radial-gradient(white, black);
+    mask-image: radial-gradient(white, black);
 }
 .mod-calendar .selector {
     display: flex;
@@ -114,10 +120,12 @@ a {
     text-align: center;
 
     /* 开启 Safari GPU 渲染并强制裁切 */
+   -webkit-transform: translateZ(0);
+    transform: translateZ(0);
     -webkit-backface-visibility: hidden;
     backface-visibility: hidden;
-    -webkit-transform: translate3d(0, 0, 0);
-    transform: translate3d(0, 0, 0);
+    -webkit-mask-image: -webkit-radial-gradient(white, black);
+    mask-image: radial-gradient(white, black);
 }
 .mod-calendar .selector span {
     display: inline-flex;
@@ -133,10 +141,12 @@ a {
     vertical-align: middle;
 
     /* 开启 Safari GPU 渲染并强制裁切 */
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
     -webkit-backface-visibility: hidden;
     backface-visibility: hidden;
-    -webkit-transform: translate3d(0, 0, 0);
-    transform: translate3d(0, 0, 0);
+    -webkit-mask-image: -webkit-radial-gradient(white, black);
+    mask-image: radial-gradient(white, black);
 }
 .mod-calendar .selector a.prev,.mod-calendar .selector a.next{
     position: relative;
@@ -179,10 +189,12 @@ a {
     border-radius: calc(var(--base-size) * 4);
 
     /* 开启 Safari GPU 渲染并强制裁切 */
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
     -webkit-backface-visibility: hidden;
     backface-visibility: hidden;
-    -webkit-transform: translate3d(0, 0, 0);
-    transform: translate3d(0, 0, 0);
+    -webkit-mask-image: -webkit-radial-gradient(white, black);
+    mask-image: radial-gradient(white, black);
 }
 .mod-calendar .selector a:hover {
     border-color: #d2d9df;
@@ -215,10 +227,12 @@ a {
     border-radius: calc(var(--base-size) * 6);
 
     /* 开启 Safari GPU 渲染并强制裁切 */
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
     -webkit-backface-visibility: hidden;
     backface-visibility: hidden;
-    -webkit-transform: translate3d(0, 0, 0);
-    transform: translate3d(0, 0, 0);
+    -webkit-mask-image: -webkit-radial-gradient(white, black);
+    mask-image: radial-gradient(white, black);
 }
 .mod-calendar table {
     width: 100%;
@@ -261,10 +275,12 @@ a {
     border-radius: calc(var(--base-size) * 4);
 
     /* 开启 Safari GPU 渲染并强制裁切 */
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
     -webkit-backface-visibility: hidden;
     backface-visibility: hidden;
-    -webkit-transform: translate3d(0, 0, 0);
-    transform: translate3d(0, 0, 0);
+    -webkit-mask-image: -webkit-radial-gradient(white, black);
+    mask-image: radial-gradient(white, black);
 }
 .mod-calendar table tbody a {
     display: block;
@@ -277,10 +293,12 @@ a {
     cursor: pointer;
 
     /* 开启 Safari GPU 渲染并强制裁切 */
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
     -webkit-backface-visibility: hidden;
     backface-visibility: hidden;
-    -webkit-transform: translate3d(0, 0, 0);
-    transform: translate3d(0, 0, 0);
+    -webkit-mask-image: -webkit-radial-gradient(white, black);
+    mask-image: radial-gradient(white, black);
 }
 .mod-calendar table tbody a:hover {
     border: calc(var(--base-size) * 1) solid #cccccccc;
@@ -412,12 +430,6 @@ a {
         white-space: nowrap;
         color: #fff;
         border-radius: calc(var(--base-size-mobile) * 3);
-
-        /* 开启 Safari GPU 渲染并强制裁切 */
-        -webkit-backface-visibility: hidden;
-        backface-visibility: hidden;
-        -webkit-transform: translate3d(0, 0, 0);
-        transform: translate3d(0, 0, 0);
     }
     .mod-calendar .selector .goback:hover {
         border-color: var(--secondary-color);
